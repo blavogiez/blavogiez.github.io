@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-fr="Portfolio - Votre Nom" data-en="Portfolio - Your Name">Portfolio - Votre Nom</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <span data-fr="Portfolio" data-en="Portfolio">Portfolio</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about" data-fr="À propos" data-en="About">À propos</a>
+                <a href="#quick" data-fr="Moi en 10s" data-en="Me in 10s">Moi en 10s</a>
+                <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
+                <a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
+                <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+            </div>
+            <div class="language-switcher">
+                <button id="lang-fr" class="lang-btn active">🇫🇷</button>
+                <button id="lang-en" class="lang-btn">🇺🇸</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span data-fr="Bonjour, je suis" data-en="Hello, I'm">Bonjour, je suis</span>
+                    <span class="name">Votre Nom</span>
+                </h1>
+                <p class="hero-subtitle" data-fr="Étudiant en 2ème année - Développeur passionné" data-en="2nd Year Student - Passionate Developer">
+                    Étudiant en 2ème année - Développeur passionné
+                </p>
+                <a href="#about" class="cta-button" data-fr="Découvrir mon profil" data-en="Discover my profile">
+                    Découvrir mon profil
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="profile-photo">
+                    <img src="https://img.a.transfermarkt.technology/portrait/big/351110-1670593652.jpg?lm=1" alt="Photo de profil" />
+                </div>
+                <div class="floating-card"></div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 data-fr="À propos de moi" data-en="About me">À propos de moi</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p data-fr="Étudiant passionné en informatique, je développe des projets créatifs et techniques. Toujours en quête d'apprentissage et d'innovation." data-en="Passionate computer science student, I develop creative and technical projects. Always seeking learning and innovation.">
+                            Étudiant passionné en informatique, je développe des projets créatifs et techniques. Toujours en quête d'apprentissage et d'innovation.
+                        </p>
+                        <div class="stats">
+                            <div class="stat">
+                                <span class="stat-number">2+</span>
+                                <span class="stat-label" data-fr="Années d'études" data-en="Years of study">Années d'études</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label" data-fr="Projets réalisés" data-en="Projects completed">Projets réalisés</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quick" class="quick-intro">
+            <div class="container">
+                <h2 data-fr="Moi en 10 secondes" data-en="Me in 10 seconds">Moi en 10 secondes</h2>
+                <div class="quick-grid">
+                    <div class="quick-item">
+                        <span class="quick-icon">🎯</span>
+                        <span class="quick-text" data-fr="Passionné de code" data-en="Code enthusiast">Passionné de code</span>
+                    </div>
+                    <div class="quick-item">
+                        <span class="quick-icon">⚡</span>
+                        <span class="quick-text" data-fr="Apprend vite" data-en="Fast learner">Apprend vite</span>
+                    </div>
+                    <div class="quick-item">
+                        <span class="quick-icon">🚀</span>
+                        <span class="quick-text" data-fr="Aime les défis" data-en="Loves challenges">Aime les défis</span>
+                    </div>
+                    <div class="quick-item">
+                        <span class="quick-icon">🎨</span>
+                        <span class="quick-text" data-fr="Design & UX" data-en="Design & UX">Design & UX</span>
+                    </div>
+                    <div class="quick-item">
+                        <span class="quick-icon">🤝</span>
+                        <span class="quick-text" data-fr="Esprit d'équipe" data-en="Team player">Esprit d'équipe</span>
+                    </div>
+                    <div class="quick-item">
+                        <span class="quick-icon">💡</span>
+                        <span class="quick-text" data-fr="Créatif" data-en="Creative">Créatif</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <h2 data-fr="Mes Projets" data-en="My Projects">Mes Projets</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="placeholder-image">🚀</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 data-fr="Projet 1" data-en="Project 1">Projet 1</h3>
+                            <p data-fr="Description de votre premier projet avec les technologies utilisées." data-en="Description of your first project with the technologies used.">
+                                Description de votre premier projet avec les technologies utilisées.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="placeholder-image">💻</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 data-fr="Projet 2" data-en="Project 2">Projet 2</h3>
+                            <p data-fr="Description de votre deuxième projet et de ses fonctionnalités." data-en="Description of your second project and its features.">
+                                Description de votre deuxième projet et de ses fonctionnalités.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <div class="placeholder-image">🎯</div>
+                        </div>
+                        <div class="project-content">
+                            <h3 data-fr="Projet 3" data-en="Project 3">Projet 3</h3>
+                            <p data-fr="Description de votre troisième projet et de son impact." data-en="Description of your third project and its impact.">
+                                Description de votre troisième projet et de son impact.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills">
+            <div class="container">
+                <h2 data-fr="Mes Compétences" data-en="My Skills">Mes Compétences</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 data-fr="Frontend" data-en="Frontend">Frontend</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span>HTML/CSS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>React</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3 data-fr="Backend" data-en="Backend">Backend</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span>Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Node.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>SQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3 data-fr="Outils" data-en="Tools">Outils</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span>Git</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>VS Code</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Figma</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 data-fr="Me contacter" data-en="Contact me">Me contacter</h2>
+                <div class="contact-content">
+                    <p data-fr="Intéressé par une collaboration ? N'hésitez pas à me contacter !" data-en="Interested in collaboration? Feel free to contact me!">
+                        Intéressé par une collaboration ? N'hésitez pas à me contacter !
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:votre.email@example.com" class="contact-link">
+                            📧 votre.email@example.com
+                        </a>
+                        <a href="https://linkedin.com/in/votre-profil" class="contact-link" target="_blank">
+                            💼 LinkedIn
+                        </a>
+                        <a href="https://github.com/votre-username" class="contact-link" target="_blank">
+                            💻 GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 <span data-fr="Votre Nom. Tous droits réservés." data-en="Your Name. All rights reserved.">Votre Nom. Tous droits réservés.</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
