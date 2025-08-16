@@ -210,9 +210,10 @@ nav {
     transition: var(--transition);
     position: relative;
     padding: 0.5rem 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     text-transform: lowercase;
+    letter-spacing: -0.01em;
 }
 
 .nav-links a:hover {
@@ -334,21 +335,22 @@ main {
 
 .hero-greeting {
     font-size: clamp(1.2rem, 3vw, 1.5rem);
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text-muted);
     display: block;
     margin-bottom: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
     text-transform: lowercase;
+    letter-spacing: -0.01em;
 }
 
 .hero-title {
-    font-family: 'Fira Code', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
 }
 
@@ -483,20 +485,22 @@ section.animate-in {
 }
 
 h2 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 2.2rem;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     margin-bottom: 3rem;
     color: var(--text-primary);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     position: relative;
+    text-transform: lowercase;
 }
 
 h2::before {
-    content: '// ';
+    content: '> ';
     color: var(--accent);
     opacity: 0.7;
+    font-family: 'Inter', sans-serif;
 }
 
 h2::after {
@@ -677,7 +681,9 @@ h2::after {
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: 500;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .timeline-grade {
@@ -730,7 +736,8 @@ h2::after {
     font-weight: 500;
     border: 1px solid var(--border);
     transition: var(--transition);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Inter', sans-serif;
+    text-transform: lowercase;
 }
 
 .skill-tag:hover {
@@ -1029,6 +1036,135 @@ h2::after {
 .github-link:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 35px rgba(65, 105, 225, 0.4);
+}
+
+/* ===== PHILOSOPHY ===== */
+.philosophy {
+    background: var(--bg-secondary);
+    padding: 4rem 0;
+}
+
+.philosophy-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.philosophy-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.philosophy-intro h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-transform: lowercase;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+.philosophy-intro h3::before {
+    content: '> ';
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.philosophy-card {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.philosophy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.philosophy-card:hover::before {
+    opacity: 1;
+}
+
+.philosophy-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.philosophy-card.highlight {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.05) 100%);
+}
+
+.philosophy-card.highlight::before {
+    opacity: 1;
+}
+
+.philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.philosophy-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--primary-light);
+    margin-bottom: 1.5rem;
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+}
+
+.philosophy-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+}
+
+.philosophy-card blockquote {
+    background: var(--bg-primary);
+    border-left: 4px solid var(--accent);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-style: italic;
+    color: var(--text-primary);
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-transform: lowercase;
+}
+
+.philosophy-card blockquote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--accent);
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    opacity: 0.3;
 }
 
 /* ===== SKILLS ===== */
