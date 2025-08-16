@@ -9,9 +9,9 @@
 
 // ===== CONFIGURATION =====
 const CONFIG = {
-    LOADING_DURATION: 1200,
-    ANIMATION_DURATION: 300,
-    IMAGE_ROTATION_INTERVAL: 5000,
+    LOADING_DURATION: 800,
+    ANIMATION_DURATION: 200,
+    IMAGE_ROTATION_INTERVAL: 4000,
     PERFORMANCE_MODE: window.matchMedia('(prefers-reduced-motion: reduce)').matches
 };
 
@@ -204,7 +204,7 @@ class ProjectNavigator {
         setTimeout(() => {
             callback();
             this.projectCard.classList.remove('exiting');
-        }, 300);
+        }, CONFIG.ANIMATION_DURATION);
     }
 
     loadProjects(projects) {
@@ -223,6 +223,7 @@ class ProjectNavigator {
         const project = this.projects[this.currentIndex];
         this.projectCard.innerHTML = this.createProjectCard(project);
         this.setupImageNavigation();
+        this.setupLazyLoading();
         this.updateControls();
         
         // Update language
@@ -238,9 +239,9 @@ class ProjectNavigator {
         
         return `
             <div class="project-gallery">
-                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" />
-                <img src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image" loading="lazy" />
-                <img src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image" loading="lazy" />
+                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
                 
                 <div class="gallery-nav">
                     <span class="gallery-dot active" data-index="0"></span>
@@ -288,6 +289,31 @@ class ProjectNavigator {
         
         this.currentImageIndex = 0;
         this.startImageRotation();
+    }
+    
+    setupLazyLoading() {
+        const lazyImages = DOM.queryAll('.lazy-load', this.projectCard);
+        
+        if ('IntersectionObserver' in window) {
+            const lazyImageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy-load');
+                        lazyImageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            lazyImages.forEach(img => lazyImageObserver.observe(img));
+        } else {
+            // Fallback for older browsers
+            lazyImages.forEach(img => {
+                img.src = img.dataset.src;
+                img.classList.remove('lazy-load');
+            });
+        }
     }
 
     showImage(index) {
@@ -416,7 +442,7 @@ class AnimationManager {
             let activeSection = null;
             
             entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
                     activeSection = entry.target;
                 }
             });
@@ -437,8 +463,8 @@ class AnimationManager {
             });
             
         }, { 
-            threshold: [0.3, 0.5, 0.7],
-            rootMargin: '-20% 0px -20% 0px'
+            threshold: [0.2, 0.4, 0.6],
+            rootMargin: '-10% 0px -10% 0px'
         });
 
         // Observe all sections
