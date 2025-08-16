@@ -378,7 +378,7 @@ class AnimationManager {
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-        DOM.queryAll('section, .skill-category').forEach(el => observer.observe(el));
+        DOM.queryAll('section, .skill-category, .timeline-item').forEach(el => observer.observe(el));
     }
 
     setupSmoothScrolling() {

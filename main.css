@@ -52,7 +52,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     line-height: 1.6;
     color: var(--text-primary);
     background: var(--bg-primary);
@@ -194,6 +194,8 @@ nav {
     font-size: 1.1rem;
     color: var(--text-primary);
     font-weight: 600;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
 }
 
 .nav-links {
@@ -208,6 +210,9 @@ nav {
     transition: var(--transition);
     position: relative;
     padding: 0.5rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    text-transform: lowercase;
 }
 
 .nav-links a:hover {
@@ -333,14 +338,17 @@ main {
     color: var(--text-muted);
     display: block;
     margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: lowercase;
 }
 
 .hero-title {
+    font-family: 'Fira Code', monospace;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     color: var(--text-primary);
 }
 
@@ -475,12 +483,31 @@ section.animate-in {
 }
 
 h2 {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 2.2rem;
     font-weight: 600;
     text-align: center;
     margin-bottom: 3rem;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+h2::before {
+    content: '// ';
+    color: var(--accent);
+    opacity: 0.7;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: var(--gradient);
 }
 
 /* ===== ABOUT ===== */
@@ -535,6 +562,181 @@ h2 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 500;
+}
+
+/* ===== JOURNEY ===== */
+.journey {
+    background: var(--bg-primary);
+    padding: 5rem 0;
+}
+
+.journey-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 50%, var(--success) 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all var(--transition-slow);
+}
+
+.timeline-item.animate-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -1.75rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 3px solid var(--primary);
+    z-index: 2;
+    transition: var(--transition);
+}
+
+.timeline-marker.active {
+    background: var(--primary);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.timeline-marker.future {
+    background: var(--bg-secondary);
+    border-color: var(--text-muted);
+    border-style: dashed;
+}
+
+.timeline-content {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border);
+    margin-left: 2rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.timeline-content:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timeline-content h3 {
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.timeline-details {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.specialty-badge {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: 'Fira Code', monospace;
+}
+
+.timeline-grade {
+    margin-bottom: 1rem;
+}
+
+.grade-badge {
+    background: linear-gradient(135deg, var(--success), #22c55e);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.timeline-institution {
+    color: var(--primary-light);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    font-style: italic;
+}
+
+.timeline-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.timeline-skills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.skill-tag {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.skill-tag:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
 }
 
 /* ===== PROJECTS ===== */
@@ -892,6 +1094,10 @@ h2 {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
 }
 
 .skill-category h3::before {
