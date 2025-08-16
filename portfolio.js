@@ -188,9 +188,23 @@ class ProjectNavigator {
         const newIndex = this.currentIndex + direction;
         
         if (newIndex >= 0 && newIndex < this.projects.length) {
-            this.currentIndex = newIndex;
-            this.showProject();
+            this.animateProjectTransition(() => {
+                this.currentIndex = newIndex;
+                this.showProject();
+            });
         }
+    }
+    
+    animateProjectTransition(callback) {
+        if (!this.projectCard) return callback();
+        
+        // Add exit animation
+        this.projectCard.classList.add('exiting');
+        
+        setTimeout(() => {
+            callback();
+            this.projectCard.classList.remove('exiting');
+        }, 300);
     }
 
     loadProjects(projects) {
@@ -351,6 +365,7 @@ class AnimationManager {
             this.setupIntersectionObserver();
             this.setupSmoothScrolling();
             this.setupSkillBars();
+            this.setupHeaderAnimation();
         }
     }
 
@@ -390,6 +405,65 @@ class AnimationManager {
         }, { threshold: 0.5 });
 
         DOM.queryAll('.skills').forEach(section => observer.observe(section));
+    }
+    
+    setupHeaderAnimation() {
+        const header = DOM.query('header');
+        const navLinks = DOM.queryAll('.nav-links a');
+        
+        // Section observer for header animation
+        const sectionObserver = new IntersectionObserver((entries) => {
+            let activeSection = null;
+            
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+                    activeSection = entry.target;
+                }
+            });
+            
+            // Update header state
+            if (activeSection && activeSection.id !== 'hero') {
+                header.classList.add('section-active');
+            } else {
+                header.classList.remove('section-active');
+            }
+            
+            // Update active nav link
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (activeSection && link.getAttribute('href') === `#${activeSection.id}`) {
+                    link.classList.add('active');
+                }
+            });
+            
+        }, { 
+            threshold: [0.3, 0.5, 0.7],
+            rootMargin: '-20% 0px -20% 0px'
+        });
+
+        // Observe all sections
+        DOM.queryAll('section[id]').forEach(section => {
+            sectionObserver.observe(section);
+        });
+        
+        // Smooth scroll with header animation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = DOM.query(`#${targetId}`);
+                
+                if (targetSection) {
+                    // Add temporary active state during navigation
+                    header.classList.add('section-active');
+                    
+                    targetSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            });
+        });
     }
 }
 
