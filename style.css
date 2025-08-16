@@ -222,12 +222,16 @@ main {
 }
 
 .floating-card::before {
-    content: '💻';
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 4rem;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient);
+    border-radius: 12px;
+    opacity: 0.8;
 }
 
 @keyframes float {
@@ -295,17 +299,97 @@ main {
     border-color: var(--royal-blue);
 }
 
-.quick-icon {
-    font-size: 2rem;
-    margin-bottom: 0.8rem;
-    display: block;
-}
-
 .quick-text {
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--text-primary);
     line-height: 1.4;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.git-link {
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    padding: 0.5rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.git-link:hover {
+    color: var(--primary-color);
+    background: rgba(30, 64, 175, 0.1);
+    transform: translateY(-1px);
+}
+
+.project-summary {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.project-details {
+    margin: 1rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.project-details p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.project-gallery {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.gallery-img {
+    width: 100%;
+    max-width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+.gallery-img:hover {
+    transform: scale(1.05);
+}
+
+.expand-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.expand-btn:hover {
+    background: rgba(30, 64, 175, 0.1);
+    border-color: var(--primary-color);
+}
+
+.expand-btn.expanded {
+    background: var(--primary-color);
+    color: white;
 }
 
 section {

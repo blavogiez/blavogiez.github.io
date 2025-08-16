@@ -140,8 +140,35 @@ class ThemeManager {
     }
 }
 
+class ProjectManager {
+    constructor() {
+        this.setupExpandButtons();
+    }
+
+    setupExpandButtons() {
+        document.querySelectorAll('.expand-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = e.target.closest('.project-card');
+                const details = card.querySelector('.project-details');
+                const isExpanded = details.style.display !== 'none';
+
+                if (isExpanded) {
+                    details.style.display = 'none';
+                    btn.textContent = btn.getAttribute('data-fr') || 'Voir plus';
+                    btn.classList.remove('expanded');
+                } else {
+                    details.style.display = 'block';
+                    btn.textContent = btn.getAttribute('data-fr') === 'Voir plus' ? 'Voir moins' : 'See less';
+                    btn.classList.add('expanded');
+                }
+            });
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     new LanguageManager();
     new AnimationManager();
     new ThemeManager();
+    new ProjectManager();
 });
