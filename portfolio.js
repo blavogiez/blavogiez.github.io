@@ -186,6 +186,7 @@ class ProjectNavigator {
 
     navigate(direction) {
         const newIndex = this.currentIndex + direction;
+        
         if (newIndex >= 0 && newIndex < this.projects.length) {
             this.currentIndex = newIndex;
             this.showProject();
@@ -194,6 +195,7 @@ class ProjectNavigator {
 
     loadProjects(projects) {
         this.projects = projects;
+        
         if (this.projects.length > 0 && this.projectCard) {
             this.currentIndex = 0;
             this.showProject();
@@ -261,6 +263,15 @@ class ProjectNavigator {
             dot.addEventListener('click', () => this.showImage(index));
         });
         
+        // Ajouter le clic sur image pour agrandissement
+        images.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.openLightbox(img.src, img.alt);
+            });
+            img.style.cursor = 'pointer';
+        });
+        
         this.currentImageIndex = 0;
         this.startImageRotation();
     }
@@ -288,10 +299,48 @@ class ProjectNavigator {
     }
 
     updateControls() {
-        if (this.prevBtn) this.prevBtn.disabled = this.currentIndex === 0;
-        if (this.nextBtn) this.nextBtn.disabled = this.currentIndex === this.projects.length - 1;
+        if (this.prevBtn) {
+            this.prevBtn.disabled = this.currentIndex === 0;
+        }
+        
+        if (this.nextBtn) {
+            this.nextBtn.disabled = this.currentIndex === this.projects.length - 1;
+        }
+        
         if (this.counterCurrent) this.counterCurrent.textContent = this.currentIndex + 1;
         if (this.counterTotal) this.counterTotal.textContent = this.projects.length;
+    }
+
+    openLightbox(imageSrc, imageAlt) {
+        // Créer la lightbox
+        const lightbox = DOM.createElement('div', 'lightbox', `
+            <div class="lightbox-content">
+                <img src="${imageSrc}" alt="${imageAlt}" />
+                <button class="lightbox-close" aria-label="Fermer">✕</button>
+            </div>
+        `);
+
+        document.body.appendChild(lightbox);
+
+        // Gestion de la fermeture
+        const closeBtn = lightbox.querySelector('.lightbox-close');
+        const closeLightbox = () => {
+            document.body.removeChild(lightbox);
+            document.removeEventListener('keydown', handleKeydown);
+        };
+
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        };
+
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', handleKeydown);
+
+        // Animation d'entrée
+        setTimeout(() => lightbox.classList.add('active'), 10);
     }
 }
 
@@ -386,6 +435,7 @@ class ConfigLoader {
 
     async load() {
         try {
+            // Essayer de charger depuis settings.ini
             const response = await fetch('settings.ini');
             if (!response.ok) throw new Error('Config not found');
             
@@ -393,8 +443,8 @@ class ConfigLoader {
             this.parse(text);
             this.apply();
         } catch (error) {
-            console.warn('Using defaults:', error.message);
-            this.loadDefaults();
+            console.warn('CORS error or config not found, using embedded config:', error.message);
+            this.loadEmbeddedConfig();
             this.apply();
         }
     }
@@ -501,14 +551,132 @@ class ConfigLoader {
         }
     }
 
-    loadDefaults() {
+    loadEmbeddedConfig() {
         this.config = {
             Personal: {
                 name: 'Baptiste Lavogiez',
+                title_fr: 'Étudiant en 2ème année - Développeur passionné',
+                title_en: '2nd Year Student - Passionate Developer',
                 email: 'baptiste.lavogiez@example.com',
+                linkedin: 'https://linkedin.com/in/baptiste-lavogiez',
+                github: 'https://github.com/baptiste-lavogiez',
                 photo: 'photo.jpg'
             },
-            Project1: this.getDefaultProject()
+            Site: {
+                year: '2025',
+                logo_text_fr: 'Portfolio',
+                logo_text_en: 'Portfolio'
+            },
+            About: {
+                description_fr: 'Étudiant passionné en informatique, je développe des projets créatifs et techniques. Toujours en quête d\'apprentissage et d\'innovation.',
+                description_en: 'Passionate computer science student, I develop creative and technical projects. Always seeking learning and innovation.',
+                years_study: '2+',
+                projects_completed: '8+'
+            },
+            Project1: {
+                name_fr: 'Application Web Portfolio',
+                name_en: 'Portfolio Web App',
+                summary_fr: 'Site portfolio moderne et responsive avec animations CSS.',
+                summary_en: 'Modern responsive portfolio website with CSS animations.',
+                description_fr: 'Développement complet d\'un portfolio personnel utilisant HTML5, CSS3 et JavaScript vanilla. Fonctionnalités : système multilingue, animations fluides, design responsive optimisé pour tous les appareils.',
+                description_en: 'Complete development of a personal portfolio using HTML5, CSS3 and vanilla JavaScript. Features: multilingual system, smooth animations, responsive design optimized for all devices.',
+                github: 'https://github.com/baptiste-lavogiez/portfolio',
+                image_main: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1547658719-da2b51169166?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop',
+                tags: 'HTML/CSS,JavaScript,Responsive'
+            },
+            Project2: {
+                name_fr: 'API de Gestion de Tâches',
+                name_en: 'Task Management API',
+                summary_fr: 'API REST pour gestion de projets avec authentification JWT.',
+                summary_en: 'REST API for project management with JWT authentication.',
+                description_fr: 'API complète développée en Python/Flask avec base de données PostgreSQL. Système d\'authentification sécurisé, CRUD complet pour les tâches, tests unitaires et documentation Swagger.',
+                description_en: 'Complete API developed in Python/Flask with PostgreSQL database. Secure authentication system, full CRUD for tasks, unit tests and Swagger documentation.',
+                github: 'https://github.com/baptiste-lavogiez/task-api',
+                image_main: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop',
+                tags: 'Python,Flask,PostgreSQL'
+            },
+            Project3: {
+                name_fr: 'Dashboard Analytique',
+                name_en: 'Analytics Dashboard',
+                summary_fr: 'Interface de visualisation de données temps réel avec React.',
+                summary_en: 'Real-time data visualization interface with React.',
+                description_fr: 'Application React complète avec Redux pour la gestion d\'état, intégration d\'APIs externes, graphiques interactifs avec Chart.js, et système de notifications en temps réel via WebSockets.',
+                description_en: 'Complete React application with Redux for state management, external API integration, interactive charts with Chart.js, and real-time notification system via WebSockets.',
+                github: 'https://github.com/baptiste-lavogiez/analytics-dashboard',
+                image_main: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop',
+                tags: 'React,Redux,Chart.js'
+            },
+            Project4: {
+                name_fr: 'Application Mobile E-commerce',
+                name_en: 'E-commerce Mobile App',
+                summary_fr: 'App mobile cross-platform avec Flutter pour le shopping en ligne.',
+                summary_en: 'Cross-platform mobile app with Flutter for online shopping.',
+                description_fr: 'Application mobile complète développée avec Flutter, intégrant paiements sécurisés, gestion du panier, notifications push et synchronisation offline. Interface moderne avec animations fluides.',
+                description_en: 'Complete mobile application developed with Flutter, integrating secure payments, cart management, push notifications and offline sync. Modern interface with smooth animations.',
+                github: 'https://github.com/baptiste-lavogiez/ecommerce-app',
+                image_main: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=300&h=200&fit=crop',
+                tags: 'Flutter,Dart,Firebase'
+            },
+            Project5: {
+                name_fr: 'Système de Chat en Temps Réel',
+                name_en: 'Real-time Chat System',
+                summary_fr: 'Plateforme de messagerie instantanée avec WebSockets et Redis.',
+                summary_en: 'Instant messaging platform with WebSockets and Redis.',
+                description_fr: 'Système de chat moderne avec messages en temps réel, salles privées et publiques, partage de fichiers, émojis personnalisés et notifications desktop. Architecture scalable avec microservices.',
+                description_en: 'Modern chat system with real-time messages, private and public rooms, file sharing, custom emojis and desktop notifications. Scalable architecture with microservices.',
+                github: 'https://github.com/baptiste-lavogiez/chat-system',
+                image_main: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=300&h=200&fit=crop',
+                tags: 'Node.js,WebSocket,Redis'
+            },
+            Project6: {
+                name_fr: 'Intelligence Artificielle pour Images',
+                name_en: 'AI Image Recognition',
+                summary_fr: 'Modèle de deep learning pour classification et détection d\'objets.',
+                summary_en: 'Deep learning model for classification and object detection.',
+                description_fr: 'Développement d\'un modèle CNN avec TensorFlow pour la reconnaissance d\'images. Précision de 94% sur le dataset CIFAR-10, interface web pour tests en temps réel et API REST pour intégration.',
+                description_en: 'Development of a CNN model with TensorFlow for image recognition. 94% accuracy on CIFAR-10 dataset, web interface for real-time testing and REST API for integration.',
+                github: 'https://github.com/baptiste-lavogiez/ai-image-recognition',
+                image_main: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop',
+                tags: 'Python,TensorFlow,AI'
+            },
+            Project7: {
+                name_fr: 'Plateforme de Streaming Vidéo',
+                name_en: 'Video Streaming Platform',
+                summary_fr: 'Netflix-like avec transcoding automatique et CDN optimisé.',
+                summary_en: 'Netflix-like platform with automatic transcoding and optimized CDN.',
+                description_fr: 'Plateforme complète de streaming vidéo avec upload, transcoding automatique multi-résolutions, système d\'abonnements, recommandations personnalisées et analytics détaillées.',
+                description_en: 'Complete video streaming platform with upload, automatic multi-resolution transcoding, subscription system, personalized recommendations and detailed analytics.',
+                github: 'https://github.com/baptiste-lavogiez/streaming-platform',
+                image_main: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=300&h=200&fit=crop',
+                tags: 'Vue.js,FFmpeg,AWS'
+            },
+            Project8: {
+                name_fr: 'Blockchain et Cryptomonnaies',
+                name_en: 'Blockchain & Cryptocurrency',
+                summary_fr: 'Implémentation complète d\'une blockchain avec mining et wallet.',
+                summary_en: 'Complete blockchain implementation with mining and wallet.',
+                description_fr: 'Développement from scratch d\'une blockchain fonctionnelle avec proof-of-work, wallet sécurisé, transactions peer-to-peer et interface de mining. Étude approfondie des cryptomonnaies.',
+                description_en: 'From-scratch development of a functional blockchain with proof-of-work, secure wallet, peer-to-peer transactions and mining interface. In-depth study of cryptocurrencies.',
+                github: 'https://github.com/baptiste-lavogiez/blockchain-crypto',
+                image_main: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=250&fit=crop',
+                image_gallery1: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=300&h=200&fit=crop',
+                image_gallery2: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=300&h=200&fit=crop',
+                tags: 'Go,Cryptography,P2P'
+            }
         };
     }
 
