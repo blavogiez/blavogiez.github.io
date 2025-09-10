@@ -19,7 +19,7 @@ const SETTINGS_CONFIG = {
         logo_text_en: "Portfolio"
     },
     About: {
-        description_fr: "Étudiant passionné en informatique, je développe des projets créatifs et techniques. Toujours en quête d'apprentissage et d'innovation.",
+        description_fr: "L'informatique existe pour aider l'",
         description_en: "Passionate computer science student, I develop creative and technical projects. Always seeking learning and innovation.",
         years_study: "2+",
         projects_completed: "5+"
@@ -79,8 +79,8 @@ const SETTINGS_CONFIG = {
         about_title_en: "About me",
         about_description_fr: "Étudiant passionné en informatique, je développe des projets créatifs et techniques ! Toujours en quête d'apprentissage et d'innovation !",
         about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
-        about_years_value: "2+",
-        about_years_label_fr: "Années d'études",
+        about_years_value: "5+",
+        about_years_label_fr: "expérience",
         about_years_label_en: "Years of study", 
         about_projects_value: "5+",
         about_projects_label_fr: "Projets réalisés",
@@ -159,24 +159,24 @@ const SETTINGS_CONFIG = {
         ]
     },
     Project1: {
-        name_fr: "Application Web Portfolio",
+        name_fr: "Fuchsia",
         name_en: "Portfolio Web App",
-        summary_fr: "Site portfolio moderne et responsive avec animations CSS.",
+        summary_fr: "Éditeur LaTeX optimisé avec IA intégrée",
         summary_en: "Modern responsive portfolio website with CSS animations.",
-        description_fr: "Développement complet d'un portfolio personnel utilisant HTML5, CSS3 et JavaScript vanilla. Fonctionnalités : système multilingue, animations fluides, design responsive optimisé pour tous les appareils.",
+        description_fr: "Mon plus grand projet personnel ! Un éditeur LaTeX (un langage de balisage et de composition de documents) complet from-scratch (pdf preview instantanée, insertion de tables, gestion d'images) et lié avec un LLM (Gemini API) pour accélérer le processus d'écriture (reformulation, relecture, génération formules). Il comporte bien plus ; regardez la démonstration et vous verrez. J'écris tous mes rapports en LaTeX, ainsi j'utilise constamment ce projet, permettant une amélioration continue.",
         description_en: "Complete development of a personal portfolio using HTML5, CSS3 and vanilla JavaScript. Features: multilingual system, smooth animations, responsive design optimized for all devices.",
         github: "https://github.com/baptiste-lavogiez/portfolio",
         image_main: "assets/images/projects/project1/main.jpg",
         image_gallery1: "assets/images/projects/project1/gallery1.jpg",
         image_gallery2: "assets/images/projects/project1/gallery2.jpg",
-        tags: "HTML/CSS,JavaScript,Responsive"
+        tags: "Python"
     },
     Project2: {
-        name_fr: "API de Gestion de Tâches",
+        name_fr: "Infopoly",
         name_en: "Task Management API",
-        summary_fr: "API REST pour gestion de projets avec authentification JWT.",
+        summary_fr: "Jeu réalisé en équipe de 6 personnes, de façon agile",
         summary_en: "REST API for project management with JWT authentication.",
-        description_fr: "API complète développée en Python/Flask avec base de données PostgreSQL. Système d'authentification sécurisé, CRUD complet pour les tâches, tests unitaires et documentation Swagger.",
+        description_fr: "Un projet réalisé à la rentrée de BUT2 ! Nous avions 20h (en 2 jours et demi) pour réaliser une application en Java avec pour objectif principal d'appliquer la méthodologie agile. Une communication importante, un radiateur d'information, une répartition adéquate des tâches ; c'est ce qui fait la force de notre projet, plus que du code pur.",
         description_en: "Complete API developed in Python/Flask with PostgreSQL database. Secure authentication system, full CRUD for tasks, unit tests and Swagger documentation.",
         github: "https://github.com/baptiste-lavogiez/task-api",
         image_main: "assets/images/projects/project2/main.jpg",
