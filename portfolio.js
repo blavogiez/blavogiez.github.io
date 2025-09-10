@@ -112,6 +112,47 @@ class LanguageManager {
             const title = titleEl.getAttribute(`data-${lang}`);
             if (title) document.title = title;
         }
+        
+        // Update meta tags and image alt for language change
+        const ui = window.SETTINGS_CONFIG?.UI;
+        if (ui) {
+            // Update meta tags
+            const metaDesc = DOM.query('meta[name="description"]');
+            if (metaDesc && ui.meta_description_fr && ui.meta_description_en) {
+                metaDesc.content = lang === 'en' ? ui.meta_description_en : ui.meta_description_fr;
+            }
+            
+            const metaKeywords = DOM.query('meta[name="keywords"]');
+            if (metaKeywords && ui.meta_keywords_fr && ui.meta_keywords_en) {
+                metaKeywords.content = lang === 'en' ? ui.meta_keywords_en : ui.meta_keywords_fr;
+            }
+            
+            const ogTitle = DOM.query('meta[property="og:title"]');
+            if (ogTitle && ui.og_title_fr && ui.og_title_en) {
+                ogTitle.content = lang === 'en' ? ui.og_title_en : ui.og_title_fr;
+            }
+            
+            const ogDesc = DOM.query('meta[property="og:description"]');
+            if (ogDesc && ui.og_description_fr && ui.og_description_en) {
+                ogDesc.content = lang === 'en' ? ui.og_description_en : ui.og_description_fr;
+            }
+            
+            const twitterTitle = DOM.query('meta[property="twitter:title"]');
+            if (twitterTitle && ui.og_title_fr && ui.og_title_en) {
+                twitterTitle.content = lang === 'en' ? ui.og_title_en : ui.og_title_fr;
+            }
+            
+            const twitterDesc = DOM.query('meta[property="twitter:description"]');
+            if (twitterDesc && ui.og_description_fr && ui.og_description_en) {
+                twitterDesc.content = lang === 'en' ? ui.og_description_en : ui.og_description_fr;
+            }
+            
+            // Update image alt
+            const profileImg = DOM.query('[data-ui="profile_image_alt"]');
+            if (profileImg && ui.profile_image_alt_fr && ui.profile_image_alt_en) {
+                profileImg.alt = lang === 'en' ? ui.profile_image_alt_en : ui.profile_image_alt_fr;
+            }
+        }
     }
 }
 
@@ -304,7 +345,7 @@ class ProjectNavigator {
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
                         </svg>
-                        <span data-fr="Voir le code" data-en="View code">Voir le code</span>
+                        <span data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_en || 'View code'}">${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}</span>
                     </a>
                 </div>
             </div>
@@ -665,14 +706,25 @@ class ConfigLoader {
     }
 
     load() {
+        console.log('🔄 Starting config load...');
+        console.log('🔍 SETTINGS_CONFIG exists:', typeof SETTINGS_CONFIG !== 'undefined');
+        console.log('🔍 SETTINGS_CONFIG value:', window.SETTINGS_CONFIG);
+        
         // Utiliser directement la config depuis settings.js
-        if (typeof SETTINGS_CONFIG !== 'undefined') {
+        if (typeof SETTINGS_CONFIG !== 'undefined' && SETTINGS_CONFIG) {
             this.config = SETTINGS_CONFIG;
             console.log('✅ Settings loaded from settings.js');
+            console.log('📋 UI keys available:', Object.keys(this.config.UI || {}));
+            console.log('📋 Full config:', this.config);
         } else {
-            console.warn('⚠️ SETTINGS_CONFIG not found, using embedded fallback');
-            this.loadEmbeddedConfig();
+            console.error('❌ SETTINGS_CONFIG not found or empty! Cannot load content.');
+            console.error('❌ Make sure settings.js is loaded before portfolio.js');
+            return;
         }
+        
+        // Make config globally accessible for other functions
+        window.PORTFOLIO_CONFIG = this.config;
+        
         this.apply();
     }
 
@@ -697,10 +749,11 @@ class ConfigLoader {
         this.applyAbout();
         this.applyProjects();
         this.applySite();
+        this.applyUI();
     }
 
     applyPersonal() {
-        const personal = this.config.Personal;
+        const personal = window.PORTFOLIO_CONFIG?.Personal;
         if (!personal) return;
 
         // Update name
@@ -739,25 +792,18 @@ class ConfigLoader {
     }
 
     applyAbout() {
-        const about = this.config.About;
+        const about = window.PORTFOLIO_CONFIG?.About;
         if (!about) return;
 
-        const aboutText = DOM.query('.about-text p');
-        if (aboutText && about.description_fr && about.description_en) {
-            aboutText.setAttribute('data-fr', about.description_fr);
-            aboutText.setAttribute('data-en', about.description_en);
-        }
-
-        const stats = DOM.queryAll('.stat-number');
-        if (stats[0] && about.years_study) stats[0].textContent = about.years_study;
-        if (stats[1] && about.projects_completed) stats[1].textContent = about.projects_completed;
+        // Note: Description and stats are now handled by applyUI()
+        // This function is kept for potential other About configurations
     }
 
     applyProjects() {
         const projects = [];
         
         for (let i = 1; i <= 8; i++) {
-            const project = this.config[`Project${i}`];
+            const project = window.PORTFOLIO_CONFIG?.[`Project${i}`];
             if (project) projects.push(project);
         }
         
@@ -769,7 +815,7 @@ class ConfigLoader {
     }
 
     applySite() {
-        const site = this.config.Site;
+        const site = window.PORTFOLIO_CONFIG?.Site;
         if (site?.year) {
             const footer = DOM.query('footer p');
             if (footer) {
@@ -778,7 +824,178 @@ class ConfigLoader {
         }
     }
 
-    loadEmbeddedConfig() {
+    applyUI() {
+        const ui = window.PORTFOLIO_CONFIG?.UI;
+        if (!ui) {
+            console.error('❌ No UI config found');
+            return;
+        }
+        console.log('🎨 Applying UI config...');
+
+        // Apply title
+        const titleEl = DOM.query('[data-ui="title"]');
+        if (titleEl && ui.title_fr && ui.title_en) {
+            titleEl.setAttribute('data-fr', ui.title_fr);
+            titleEl.setAttribute('data-en', ui.title_en);
+            const currentLang = document.documentElement.lang || 'fr';
+            titleEl.textContent = currentLang === 'en' ? ui.title_en : ui.title_fr;
+            document.title = titleEl.textContent; // Update document title too
+        }
+
+        // Apply all UI elements with data-ui attribute
+        Object.keys(ui).forEach(key => {
+            if (key.endsWith('_fr')) {
+                const baseKey = key.replace('_fr', '');
+                const enKey = baseKey + '_en';
+                
+                if (ui[enKey]) {
+                    const elements = DOM.queryAll(`[data-ui="${baseKey}"]`);
+                    
+                    elements.forEach(el => {
+                        el.setAttribute('data-fr', ui[key]);
+                        el.setAttribute('data-en', ui[enKey]);
+                        
+                        const currentLang = document.documentElement.lang || 'fr';
+                        el.textContent = currentLang === 'en' ? ui[enKey] : ui[key];
+                    });
+                }
+            }
+        });
+
+        // Apply non-text values (like stats values and logo)
+        ['about_years_value', 'about_projects_value', 'logo_text'].forEach(key => {
+            if (ui[key]) {
+                const elements = DOM.queryAll(`[data-ui="${key}"]`);
+                console.log(`🔤 Setting ${key}: found ${elements.length} element(s)`);
+                elements.forEach(el => {
+                    el.textContent = ui[key];
+                });
+            }
+        });
+
+        // Generate journey skills tags
+        this.generateJourneySkills();
+
+        // Generate skills badges  
+        this.generateSkillsBadges();
+        
+        // Apply meta tags
+        this.applyMetaTags();
+        
+        // Apply image alt
+        const profileImg = DOM.query('[data-ui="profile_image_alt"]');
+        if (profileImg && ui.profile_image_alt_fr && ui.profile_image_alt_en) {
+            const currentLang = document.documentElement.lang || 'fr';
+            profileImg.alt = currentLang === 'en' ? ui.profile_image_alt_en : ui.profile_image_alt_fr;
+        }
+    }
+
+    applyMetaTags() {
+        const ui = window.PORTFOLIO_CONFIG?.UI;
+        if (!ui) return;
+        
+        const currentLang = document.documentElement.lang || 'fr';
+        
+        // Update meta description
+        const metaDesc = DOM.query('meta[name="description"]');
+        if (metaDesc && ui.meta_description_fr && ui.meta_description_en) {
+            metaDesc.content = currentLang === 'en' ? ui.meta_description_en : ui.meta_description_fr;
+        }
+        
+        // Update meta keywords  
+        const metaKeywords = DOM.query('meta[name="keywords"]');
+        if (metaKeywords && ui.meta_keywords_fr && ui.meta_keywords_en) {
+            metaKeywords.content = currentLang === 'en' ? ui.meta_keywords_en : ui.meta_keywords_fr;
+        }
+        
+        // Update meta author
+        const metaAuthor = DOM.query('meta[name="author"]');
+        if (metaAuthor && ui.logo_text) {
+            metaAuthor.content = ui.logo_text;
+        }
+        
+        // Update Open Graph tags
+        const ogTitle = DOM.query('meta[property="og:title"]');
+        if (ogTitle && ui.og_title_fr && ui.og_title_en) {
+            ogTitle.content = currentLang === 'en' ? ui.og_title_en : ui.og_title_fr;
+        }
+        
+        const ogDesc = DOM.query('meta[property="og:description"]');
+        if (ogDesc && ui.og_description_fr && ui.og_description_en) {
+            ogDesc.content = currentLang === 'en' ? ui.og_description_en : ui.og_description_fr;
+        }
+        
+        // Update Twitter tags
+        const twitterTitle = DOM.query('meta[property="twitter:title"]');
+        if (twitterTitle && ui.og_title_fr && ui.og_title_en) {
+            twitterTitle.content = currentLang === 'en' ? ui.og_title_en : ui.og_title_fr;
+        }
+        
+        const twitterDesc = DOM.query('meta[property="twitter:description"]');
+        if (twitterDesc && ui.og_description_fr && ui.og_description_en) {
+            twitterDesc.content = currentLang === 'en' ? ui.og_description_en : ui.og_description_fr;
+        }
+    }
+
+    generateJourneySkills() {
+        const ui = window.PORTFOLIO_CONFIG?.UI;
+        const skillsContainer = DOM.query('[data-ui="journey_skills"]');
+        
+        if (!skillsContainer || !ui?.journey_skills) return;
+
+        skillsContainer.innerHTML = '';
+        ui.journey_skills.forEach(skill => {
+            const skillTag = DOM.createElement('div', 'skill-tag', skill);
+            skillsContainer.appendChild(skillTag);
+        });
+    }
+
+    generateSkillsBadges() {
+        const ui = window.PORTFOLIO_CONFIG?.UI;
+        const skillsContainer = DOM.query('[data-ui="skills_list"]');
+        
+        if (!skillsContainer || !ui?.skills_list) return;
+
+        // Icon mapping for skills
+        const skillIcons = {
+            'HTML5': 'https://img.icons8.com/color/48/html-5--v1.png',
+            'CSS3': 'https://img.icons8.com/color/48/css3.png',
+            'JavaScript': 'https://img.icons8.com/color/48/javascript--v1.png',
+            'React': 'https://img.icons8.com/color/48/react-native.png',
+            'Vue.js': 'https://img.icons8.com/color/48/vue-js.png',
+            'Python': 'https://img.icons8.com/color/48/python--v1.png',
+            'Node.js': 'https://img.icons8.com/color/48/nodejs.png',
+            'Flask': 'https://img.icons8.com/color/48/flask.png',
+            'Express': 'https://img.icons8.com/office/48/express-js.png',
+            'FastAPI': 'https://img.icons8.com/color/48/api-settings.png',
+            'PostgreSQL': 'https://img.icons8.com/color/48/postgreesql.png',
+            'MongoDB': 'https://img.icons8.com/color/48/mongodb.png',
+            'Redis': 'https://img.icons8.com/color/48/redis.png',
+            'SQLite': 'https://img.icons8.com/color/48/sql.png',
+            'Flutter': 'https://img.icons8.com/color/48/flutter.png',
+            'AWS': 'https://img.icons8.com/color/48/amazon-web-services.png',
+            'Firebase': 'https://img.icons8.com/color/48/firebase.png',
+            'Docker': 'https://img.icons8.com/color/48/docker.png',
+            'Git': 'https://img.icons8.com/color/48/git.png',
+            'VS Code': 'https://img.icons8.com/color/48/visual-studio-code-2019.png',
+            'Figma': 'https://img.icons8.com/color/48/figma--v1.png',
+            'UI/UX': 'https://img.icons8.com/color/48/design.png',
+            'Linux': 'https://img.icons8.com/color/48/linux--v1.png',
+            'TypeScript': 'https://img.icons8.com/color/48/typescript.png'
+        };
+
+        skillsContainer.innerHTML = '';
+        ui.skills_list.forEach(skill => {
+            const icon = skillIcons[skill] || 'https://img.icons8.com/color/48/code.png';
+            const skillBadge = DOM.createElement('div', 'skill-badge', `
+                <img src="${icon}" alt="${skill}"/>
+                <span>${skill}</span>
+            `);
+            skillsContainer.appendChild(skillBadge);
+        });
+    }
+
+    /* loadEmbeddedConfig() { // DISABLED - not compatible with data-ui system
         this.config = {
             Personal: {
                 name: 'Baptiste Lavogiez',
@@ -904,8 +1121,8 @@ class ConfigLoader {
                 image_gallery2: 'https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=300&h=200&fit=crop',
                 tags: 'Go,Cryptography,P2P'
             }
-        };
-    }
+        }; */
+    // }
 
     getDefaultProject() {
         return {

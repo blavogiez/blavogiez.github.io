@@ -38,12 +38,132 @@ const SETTINGS_CONFIG = {
         trait6_fr: "Créatif",
         trait6_en: "Creative"
     },
+    UI: {
+        // Page title
+        title_fr: "Baptiste Lavogiez - Portfolio Développeur Full-Stack",
+        title_en: "Baptiste Lavogiez - Full-Stack Developer Portfolio",
+        
+        // Meta tags
+        meta_description_fr: "Baptiste Lavogiez - Développeur Full-Stack passionné, étudiant en 2ème année. Portfolio moderne avec projets créatifs et solutions digitales innovantes.",
+        meta_description_en: "Baptiste Lavogiez - Passionate Full-Stack Developer, 2nd year student. Modern portfolio with creative projects and innovative digital solutions.",
+        meta_keywords_fr: "Baptiste Lavogiez, développeur, full-stack, portfolio, web, javascript, python, react",
+        meta_keywords_en: "Baptiste Lavogiez, developer, full-stack, portfolio, web, javascript, python, react",
+        og_title_fr: "Baptiste Lavogiez - Développeur Full-Stack",
+        og_title_en: "Baptiste Lavogiez - Full-Stack Developer",
+        og_description_fr: "Développeur Full-Stack qui transforme des idées en solutions digitales innovantes",
+        og_description_en: "Full-Stack Developer who transforms ideas into innovative digital solutions",
+        
+        // Logo and image alts
+        logo_text: "Baptiste Lavogiez",
+        profile_image_alt_fr: "Baptiste Lavogiez - Photo de profil",
+        profile_image_alt_en: "Baptiste Lavogiez - Profile photo",
+        
+        // Navigation
+        nav_about_fr: "À propos",
+        nav_about_en: "About",
+        nav_journey_fr: "Parcours", 
+        nav_journey_en: "Journey",
+        nav_projects_fr: "Projets",
+        nav_projects_en: "Projects",
+        nav_skills_fr: "Compétences",
+        nav_skills_en: "Skills",
+        nav_contact_fr: "Contact",
+        nav_contact_en: "Contact",
+        
+        // Hero section
+        hero_subtitle_fr: "développeur full-stack",
+        hero_subtitle_en: "full-stack developer",
+        
+        // About section
+        about_title_fr: "À propos de moi",
+        about_title_en: "About me",
+        about_description_fr: "Étudiant passionné en informatique, je développe des projets créatifs et techniques ! Toujours en quête d'apprentissage et d'innovation !",
+        about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
+        about_years_value: "2+",
+        about_years_label_fr: "Années d'études",
+        about_years_label_en: "Years of study", 
+        about_projects_value: "5+",
+        about_projects_label_fr: "Projets réalisés",
+        about_projects_label_en: "Projects completed",
+        
+        // Journey section
+        journey_title_fr: "Mon Parcours",
+        journey_title_en: "My Journey",
+        journey_bac_title_fr: "Baccalauréat Scientifique",
+        journey_bac_title_en: "Scientific Baccalaureate",
+        journey_bac_grade_fr: "Mention Très Bien",
+        journey_bac_grade_en: "Highest Honors",
+        journey_bac_desc_fr: "Spécialités : Numérique et Sciences Informatiques, Mathématiques, Physique-Chimie",
+        journey_bac_desc_en: "Specialties: Computer Science, Mathematics, Physics-Chemistry",
+        journey_but_title_fr: "BUT Informatique - 2ème année",
+        journey_but_title_en: "Computer Science BUT - 2nd year",
+        journey_but_institution_fr: "Formation en alternance",
+        journey_but_institution_en: "Work-study program",
+        journey_but_desc_fr: "Développement logiciel, bases de données, réseaux, gestion de projet, méthodes agiles !",
+        journey_but_desc_en: "Software development, databases, networks, project management, agile methods!",
+        journey_engineer_title_fr: "École d'Ingénieur",
+        journey_engineer_title_en: "Engineering School",
+        journey_engineer_institution_fr: "Objectif : intégration directe post-BUT2 + alternance",
+        journey_engineer_institution_en: "Goal: direct admission after BUT2",
+        journey_engineer_desc_fr: "toto",
+        journey_engineer_desc_en: "Skip preparatory classes by directly entering engineering school after 2nd year! Otherwise, 3rd year BUT and let's go!",
+        
+        // Journey skills
+        journey_skills: ["Java", "Python", "SQL", "Web", "Linux"],
+        
+        // Projects section
+        projects_title_fr: "Mes Projets",
+        projects_title_en: "My Projects",
+        projects_view_code_fr: "Voir le code",
+        projects_view_code_en: "View code",
+        
+        // Philosophy section
+        philosophy_title_fr: "ma philosophie de développement",
+        philosophy_title_en: "my development philosophy",
+        philosophy_opt_title_fr: "optimisation continue",
+        philosophy_opt_title_en: "continuous optimization",
+        philosophy_opt_desc_fr: "j'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! aujourd'hui, j'intègre notamment les agents llm terminaux (claude code, gemini/qwen cli...) à mon cycle de développement afin d'être plus productif !",
+        philosophy_opt_desc_en: "i continuously optimize my development process and embrace new technologies! today, i integrate terminal llm agents (claude code, gemini/qwen cli...) into my development cycle to be more productive!",
+        philosophy_arch_title_fr: "architecture solide",
+        philosophy_arch_title_en: "solid architecture",
+        philosophy_arch_desc_fr: "je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !",
+        philosophy_arch_desc_en: "i modularize my projects extensively using solid and agile principles. well-organized projects that everyone can understand!",
+        philosophy_user_title_fr: "vision utilisateur",
+        philosophy_user_title_en: "user vision",
+        philosophy_user_quote_fr: "un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois",
+        philosophy_user_quote_en: "a developer should not limit themselves; they must embody all users at once",
+        philosophy_user_desc_fr: "cette phrase résume comment je vois la réalisation de projets informatiques",
+        philosophy_user_desc_en: "this phrase summarizes how i view software project development",
+        
+        // Skills section
+        skills_title_fr: "Mes Compétences",
+        skills_title_en: "My Skills",
+        skills_intro_fr: "Technologies que je maîtrise pour créer des solutions digitales complètes !",
+        skills_intro_en: "Technologies I master to create complete digital solutions!",
+        
+        // Contact section
+        contact_title_fr: "Contactez moi",
+        contact_title_en: "Contact me",
+        contact_intro_fr: "",
+        contact_intro_en: "Interested in collaboration? Feel free to contact me!",
+        
+        // Footer
+        footer_rights_fr: "Baptiste Lavogiez. Tous droits réservés.",
+        footer_rights_en: "Baptiste Lavogiez. All rights reserved.",
+        
+        // Skills list for badges
+        skills_list: [
+            "HTML5", "CSS3", "JavaScript", "React", "Vue.js", "Python", "Node.js", "Flask", "Express", "FastAPI",
+            "PostgreSQL", "MongoDB", "Redis", "SQLite", "Flutter", "AWS", "Firebase", "Docker", "Git", "VS Code",
+            "Figma", "UI/UX", "Linux", "TypeScript"
+        ]
+    },
     Project1: {
         name_fr: "Application Web Portfolio",
         name_en: "Portfolio Web App",
         summary_fr: "Site portfolio moderne et responsive avec animations CSS.",
         summary_en: "Modern responsive portfolio website with CSS animations.",
-        description_fr: "Dérrveloppement complet d'un portfolio personnel utilisant HTML5, CSS3 et JavaScript vanilla. Fonctionnalités : système multilingue, animations fluides, design responsive optimisé pour tous les appareils.",
+        description_fr: "Développement complet d'un portfolio personnel utilisant HTML5, CSS3 et JavaScript vanilla. Fonctionnalités : système multilingue, animations fluides, design responsive optimisé pour tous les appareils.",
         description_en: "Complete development of a personal portfolio using HTML5, CSS3 and vanilla JavaScript. Features: multilingual system, smooth animations, responsive design optimized for all devices.",
         github: "https://github.com/baptiste-lavogiez/portfolio",
         image_main: "assets/images/projects/project1/main.jpg",
@@ -143,3 +263,6 @@ const SETTINGS_CONFIG = {
         tags: "Go,Cryptography,P2P"
     }
 };
+
+// Make it globally accessible
+window.SETTINGS_CONFIG = SETTINGS_CONFIG;

@@ -22,7 +22,7 @@
     <meta property="twitter:description" content="Développeur Full-Stack qui transforme des idées en solutions digitales innovantes">
     <meta property="twitter:image" content="photo.jpg">
 
-    <title data-fr="Baptiste Lavogiez - Portfolio Développeur Full-Stack" data-en="Baptiste Lavogiez - Full-Stack Developer Portfolio">Baptiste Lavogiez - Portfolio Développeur Full-Stack</title>
+    <title data-ui="title"></title>
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,14 +46,14 @@
     <header>
         <nav>
             <div class="logo">
-                <span class="logo-text" data-fr="Baptiste Lavogiez" data-en="Baptiste Lavogiez">Baptiste Lavogiez</span>
+                <span class="logo-text" data-ui="logo_text"></span>
             </div>
             <div class="nav-links">
-                <a href="#about" data-fr="À propos" data-en="About">À propos</a>
-                <a href="#journey" data-fr="Parcours" data-en="Journey">Parcours</a>
-                <a href="#projects" data-fr="Projets" data-en="Projects">Projets</a>
-                <a href="#skills" data-fr="Compétences" data-en="Skills">Compétences</a>
-                <a href="#contact" data-fr="Contact" data-en="Contact">Contact</a>
+                <a href="#about" data-ui="nav_about"></a>
+                <a href="#journey" data-ui="nav_journey"></a>
+                <a href="#projects" data-ui="nav_projects"></a>
+                <a href="#skills" data-ui="nav_skills"></a>
+                <a href="#contact" data-ui="nav_contact"></a>
             </div>
             <div class="language-switcher">
                 <button id="lang-fr" class="lang-btn active" aria-label="Français">🇫🇷</button>
@@ -71,13 +71,11 @@
                     <h1 class="hero-title">
                         <span class="name">baptiste lavogiez</span>
                     </h1>
-                    <p class="hero-subtitle" data-fr="développeur full-stack" data-en="full-stack developer">
-                        développeur full-stack
-                    </p>
+                    <p class="hero-subtitle" data-ui="hero_subtitle"></p>
                 </div>
                 <div class="hero-visual">
                     <div class="profile-photo">
-                        <img src="photo.jpg" alt="Baptiste Lavogiez" loading="eager" />
+                        <img src="photo.jpg" data-ui="profile_image_alt" loading="eager" />
                     </div>
                 </div>
             </div>
@@ -86,20 +84,18 @@
         <!-- About Section -->
         <section id="about" class="about">
             <div class="container">
-                <h2 data-fr="À propos de moi" data-en="About me">À propos de moi</h2>
+                <h2 data-ui="about_title"></h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p data-fr="Étudiant passionné en informatique, je développe des projets créatifs et techniques ! Toujours en quête d'apprentissage et d'innovation !" data-en="Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!">
-                            Étudiant passionné en informatique, je développe des projets créatifs et techniques ! Toujours en quête d'apprentissage et d'innovation !
-                        </p>
+                        <p data-ui="about_description"></p>
                         <div class="stats">
                             <div class="stat">
-                                <span class="stat-number">2+</span>
-                                <span class="stat-label" data-fr="Années d'études" data-en="Years of study">Années d'études</span>
+                                <span class="stat-number" data-ui="about_years_value"></span>
+                                <span class="stat-label" data-ui="about_years_label"></span>
                             </div>
                             <div class="stat">
-                                <span class="stat-number">8+</span>
-                                <span class="stat-label" data-fr="Projets réalisés" data-en="Projects completed">Projets réalisés</span>
+                                <span class="stat-number" data-ui="about_projects_value"></span>
+                                <span class="stat-label" data-ui="about_projects_label"></span>
                             </div>
                         </div>
                     </div>
@@ -110,25 +106,23 @@
         <!-- Journey Section -->
         <section id="journey" class="journey">
             <div class="container">
-                <h2 data-fr="Mon Parcours" data-en="My Journey">Mon Parcours</h2>
+                <h2 data-ui="journey_title"></h2>
                 <div class="journey-content">
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-marker"></div>
                             <div class="timeline-content">
                                 <div class="timeline-date">2024</div>
-                                <h3 data-fr="Baccalauréat Scientifique" data-en="Scientific Baccalaureate">Baccalauréat Scientifique</h3>
+                                <h3 data-ui="journey_bac_title"></h3>
                                 <div class="timeline-details">
                                     <div class="specialty-badge">NSI</div>
                                     <div class="specialty-badge">Mathématiques</div>
                                     <div class="specialty-badge">Physique-Chimie</div>
                                 </div>
                                 <div class="timeline-grade">
-                                    <span class="grade-badge" data-fr="Mention Très Bien" data-en="Highest Honors">Mention Très Bien</span>
+                                    <span class="grade-badge" data-ui="journey_bac_grade"></span>
                                 </div>
-                                <p data-fr="Spécialités : Numérique et Sciences Informatiques, Mathématiques, Physique-Chimie" data-en="Specialties: Computer Science, Mathematics, Physics-Chemistry">
-                                    Spécialités : Numérique et Sciences Informatiques, Mathématiques, Physique-Chimie
-                                </p>
+                                <p data-ui="journey_bac_desc"></p>
                             </div>
                         </div>
                         
@@ -136,19 +130,11 @@
                             <div class="timeline-marker active"></div>
                             <div class="timeline-content">
                                 <div class="timeline-date">2025 - 2026</div>
-                                <h3 data-fr="BUT Informatique - 2ème année" data-en="Computer Science BUT - 2nd year">BUT Informatique - 2ème année</h3>
-                                <div class="timeline-institution" data-fr="Formation en alternance" data-en="Work-study program">
-                                    Formation en alternance
-                                </div>
-                                <p data-fr="Développement logiciel, bases de données, réseaux, gestion de projet, méthodes agiles !" data-en="Software development, databases, networks, project management, agile methods!">
-                                    Développement logiciel, bases de données, réseaux, gestion de projet, méthodes agiles !
-                                </p>
-                                <div class="timeline-skills">
-                                    <div class="skill-tag">Java</div>
-                                    <div class="skill-tag">Python</div>
-                                    <div class="skill-tag">SQL</div>
-                                    <div class="skill-tag">Web</div>
-                                    <div class="skill-tag">Linux</div>
+                                <h3 data-ui="journey_but_title"></h3>
+                                <div class="timeline-institution" data-ui="journey_but_institution"></div>
+                                <p data-ui="journey_but_desc"></p>
+                                <div class="timeline-skills" data-ui="journey_skills">
+                                    <!-- Skills will be generated dynamically -->
                                 </div>
                             </div>
                         </div>
@@ -157,13 +143,9 @@
                             <div class="timeline-marker future"></div>
                             <div class="timeline-content">
                                 <div class="timeline-date">2026+</div>
-                                <h3 data-fr="École d'Ingénieur" data-en="Engineering School">École d'Ingénieur</h3>
-                                <div class="timeline-institution" data-fr="Objectif : intégration directe post-BUT2" data-en="Goal: direct admission after BUT2">
-                                    Objectif : intégration directe post-BUT2
-                                </div>
-                                <p data-fr="Éviter la prépa en intégrant directement une école d'ingénieur dès la fin de 2ème année ! Sinon, 3ème année BUT et c'est parti !" data-en="Skip preparatory classes by directly entering engineering school after 2nd year! Otherwise, 3rd year BUT and let's go!">
-                                    Éviter la prépa en intégrant directement une école d'ingénieur dès la fin de 2ème année ! Sinon, 3ème année BUT et c'est parti !
-                                </p>
+                                <h3 data-ui="journey_engineer_title"></h3>
+                                <div class="timeline-institution" data-ui="journey_engineer_institution"></div>
+                                <p data-ui="journey_engineer_desc"></p>
                             </div>
                         </div>
                     </div>
@@ -174,7 +156,7 @@
         <!-- Projects Section -->
         <section id="projects" class="projects">
             <div class="projects-container">
-                <h2 data-fr="Mes Projets" data-en="My Projects">Mes Projets</h2>
+                <h2 data-ui="projects_title"></h2>
                 <div class="project-counter">
                     <span class="current">1</span> / <span class="total">8</span>
                 </div>
@@ -193,35 +175,27 @@
             <div class="container">
                 <div class="philosophy-content">
                     <div class="philosophy-intro">
-                        <h3 data-fr="ma philosophie de développement" data-en="my development philosophy">ma philosophie de développement</h3>
+                        <h3 data-ui="philosophy_title"></h3>
                     </div>
                     
                     <div class="philosophy-grid">
                         <div class="philosophy-card">
                             <div class="philosophy-icon">01</div>
-                            <h4 data-fr="optimisation continue" data-en="continuous optimization">optimisation continue</h4>
-                            <p data-fr="j'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! aujourd'hui, j'intègre notamment les agents llm terminaux (claude code, gemini/qwen cli...) à mon cycle de développement afin d'être plus productif !" data-en="i continuously optimize my development process and embrace new technologies! today, i integrate terminal llm agents (claude code, gemini/qwen cli...) into my development cycle to be more productive!">
-                                j'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! aujourd'hui, j'intègre notamment les agents llm terminaux (claude code, gemini/qwen cli...) à mon cycle de développement afin d'être plus productif !
-                            </p>
+                            <h4 data-ui="philosophy_opt_title"></h4>
+                            <p data-ui="philosophy_opt_desc"></p>
                         </div>
                         
                         <div class="philosophy-card">
                             <div class="philosophy-icon">02</div>
-                            <h4 data-fr="architecture solide" data-en="solid architecture">architecture solide</h4>
-                            <p data-fr="je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !" data-en="i modularize my projects extensively using solid and agile principles. well-organized projects that everyone can understand!">
-                                je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !
-                            </p>
+                            <h4 data-ui="philosophy_arch_title"></h4>
+                            <p data-ui="philosophy_arch_desc"></p>
                         </div>
                         
                         <div class="philosophy-card highlight">
                             <div class="philosophy-icon">03</div>
-                            <h4 data-fr="vision utilisateur" data-en="user vision">vision utilisateur</h4>
-                            <blockquote data-fr="un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois" data-en="a developer should not limit themselves; they must embody all users at once">
-                                "un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois"
-                            </blockquote>
-                            <p data-fr="cette phrase résume comment je vois la réalisation de projets informatiques" data-en="this phrase summarizes how i view software project development">
-                                cette phrase résume comment je vois la réalisation de projets informatiques
-                            </p>
+                            <h4 data-ui="philosophy_user_title"></h4>
+                            <blockquote data-ui="philosophy_user_quote"></blockquote>
+                            <p data-ui="philosophy_user_desc"></p>
                         </div>
                     </div>
                 </div>
@@ -231,110 +205,13 @@
         <!-- Skills Section -->
         <section id="skills" class="skills">
             <div class="skills-container">
-                <h2 data-fr="Mes Compétences" data-en="My Skills">Mes Compétences</h2>
+                <h2 data-ui="skills_title"></h2>
                 <div class="skills-intro">
-                    <p data-fr="Technologies que je maîtrise pour créer des solutions digitales complètes !" data-en="Technologies I master to create complete digital solutions!">
-                        Technologies que je maîtrise pour créer des solutions digitales complètes !
-                    </p>
+                    <p data-ui="skills_intro"></p>
                 </div>
                 
-                <div class="skills-grid-new">
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/html-5--v1.png" alt="HTML5"/>
-                        <span>HTML5</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/css3.png" alt="CSS3"/>
-                        <span>CSS3</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/javascript--v1.png" alt="JavaScript"/>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/react-native.png" alt="React"/>
-                        <span>React</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/vue-js.png" alt="Vue.js"/>
-                        <span>Vue.js</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/python--v1.png" alt="Python"/>
-                        <span>Python</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/nodejs.png" alt="Node.js"/>
-                        <span>Node.js</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/flask.png" alt="Flask"/>
-                        <span>Flask</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/office/48/express-js.png" alt="Express"/>
-                        <span>Express</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/api-settings.png" alt="FastAPI"/>
-                        <span>FastAPI</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/postgreesql.png" alt="PostgreSQL"/>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/mongodb.png" alt="MongoDB"/>
-                        <span>MongoDB</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/redis.png" alt="Redis"/>
-                        <span>Redis</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/sql.png" alt="SQLite"/>
-                        <span>SQLite</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/flutter.png" alt="Flutter"/>
-                        <span>Flutter</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/amazon-web-services.png" alt="AWS"/>
-                        <span>AWS</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/firebase.png" alt="Firebase"/>
-                        <span>Firebase</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/docker.png" alt="Docker"/>
-                        <span>Docker</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/git.png" alt="Git"/>
-                        <span>Git</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/visual-studio-code-2019.png" alt="VS Code"/>
-                        <span>VS Code</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/figma--v1.png" alt="Figma"/>
-                        <span>Figma</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/design.png" alt="UI/UX"/>
-                        <span>UI/UX</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/linux--v1.png" alt="Linux"/>
-                        <span>Linux</span>
-                    </div>
-                    <div class="skill-badge">
-                        <img src="https://img.icons8.com/color/48/typescript.png" alt="TypeScript"/>
-                        <span>TypeScript</span>
-                    </div>
+                <div class="skills-grid-new" data-ui="skills_list">
+                    <!-- Skills badges will be generated dynamically -->
                 </div>
             </div>
         </section>
@@ -342,11 +219,9 @@
         <!-- Contact Section -->
         <section id="contact" class="contact">
             <div class="container">
-                <h2 data-fr="Contactez moi" data-en="Contact me">Contactez moi</h2>
+                <h2 data-ui="contact_title"></h2>
                 <div class="contact-content">
-                    <p data-fr="Intéressé par une collaboration ? N'hésitez pas à me contacter !" data-en="Interested in collaboration? Feel free to contact me!">
-                        Intéressé par une collaboration ? N'hésitez pas à me contacter !
-                    </p>
+                    <p data-ui="contact_intro"></p>
                     <div class="contact-links">
                         <a href="mailto:baptiste.lavogiez@proton.me" class="contact-link">
                             baptiste.lavogiez@proton.me
@@ -366,7 +241,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 <span data-fr="Baptiste Lavogiez. Tous droits réservés." data-en="Baptiste Lavogiez. All rights reserved.">Baptiste Lavogiez. Tous droits réservés.</span></p>
+            <p>&copy; 2025 <span data-ui="footer_rights"></span></p>
         </div>
     </footer>
 
@@ -376,6 +251,6 @@
     <!-- Scripts -->
     <script src="settings.js"></script>
     <script src="plausible-advanced.js" defer></script>
-    <script src="portfolio.js" defer></script>
+    <script src="portfolio.js"></script>
 </body>
 </html>
