@@ -664,20 +664,16 @@ class ConfigLoader {
         this.load();
     }
 
-    async load() {
-        try {
-            // Essayer de charger depuis settings.ini
-            const response = await fetch('settings.ini');
-            if (!response.ok) throw new Error('Config not found');
-            
-            const text = await response.text();
-            this.parse(text);
-            this.apply();
-        } catch (error) {
-            console.warn('CORS error or config not found, using embedded config:', error.message);
+    load() {
+        // Utiliser directement la config depuis settings.js
+        if (typeof SETTINGS_CONFIG !== 'undefined') {
+            this.config = SETTINGS_CONFIG;
+            console.log('✅ Settings loaded from settings.js');
+        } else {
+            console.warn('⚠️ SETTINGS_CONFIG not found, using embedded fallback');
             this.loadEmbeddedConfig();
-            this.apply();
         }
+        this.apply();
     }
 
     parse(text) {
