@@ -1,3 +1,0 @@
-J'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ; aujourd'hui, j'intègre notamment les agents LLM terminaux (Claude Code, Gemini/Qwen CLI...) à mon cycle de développement afin d'être plus productif. 
-Je module beaucoup mes projets en réutilisant les principes SOLID et AGILE notamment (des projets bien organisés et compréhensibles de tous !).
-Cette phrase résume comment je vois la réalisation de projets informatiques: "Un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois"
