@@ -30,6 +30,9 @@ build/
 *.swp
 *.swo
 
+# Claude Code
+.claude/
+
 # OS generated files
 Thumbs.db
 .DS_Store
