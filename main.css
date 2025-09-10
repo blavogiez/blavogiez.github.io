@@ -617,7 +617,7 @@ h2 {
 
 .grade-badge {
     background: var(--primary);
-    color: white;
+    color: rgb(173, 72, 47);
     padding: 0.4rem 1rem;
     border-radius: var(--radius);
     font-size: 0.85rem;
@@ -1559,4 +1559,18 @@ footer p {
     .skill-badge span {
         font-size: 0.8rem;
     }
+}
+
+/* Skills note section styling */
+.skills-special {
+    grid-column: 1 / -1;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.skills-note {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-style: italic;
 }

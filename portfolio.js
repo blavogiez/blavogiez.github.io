@@ -993,6 +993,16 @@ class ConfigLoader {
             `);
             skillsContainer.appendChild(skillBadge);
         });
+        
+        // Add special skills note section at the bottom
+        if (ui.skills_special_fr || ui.skills_special_en) {
+            const lang = document.documentElement.lang || 'fr';
+            const skillsText = lang === 'en' ? ui.skills_special_en : ui.skills_special_fr;
+            const skillsSection = DOM.createElement('div', 'skills-special', `
+                <div class="skills-note">${skillsText}</div>
+            `);
+            skillsContainer.appendChild(skillsSection);
+        }
     }
 
     /* loadEmbeddedConfig() { // DISABLED - not compatible with data-ui system

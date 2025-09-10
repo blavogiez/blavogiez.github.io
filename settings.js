@@ -77,7 +77,7 @@ const SETTINGS_CONFIG = {
         // About section
         about_title_fr: "À propos de moi",
         about_title_en: "About me",
-        about_description_fr: "Étudiant passionné en informatique, je développe des projets créatifs et techniques ! Toujours en quête d'apprentissage et d'innovation !",
+        about_description_fr: "Plus personnellement, je suis quelqu'un de simple qui essaie de voir de la positivité partout. Gratitude, positivité et respect sont mes valeurs.",
         about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
         about_years_value: "5+",
         about_years_label_fr: "expérience",
@@ -89,27 +89,27 @@ const SETTINGS_CONFIG = {
         // Journey section
         journey_title_fr: "Mon Parcours",
         journey_title_en: "My Journey",
-        journey_bac_title_fr: "Baccalauréat Scientifique",
+        journey_bac_title_fr: "Baccalauréat Scientifique - Lycée Marguerite de Flandres",
         journey_bac_title_en: "Scientific Baccalaureate",
         journey_bac_grade_fr: "Mention Très Bien",
         journey_bac_grade_en: "Highest Honors",
-        journey_bac_desc_fr: "Spécialités : Numérique et Sciences Informatiques, Mathématiques, Physique-Chimie",
+        journey_bac_desc_fr: "+ Option mathématiques expertes",
         journey_bac_desc_en: "Specialties: Computer Science, Mathematics, Physics-Chemistry",
-        journey_but_title_fr: "BUT Informatique - 2ème année",
+        journey_but_title_fr: "BUT Informatique - 2ème année - Villeneuve d'Ascq",
         journey_but_title_en: "Computer Science BUT - 2nd year",
-        journey_but_institution_fr: "Formation en alternance",
+        journey_but_institution_fr: "",
         journey_but_institution_en: "Work-study program",
         journey_but_desc_fr: "Développement logiciel, bases de données, réseaux, gestion de projet, méthodes agiles !",
         journey_but_desc_en: "Software development, databases, networks, project management, agile methods!",
-        journey_engineer_title_fr: "École d'Ingénieur",
+        journey_engineer_title_fr: "École d'Ingénieur ?",
         journey_engineer_title_en: "Engineering School",
         journey_engineer_institution_fr: "Objectif : intégration directe post-BUT2 + alternance",
         journey_engineer_institution_en: "Goal: direct admission after BUT2",
-        journey_engineer_desc_fr: "toto",
+        journey_engineer_desc_fr: "Je donne tout mon possible pour être dans le top du BUT afin d'intégrer une école d'ingénieur dès la fin de cette année.",
         journey_engineer_desc_en: "Skip preparatory classes by directly entering engineering school after 2nd year! Otherwise, 3rd year BUT and let's go!",
         
         // Journey skills
-        journey_skills: ["Java", "Python", "SQL", "Web", "Linux"],
+        journey_skills: ["Java", "C", "SQL", "Web", "Linux"],
         
         // Projects section
         projects_title_fr: "Mes Projets",
@@ -132,19 +132,21 @@ const SETTINGS_CONFIG = {
         philosophy_user_title_en: "user vision",
         philosophy_user_quote_fr: "un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois",
         philosophy_user_quote_en: "a developer should not limit themselves; they must embody all users at once",
-        philosophy_user_desc_fr: "cette phrase résume comment je vois la réalisation de projets informatiques",
+        philosophy_user_desc_fr: "cette phrase résume comment je vois la réalisation de projets informatiques ",
         philosophy_user_desc_en: "this phrase summarizes how i view software project development",
         
         // Skills section
         skills_title_fr: "Mes Compétences",
         skills_title_en: "My Skills",
-        skills_intro_fr: "Technologies que je maîtrise pour créer des solutions digitales complètes !",
+        skills_intro_fr: "Technologies que je maîtrise pour créer des solutions complètes !",
         skills_intro_en: "Technologies I master to create complete digital solutions!",
+        skills_special_fr: "Néanmoins deux compétences sont abstraites mais les plus importantes : la communication et l'adaptation à un groupe, à un projet, à une technologie.",
+        skills_special_en: "toto",
         
         // Contact section
         contact_title_fr: "Contactez moi",
         contact_title_en: "Contact me",
-        contact_intro_fr: "",
+        contact_intro_fr: "Disponible en région lilloise et alentours (véhiculé)",
         contact_intro_en: "Interested in collaboration? Feel free to contact me!",
         
         // Footer
@@ -153,9 +155,7 @@ const SETTINGS_CONFIG = {
         
         // Skills list for badges
         skills_list: [
-            "HTML5", "CSS3", "JavaScript", "React", "Vue.js", "Python", "Node.js", "Flask", "Express", "FastAPI",
-            "PostgreSQL", "MongoDB", "Redis", "SQLite", "Flutter", "AWS", "Firebase", "Docker", "Git", "VS Code",
-            "Figma", "UI/UX", "Linux", "TypeScript"
+            "Java", "AHK", "Python", "FastAPI", "PostgreSQL", "C", "Git", "VS Code", "Figma", "Linux"
         ]
     },
     Project1: {
