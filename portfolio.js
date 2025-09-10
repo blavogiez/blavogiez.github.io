@@ -206,13 +206,22 @@ class ProjectNavigator {
     animateProjectTransition(callback) {
         if (!this.projectCard) return callback();
         
-        // Add exit animation
+        // Exit animation
         this.projectCard.classList.add('exiting');
         
         setTimeout(() => {
+            // Load new content
             callback();
+            
+            // Remove exit animation and add enter animation
             this.projectCard.classList.remove('exiting');
-        }, 200);
+            this.projectCard.classList.add('entering');
+            
+            // Clean up enter animation after it completes
+            setTimeout(() => {
+                this.projectCard.classList.remove('entering');
+            }, 250);
+        }, 250);
     }
 
     loadProjects(projects) {
@@ -247,9 +256,33 @@ class ProjectNavigator {
         
         return `
             <div class="project-gallery">
-                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
-                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                <div class="image-wrapper">
+                    <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+                    <div class="zoom-icon" data-image="0">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="image-wrapper">
+                    <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                    <div class="zoom-icon" data-image="1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="image-wrapper">
+                    <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                    <div class="zoom-icon" data-image="2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                        </svg>
+                    </div>
+                </div>
                 
                 <div class="gallery-nav">
                     <span class="gallery-dot active" data-index="0"></span>
@@ -281,16 +314,34 @@ class ProjectNavigator {
     setupImageNavigation() {
         const images = DOM.queryAll('.gallery-image', this.projectCard);
         const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+        const zoomIcons = DOM.queryAll('.zoom-icon', this.projectCard);
         
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => this.showImage(index));
         });
         
-        // Ajouter le clic sur image pour agrandissement
-        images.forEach(img => {
+        // Ajouter le clic sur les icônes zoom pour agrandissement
+        zoomIcons.forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const imageIndex = parseInt(icon.dataset.image);
+                const img = images[imageIndex];
+                const imageSrc = img.src || img.dataset.src;
+                if (imageSrc && imageSrc !== '') {
+                    this.openLightbox(imageSrc, img.alt, imageIndex);
+                }
+            });
+            icon.style.cursor = 'pointer';
+        });
+        
+        // Aussi permettre le clic sur les images
+        images.forEach((img, index) => {
             img.addEventListener('click', (e) => {
                 e.stopPropagation();
-                this.openLightbox(img.src, img.alt);
+                const imageSrc = img.src || img.dataset.src;
+                if (imageSrc && imageSrc !== '') {
+                    this.openLightbox(imageSrc, img.alt, index);
+                }
             });
             img.style.cursor = 'pointer';
         });
@@ -325,8 +376,14 @@ class ProjectNavigator {
     }
 
     showImage(index) {
+        const imageWrappers = DOM.queryAll('.image-wrapper', this.projectCard);
         const images = DOM.queryAll('.gallery-image', this.projectCard);
         const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+        
+        // Masquer tous les wrappers et afficher celui sélectionné
+        imageWrappers.forEach((wrapper, i) => {
+            wrapper.style.display = i === index ? 'block' : 'none';
+        });
         
         images.forEach((img, i) => img.classList.toggle('active', i === index));
         dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
@@ -359,33 +416,99 @@ class ProjectNavigator {
         if (this.counterTotal) this.counterTotal.textContent = this.projects.length;
     }
 
-    openLightbox(imageSrc, imageAlt) {
-        // Créer la lightbox
+    openLightbox(imageSrc, imageAlt, startIndex = 0) {
+        const currentProject = this.projects[this.currentIndex];
+        const images = [
+            { src: currentProject.image_main, alt: `${currentProject.name_fr} - Image 1` },
+            { src: currentProject.image_gallery1, alt: `${currentProject.name_fr} - Image 2` },
+            { src: currentProject.image_gallery2, alt: `${currentProject.name_fr} - Image 3` }
+        ];
+        
+        let currentImageIndex = startIndex;
+
+        // Créer la lightbox avec navigation
         const lightbox = DOM.createElement('div', 'lightbox', `
             <div class="lightbox-content">
-                <img src="${imageSrc}" alt="${imageAlt}" />
+                <img src="${images[currentImageIndex].src}" alt="${images[currentImageIndex].alt}" />
                 <button class="lightbox-close" aria-label="Fermer">✕</button>
+                <button class="lightbox-nav lightbox-prev" aria-label="Image précédente">‹</button>
+                <button class="lightbox-nav lightbox-next" aria-label="Image suivante">›</button>
+                <div class="lightbox-counter">
+                    <span class="lightbox-current">${currentImageIndex + 1}</span> / <span class="lightbox-total">${images.length}</span>
+                </div>
             </div>
         `);
 
         document.body.appendChild(lightbox);
 
-        // Gestion de la fermeture
+        // Elements
+        const img = lightbox.querySelector('img');
         const closeBtn = lightbox.querySelector('.lightbox-close');
+        const prevBtn = lightbox.querySelector('.lightbox-prev');
+        const nextBtn = lightbox.querySelector('.lightbox-next');
+        const currentSpan = lightbox.querySelector('.lightbox-current');
+
+        // Navigation functions
+        const updateImage = () => {
+            img.src = images[currentImageIndex].src;
+            img.alt = images[currentImageIndex].alt;
+            currentSpan.textContent = currentImageIndex + 1;
+            
+            prevBtn.style.opacity = currentImageIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentImageIndex === images.length - 1 ? '0.5' : '1';
+        };
+
+        const showPrevious = () => {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateImage();
+            }
+        };
+
+        const showNext = () => {
+            if (currentImageIndex < images.length - 1) {
+                currentImageIndex++;
+                updateImage();
+            }
+        };
+
+        // Gestion de la fermeture
         const closeLightbox = () => {
-            document.body.removeChild(lightbox);
-            document.removeEventListener('keydown', handleKeydown);
+            lightbox.classList.remove('active');
+            setTimeout(() => {
+                if (lightbox.parentNode) {
+                    document.body.removeChild(lightbox);
+                }
+                document.removeEventListener('keydown', handleKeydown);
+            }, 200);
         };
 
         const handleKeydown = (e) => {
-            if (e.key === 'Escape') closeLightbox();
+            e.preventDefault();
+            switch(e.key) {
+                case 'Escape':
+                    closeLightbox();
+                    break;
+                case 'ArrowLeft':
+                    showPrevious();
+                    break;
+                case 'ArrowRight':
+                    showNext();
+                    break;
+            }
         };
 
+        // Event listeners
         closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', showPrevious);
+        nextBtn.addEventListener('click', showNext);
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) closeLightbox();
         });
         document.addEventListener('keydown', handleKeydown);
+
+        // Initial setup
+        updateImage();
 
         // Animation d'entrée
         setTimeout(() => lightbox.classList.add('active'), 10);
