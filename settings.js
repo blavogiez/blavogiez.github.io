@@ -40,7 +40,7 @@ const SETTINGS_CONFIG = {
     },
     UI: {
         // Page title
-        title_fr: "Baptiste Lavogiez - Portfolio Développeur Full-Stack",
+        title_fr: "Baptiste Lavogiez",
         title_en: "Baptiste Lavogiez - Full-Stack Developer Portfolio",
         
         // Meta tags
@@ -59,11 +59,11 @@ const SETTINGS_CONFIG = {
         profile_image_alt_en: "Baptiste Lavogiez - Profile photo",
         
         // Navigation
-        nav_about_fr: "À propos",
+        nav_about_fr: "Qui suis-je ?",
         nav_about_en: "About",
-        nav_journey_fr: "Parcours", 
+        nav_journey_fr: "Formation", 
         nav_journey_en: "Journey",
-        nav_projects_fr: "Projets",
+        nav_projects_fr: "Réalisations",
         nav_projects_en: "Projects",
         nav_skills_fr: "Compétences",
         nav_skills_en: "Skills",
@@ -71,11 +71,11 @@ const SETTINGS_CONFIG = {
         nav_contact_en: "Contact",
         
         // Hero section
-        hero_subtitle_fr: "développeur full-stack",
+        hero_subtitle_fr: "",
         hero_subtitle_en: "full-stack developer",
         
         // About section
-        about_title_fr: "À propos de moi",
+        about_title_fr: "Qui suis-je ?",
         about_title_en: "About me",
         about_description_fr: "Plus personnellement, je suis quelqu'un de simple qui essaie de voir de la positivité partout. Gratitude, positivité et respect sont mes valeurs.",
         about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
@@ -87,7 +87,7 @@ const SETTINGS_CONFIG = {
         about_projects_label_en: "Projects completed",
         
         // Journey section
-        journey_title_fr: "Mon Parcours",
+        journey_title_fr: "Formation",
         journey_title_en: "My Journey",
         journey_bac_title_fr: "Baccalauréat Scientifique - Lycée Marguerite de Flandres",
         journey_bac_title_en: "Scientific Baccalaureate",
@@ -112,31 +112,31 @@ const SETTINGS_CONFIG = {
         journey_skills: ["Java", "C", "SQL", "Web", "Linux"],
         
         // Projects section
-        projects_title_fr: "Mes Projets",
+        projects_title_fr: "Réalisations",
         projects_title_en: "My Projects",
         projects_view_code_fr: "Voir le code",
         projects_view_code_en: "View code",
         
         // Philosophy section
-        philosophy_title_fr: "ma philosophie de développement",
+        philosophy_title_fr: "Ma philosophie de développement",
         philosophy_title_en: "my development philosophy",
-        philosophy_opt_title_fr: "optimisation continue",
+        philosophy_opt_title_fr: "Optimisation continue",
         philosophy_opt_title_en: "continuous optimization",
-        philosophy_opt_desc_fr: "j'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! aujourd'hui, j'intègre notamment les agents llm terminaux (claude code, gemini/qwen cli...) à mon cycle de développement afin d'être plus productif !",
+        philosophy_opt_desc_fr: "J'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! aujourd'hui, j'intègre notamment les agents llm terminaux (claude code, gemini/qwen cli...) à mon cycle de développement afin d'être plus productif !",
         philosophy_opt_desc_en: "i continuously optimize my development process and embrace new technologies! today, i integrate terminal llm agents (claude code, gemini/qwen cli...) into my development cycle to be more productive!",
-        philosophy_arch_title_fr: "architecture solide",
+        philosophy_arch_title_fr: "Architecture solide",
         philosophy_arch_title_en: "solid architecture",
-        philosophy_arch_desc_fr: "je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !",
+        philosophy_arch_desc_fr: "Je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !",
         philosophy_arch_desc_en: "i modularize my projects extensively using solid and agile principles. well-organized projects that everyone can understand!",
-        philosophy_user_title_fr: "vision utilisateur",
+        philosophy_user_title_fr: "Vision utilisateur",
         philosophy_user_title_en: "user vision",
-        philosophy_user_quote_fr: "un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois",
+        philosophy_user_quote_fr: "Un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois",
         philosophy_user_quote_en: "a developer should not limit themselves; they must embody all users at once",
         philosophy_user_desc_fr: "cette phrase résume comment je vois la réalisation de projets informatiques ",
         philosophy_user_desc_en: "this phrase summarizes how i view software project development",
         
         // Skills section
-        skills_title_fr: "Mes Compétences",
+        skills_title_fr: "Compétences",
         skills_title_en: "My Skills",
         skills_intro_fr: "Technologies que je maîtrise pour créer des solutions complètes !",
         skills_intro_en: "Technologies I master to create complete digital solutions!",

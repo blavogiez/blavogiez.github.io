@@ -218,7 +218,6 @@ nav {
     font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
     letter-spacing: 0;
-    text-transform: lowercase;
 }
 
 .nav-links a:hover {
@@ -308,7 +307,6 @@ main {
     margin-bottom: 0.5rem;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0;
-    text-transform: lowercase;
 }
 
 .hero-title {
@@ -359,7 +357,6 @@ main {
     color: var(--text-muted);
     letter-spacing: 0;
     font-weight: 500;
-    text-transform: lowercase;
 }
 
 .cta-button {
@@ -373,7 +370,6 @@ main {
     font-size: 0.95rem;
     transition: var(--transition);
     border: 2px solid var(--accent);
-    text-transform: lowercase;
 }
 
 .cta-button:hover {
@@ -447,7 +443,6 @@ h2 {
     margin-bottom: var(--space-2xl);
     color: var(--text-primary);
     letter-spacing: -0.02em;
-    text-transform: lowercase;
 }
 
 /* ===== ABOUT ===== */
@@ -656,7 +651,6 @@ h2 {
     border: 1px solid var(--border);
     transition: var(--transition);
     font-family: 'Open Sans', sans-serif;
-    text-transform: lowercase;
 }
 
 .skill-tag:hover {
@@ -938,7 +932,6 @@ h2 {
     font-weight: 300;
     color: var(--text-primary);
     margin-bottom: 1rem;
-    text-transform: lowercase;
     letter-spacing: -0.02em;
     position: relative;
 }
@@ -1001,7 +994,6 @@ h2 {
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 1.5rem;
-    text-transform: lowercase;
     letter-spacing: 0;
 }
 
@@ -1009,7 +1001,6 @@ h2 {
     color: var(--text-secondary);
     line-height: 1.7;
     font-size: 0.95rem;
-    text-transform: lowercase;
 }
 
 .philosophy-card blockquote {
@@ -1023,7 +1014,6 @@ h2 {
     position: relative;
     font-size: 1.1rem;
     line-height: 1.6;
-    text-transform: lowercase;
 }
 
 .philosophy-card blockquote::before {
@@ -1100,7 +1090,6 @@ h2 {
     justify-content: center;
     gap: 0.8rem;
     font-family: 'Open Sans', sans-serif;
-    text-transform: lowercase;
     letter-spacing: 0;
     font-size: 1.1rem;
 }
