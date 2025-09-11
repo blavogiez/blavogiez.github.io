@@ -1,0 +1,72 @@
+/* ===== THEME OVERRIDES (Palette + Typos) ===== */
+:root {
+  /* Fonts */
+  --font-sans: 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Sora', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* Palette: dark forest + tangerine */
+  --primary: #ffffff;
+  --secondary: #e9f1ec;
+  --accent: #2ec4b6;          /* teal */
+  --accent-hover: #1fb5a6;    /* deeper teal */
+
+  --text-primary: #e9f1ec;
+  --text-secondary: #c2d1c9;
+  --text-muted: #93a59d;
+  --text-light: #7e9188;
+  --text-inverse: #0b0e0c;
+
+  --bg-primary: #0e1210;      /* charcoal with green undertone */
+  --bg-secondary: #121816;
+  --bg-tertiary: #18211d;
+  --bg-dark: #0a0f0d;
+  --bg-card: #121a17;
+  --bg-hover: #1b2622;
+
+  --border: #1c2621;
+  --border-light: #223029;
+  --border-dark: #0c120f;
+  --border-accent: var(--accent);
+
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 16px 42px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 24px rgba(46, 196, 182, 0.18);
+}
+
+/* Typography overrides */
+body { font-family: var(--font-sans); }
+.logo-text { font-family: var(--font-display); letter-spacing: 0.01em; }
+.hero-title { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; }
+h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
+.philosophy-intro h3 { font-family: var(--font-display); }
+.timeline-content h3 { font-family: var(--font-display); }
+.skill-category h3 { font-family: var(--font-display); }
+.nav-links a { font-family: var(--font-sans); }
+.hero-greeting, .hero-subtitle { font-family: var(--font-sans); }
+.timeline-date { font-family: var(--font-mono); }
+.specialty-badge { font-family: var(--font-sans); }
+.grade-badge { color: var(--accent); }
+
+/* Header overrides to use theme variables */
+header {
+  background: var(--bg-secondary) !important;
+  backdrop-filter: blur(16px);
+}
+
+header.section-active {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+}
+
+/* Remove any violet tint from highlight cards */
+.philosophy-card.highlight {
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(46, 196, 182, 0.08) 100%) !important;
+}
+
+/* Ensure navigation hover/active is crisp with teal */
+.nav-links a:hover,
+.nav-links a.active { color: var(--accent) !important; }
+
+/* Make section headings clearly adopt display font */
+h4, .philosophy-card h4 { font-family: var(--font-display); }

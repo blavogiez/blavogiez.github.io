@@ -3,40 +3,41 @@
 
 /* ===== MINIMALIST PROFESSIONAL VARIABLES ===== */
 :root {
-    /* Palette gris anthracite propre */
+    /* Professional modern palette */
     --primary: #ffffff;
-    --secondary: #e5e5e5;
-    --accent: #ff6b35;
-    --accent-hover: #e55a2b;
+    --secondary: #e2e8f0;
+    --accent: #dc2626;
+    --accent-hover: #b91c1c;
     
-    /* Texte pour thème sombre */
+    /* Text colors - enhanced contrast */
     --text-primary: #ffffff;
-    --text-secondary: #d4d4d8;
-    --text-muted: #a1a1aa;
-    --text-light: #71717a;
-    --text-inverse: #18181b;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-light: #64748b;
+    --text-inverse: #1e293b;
     
-    /* Fonds gris anthracite */
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2d2d2d;
-    --bg-tertiary: #262626;
-    --bg-dark: #0a0a0a;
-    --bg-card: #343434;
-    --bg-hover: #404040;
+    /* Modern professional backgrounds */
+    --bg-primary: #1e1e2e;
+    --bg-secondary: #2a2d3a;
+    --bg-tertiary: #353547;
+    --bg-dark: #16161f;
+    --bg-card: #353547;
+    --bg-hover: #464658;
     
-    /* Bordures pour thème sombre */
-    --border: #404040;
-    --border-light: #525252;
-    --border-dark: #262626;
-    --border-accent: #ff6b35;
+    /* Professional borders */
+    --border: #464658;
+    --border-light: #525266;
+    --border-dark: #2a2d3a;
+    --border-accent: #dc2626;
     
-    /* Minimal Shadows */
-    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    /* Enhanced shadows for depth */
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.25);
+    --shadow-glow: 0 0 20px rgba(220, 38, 38, 0.15);
     
     /* Gradients pour le thème sombre */
-    --gradient-accent: linear-gradient(135deg, var(--accent), #dc2626);
+    --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-hover));
     
     /* Instant Transitions */
     --transition: 0.2s ease;
@@ -155,7 +156,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(26, 26, 26, 0.95);
+    background: rgba(30, 30, 46, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
@@ -163,7 +164,7 @@ header {
 }
 
 header.section-active {
-    background: rgba(45, 45, 45, 0.98);
+    background: linear-gradient(135deg, rgba(42, 45, 58, 0.98) 0%, rgba(53, 53, 71, 0.98) 100%);
     border-bottom: 2px solid var(--accent);
     box-shadow: var(--shadow);
 }
@@ -671,6 +672,9 @@ h2 {
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .projects-navigation {
@@ -698,9 +702,23 @@ h2 {
     transform: translateY(0);
 }
 
+/* Project transition animations */
+.project-card.exiting {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.95);
+    transition: all 0.25s ease-in;
+}
+
+.project-card.entering {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition: all 0.25s ease-out;
+}
+
 .project-card:hover {
     border-color: var(--border-accent);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: translateY(-2px);
 }
 
 /* Removed fancy project animations */
@@ -708,20 +726,23 @@ h2 {
 .nav-arrow {
     width: 60px;
     height: 60px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
     background: var(--accent);
     border: none;
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--shadow);
 }
 
 .nav-arrow:hover {
     background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .nav-arrow:disabled {
@@ -735,10 +756,15 @@ h2 {
 
 .project-counter {
     text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    color: var(--text-light);
-    font-weight: 500;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    display: inline-block;
+    border: 1px solid var(--border);
 }
 
 .project-counter .current {
