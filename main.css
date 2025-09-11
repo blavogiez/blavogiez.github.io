@@ -383,11 +383,12 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
+    transform: translateX(20px);
 }
 
 .profile-photo {
-    width: 180px;
-    height: 180px;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -404,8 +405,8 @@ main {
 }
 
 .profile-photo {
-    width: 180px;
-    height: 180px;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
@@ -668,7 +669,7 @@ h2 {
 }
 
 .projects-container {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
     padding: 0 2rem;
     position: relative;
@@ -687,7 +688,7 @@ h2 {
 
 .project-card {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     background: var(--bg-card);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -1477,9 +1478,10 @@ footer p {
         justify-content: center;
     }
 
+    .hero-visual { transform: none; }
     .profile-photo {
-        width: 200px;
-        height: 200px;
+        width: 210px;
+        height: 210px;
     }
 
     .floating-card {
