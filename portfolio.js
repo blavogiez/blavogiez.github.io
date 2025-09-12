@@ -282,6 +282,7 @@ class ProjectNavigator {
         this.projectCard.innerHTML = this.createProjectCard(project);
         this.setupImageNavigation();
         this.setupLazyLoading();
+        this.setupExpandableDescription();
         this.updateControls();
         
         // Update language
@@ -339,8 +340,17 @@ class ProjectNavigator {
             
             <div class="project-info">
                 <div class="tech-icons">${techIcons}</div>
-                <p class="project-description" data-fr="${project.description_fr}" data-en="${project.description_en}">${project.description_fr}</p>
+                <div class="project-content">
+                    <div class="project-summary" data-fr="${project.description_fr}" data-en="${project.description_en}">${project.description_fr}</div>
+                    <div class="project-details" data-fr="${project.extended_description_fr || project.description_fr}" data-en="${project.extended_description_en || project.description_en}">${project.extended_description_fr || project.description_fr}</div>
+                </div>
                 <div class="project-actions">
+                    <button class="expand-toggle-btn" data-expanded="false">
+                        <span class="expand-text" data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_en || 'More info'}">${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}</span>
+                        <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
                     <a href="${project.github}" class="github-link" target="_blank" rel="noopener">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -442,6 +452,36 @@ class ProjectNavigator {
                 this.showImage(this.currentImageIndex);
             }
         }, CONFIG.IMAGE_ROTATION_INTERVAL);
+    }
+
+    setupExpandableDescription() {
+        const expandBtn = DOM.query('.expand-toggle-btn', this.projectCard);
+        const projectDetails = DOM.query('.project-details', this.projectCard);
+        const expandText = DOM.query('.expand-text', this.projectCard);
+        const expandIcon = DOM.query('.expand-icon', this.projectCard);
+        
+        if (!expandBtn || !projectDetails || !expandText || !expandIcon) return;
+        
+        expandBtn.addEventListener('click', () => {
+            const isExpanded = expandBtn.getAttribute('data-expanded') === 'true';
+            const newState = !isExpanded;
+            
+            expandBtn.setAttribute('data-expanded', newState);
+            projectDetails.classList.toggle('expanded', newState);
+            expandIcon.classList.toggle('rotated', newState);
+            
+            // Update button text based on current language and state
+            const currentLang = document.documentElement.lang;
+            const moreInfoKey = `projects_more_info_${currentLang}`;
+            const lessInfoKey = `projects_less_info_${currentLang}`;
+            
+            const moreInfoText = window.PORTFOLIO_CONFIG?.UI?.[moreInfoKey] || (currentLang === 'en' ? 'More info' : 'Plus d\'infos');
+            const lessInfoText = window.PORTFOLIO_CONFIG?.UI?.[lessInfoKey] || (currentLang === 'en' ? 'Less info' : 'Moins d\'infos');
+            
+            expandText.textContent = newState ? lessInfoText : moreInfoText;
+            expandText.setAttribute('data-fr', newState ? window.PORTFOLIO_CONFIG?.UI?.projects_less_info_fr || 'Moins d\'infos' : window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos');
+            expandText.setAttribute('data-en', newState ? window.PORTFOLIO_CONFIG?.UI?.projects_less_info_en || 'Less info' : window.PORTFOLIO_CONFIG?.UI?.projects_more_info_en || 'More info');
+        });
     }
 
     updateControls() {
