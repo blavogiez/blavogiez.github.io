@@ -61,8 +61,8 @@ const SETTINGS_CONFIG = {
         // Navigation
         nav_about_fr: "Qui suis-je ?",
         nav_about_en: "About",
-        nav_journey_fr: "Formation", 
-        nav_journey_en: "Journey",
+        nav_journey_fr: "Parcours", 
+        nav_journey_en: "Experience",
         nav_projects_fr: "Réalisations",
         nav_projects_en: "Projects",
         nav_skills_fr: "Compétences",
@@ -87,8 +87,23 @@ about_years_value: "5+",
         about_projects_label_en: "Projects completed",
         
         // Journey section
-        journey_title_fr: "Formation",
-        journey_title_en: "My Journey",
+        journey_title_fr: "Parcours",
+        journey_title_en: "My Experience",
+
+        // Professional experience
+        journey_work_title_fr: "Automatisation de processus",
+        journey_work_title_en: "Process Automation",
+        journey_work_company_fr: "Indépendant",
+        journey_work_company_en: "Freelance",
+        journey_work_period: "2022-2024",
+        journey_work_desc_fr: "<ul><li>Réalisation de scripts d'automatisation d'actions redondantes sur mesure (conception, test, optimisation)</li><li>Adaptation dynamique au contexte avec image matching | OCR dans une base de données</li><li>Robustesse et protection contre les aléas de l'éxécution</li><li>Démonstration client, déploiement local et paramétrage selon les retours</li></ul>",
+        journey_work_desc_en: "<ul><li>Custom automation script development for redundant actions (design, testing, optimization)</li><li>Dynamic context adaptation with image matching | OCR in database</li><li>Client demonstration, local deployment and configuration based on feedback</li></ul>",
+        journey_work_skills: ["Python", "AHK", "OCR", "Automation", "Scripting"],
+
+        // Formation subsection title
+        journey_formation_title_fr: "Formation",
+        journey_formation_title_en: "Education",
+
         journey_bac_title_fr: "Baccalauréat Scientifique - Lycée Marguerite de Flandres",
         journey_bac_title_en: "Scientific Baccalaureate",
         journey_bac_grade_fr: "Mention Très Bien",

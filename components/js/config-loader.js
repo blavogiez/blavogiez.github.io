@@ -170,7 +170,7 @@ class ConfigLoader {
         });
 
         // Apply non-text values (like stats values and logo)
-        ['about_years_value', 'about_projects_value', 'logo_text'].forEach(key => {
+        ['about_years_value', 'about_projects_value', 'logo_text', 'journey_work_period'].forEach(key => {
             if (ui[key]) {
                 const elements = DOM.queryAll(`[data-ui="${key}"]`);
                 console.log(`🧪 Setting ${key}: found ${elements.length} element(s)`);
@@ -241,15 +241,26 @@ class ConfigLoader {
 
     generateJourneySkills() {
         const ui = window.PORTFOLIO_CONFIG?.UI;
-        const skillsContainer = DOM.query('[data-ui="journey_skills"]');
-        
-        if (!skillsContainer || !ui?.journey_skills) return;
 
-        skillsContainer.innerHTML = '';
-        ui.journey_skills.forEach(skill => {
-            const skillTag = DOM.createElement('div', 'skill-tag', skill);
-            skillsContainer.appendChild(skillTag);
-        });
+        // Handle work skills
+        const workSkillsContainer = DOM.query('[data-ui="journey_work_skills"]');
+        if (workSkillsContainer && ui?.journey_work_skills) {
+            workSkillsContainer.innerHTML = '';
+            ui.journey_work_skills.forEach(skill => {
+                const skillTag = DOM.createElement('div', 'skill-tag', skill);
+                workSkillsContainer.appendChild(skillTag);
+            });
+        }
+
+        // Handle education skills
+        const skillsContainer = DOM.query('[data-ui="journey_skills"]');
+        if (skillsContainer && ui?.journey_skills) {
+            skillsContainer.innerHTML = '';
+            ui.journey_skills.forEach(skill => {
+                const skillTag = DOM.createElement('div', 'skill-tag', skill);
+                skillsContainer.appendChild(skillTag);
+            });
+        }
     }
 
     generateSkillsBadges() {

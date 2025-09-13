@@ -575,6 +575,29 @@ h2 {
     border-style: dashed;
 }
 
+.timeline-section-divider {
+    position: relative;
+    margin: 2rem 0 1.5rem 0;
+    padding-left: 2rem;
+}
+
+.timeline-section-divider h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.02em;
+    position: relative;
+    text-align: left;
+}
+
+.timeline-section-divider h3::before {
+    content: '> ';
+    color: var(--accent);
+    font-family: 'Source Code Pro', monospace;
+}
+
 .timeline-content {
     background: var(--bg-card);
     padding: 2rem;
