@@ -90,6 +90,10 @@ about_years_value: "5+",
         journey_title_fr: "Parcours",
         journey_title_en: "My Experience",
 
+        // Activity subsection title
+        journey_activity_title_fr: "Activité",
+        journey_activity_title_en: "Activity",
+
         // Professional experience
         journey_work_title_fr: "Automatisation de processus",
         journey_work_title_en: "Process Automation",
