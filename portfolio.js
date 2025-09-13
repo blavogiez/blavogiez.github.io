@@ -50,6 +50,41 @@ class InstantLoad {
         this.init();
     }
 
+    showSlide(index) {
+        const wrappers = DOM.queryAll('.project-gallery .image-wrapper', this.projectCard);
+        const images = DOM.queryAll('.gallery-image', this.projectCard);
+        const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+
+        // Pause any playing video when changing slides
+        this.videoManager.pauseAll();
+
+        wrappers.forEach((wrapper, i) => {
+            wrapper.style.display = i === index ? 'block' : 'none';
+        });
+        images.forEach((img) => img.classList.remove('active'));
+        const currentWrapper = wrappers[index];
+        const currentImg = currentWrapper ? currentWrapper.querySelector('.gallery-image') : null;
+        if (currentImg) currentImg.classList.add('active');
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+        this.currentImageIndex = index;
+        if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
+    }
+
+    updateGalleryUI() {
+        const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === this.currentImageIndex));
+
+        const zoomBtn = DOM.query('.gallery-zoom', this.projectCard);
+        if (zoomBtn) {
+            const wrappers = DOM.queryAll('.project-gallery .image-wrapper', this.projectCard);
+            const current = wrappers[this.currentImageIndex];
+            const isImage = current && current.getAttribute('data-type') === 'image';
+            zoomBtn.disabled = !isImage;
+            zoomBtn.setAttribute('aria-disabled', String(!isImage));
+        }
+    }
+
     init() {
         // Immediate reveal with smooth entry animations
         document.body.classList.add('loaded');
@@ -286,16 +321,16 @@ class ProjectNavigator {
 
         this.projectCard.innerHTML = this.createProjectCard(project);
 
-        // Setup based on content type
+        // Always setup gallery navigation and lazy loading
+        this.setupImageNavigation();
+        this.setupLazyLoading();
+
+        // Setup video player if present
         const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
-        if (hasVideo) {
-            this.setupVideoPlayer(project);
-        } else {
-            this.setupImageNavigation();
-            this.setupLazyLoading();
-        }
+        if (hasVideo) this.setupVideoPlayer(project);
 
         this.setupExpandableDescription();
+        if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
         this.updateControls();
 
         // Update language
@@ -323,53 +358,60 @@ class ProjectNavigator {
         // Check if project has video
         const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
 
-        let galleryContent;
+        // Build unified slides: video (if any) + images
+        const slides = [];
+
         if (hasVideo) {
-            galleryContent = this.videoManager.createVideoElement(project);
-        } else {
-            galleryContent = `
-                <div class="project-gallery">
-                    <div class="image-wrapper">
-                        <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
-                        <div class="zoom-icon" data-image="0">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                            </svg>
+            const videoId = `video-${Date.now()}`;
+            const url = project.video_url;
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                slides.push(`
+                    <div class="image-wrapper" data-type="video">
+                        <div class="plyr__video-embed" id="${videoId}">
+                            <iframe src="https://www.youtube.com/embed/${this.videoManager.extractYouTubeId(url)}?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
                         </div>
                     </div>
-                    <div class="image-wrapper">
-                        <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-                        <div class="zoom-icon" data-image="1">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                            </svg>
+                `);
+            } else if (url.includes('vimeo.com')) {
+                slides.push(`
+                    <div class="image-wrapper" data-type="video">
+                        <div class="plyr__video-embed" id="${videoId}">
+                            <iframe src="https://player.vimeo.com/video/${this.videoManager.extractVimeoId(url)}?loop=false&byline=false&portrait=false&title=false&speed=true&transparent=0&gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
                         </div>
                     </div>
-                    <div class="image-wrapper">
-                        <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-                        <div class="zoom-icon" data-image="2">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                            </svg>
-                        </div>
+                `);
+            } else {
+                slides.push(`
+                    <div class="image-wrapper" data-type="video">
+                        <video class="plyr-video" id="${videoId}" playsinline controls>
+                            <source src="${url}" type="video/mp4" />
+                        </video>
                     </div>
-
-                    <div class="gallery-nav">
-                        <span class="gallery-dot active" data-index="0"></span>
-                        <span class="gallery-dot" data-index="1"></span>
-                        <span class="gallery-dot" data-index="2"></span>
-                    </div>
-
-                    <div class="project-overlay">
-                        <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
-                        <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
-                    </div>
-                </div>
-            `;
+                `);
+            }
         }
+
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+            </div>
+        `);
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+            </div>
+        `);
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+            </div>
+        `);
+
+        const dots = Array.from({ length: slides.length }, (_, i) => `<span class=\"gallery-dot${i === 0 ? ' active' : ''}\" data-index=\"${i}\" aria-label=\"Slide ${i+1}\" role=\"button\" tabindex=\"0\"></span>`).join('');
+
+        const galleryContent = `
+            <div class=\"project-gallery\">\n                ${slides.join('\\n')}\n                <div class=\"project-overlay\">\n                    <h3 class=\"project-title\" data-fr=\"${project.name_fr}\" data-en=\"${project.name_en}\">${project.name_fr}</h3>\n                    <p class=\"project-subtitle\" data-fr=\"${project.summary_fr}\" data-en=\"${project.summary_en}\">${project.summary_fr}</p>\n                </div>\n            </div>\n            <div class=\"gallery-controls\">\n                <div class=\"gallery-dots\">${dots}</div>\n                <button class=\"gallery-zoom\" aria-label=\"Open image in lightbox\" title=\"Agrandir\">\n                    <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                        <path d=\"M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n                        <path d=\"m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z\"/>\n                    </svg>\n                </button>\n            </div>
+        `;
 
         return `
             ${galleryContent}
@@ -401,11 +443,33 @@ class ProjectNavigator {
     setupImageNavigation() {
         const images = DOM.queryAll('.gallery-image', this.projectCard);
         const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+        const zoomBtn = DOM.query('.gallery-zoom', this.projectCard);
         const zoomIcons = DOM.queryAll('.zoom-icon', this.projectCard);
         
         dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => this.showImage(index));
+            dot.addEventListener('click', () => this.showSlide(index));
         });
+        
+        if (zoomBtn) {
+            zoomBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const wrappers = DOM.queryAll('.project-gallery .image-wrapper', this.projectCard);
+                const current = wrappers[this.currentImageIndex];
+                if (!current) return;
+                const isImage = current.getAttribute('data-type') === 'image';
+                if (!isImage) return;
+
+                const images = DOM.queryAll('.gallery-image', this.projectCard);
+                const hasVideo = VideoPlayerManager.isVideoUrl(this.projects[this.currentIndex]?.video_url);
+                const imageIndex = hasVideo ? this.currentImageIndex - 1 : this.currentImageIndex;
+                const img = images[imageIndex];
+                if (!img) return;
+                const imageSrc = img.src || img.dataset.src;
+                if (imageSrc && imageSrc !== '') {
+                    this.openLightbox(imageSrc, img.alt, Math.max(0, imageIndex));
+                }
+            });
+        }
         
         // Ajouter le clic sur les icônes zoom pour agrandissement
         zoomIcons.forEach(icon => {
@@ -434,6 +498,7 @@ class ProjectNavigator {
         });
         
         this.currentImageIndex = 0;
+        if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
     }
     
     setupLazyLoading() {
@@ -484,7 +549,7 @@ class ProjectNavigator {
             const images = DOM.queryAll('.gallery-image', this.projectCard);
             if (images.length > 1) {
                 this.currentImageIndex = (this.currentImageIndex + 1) % images.length;
-                this.showImage(this.currentImageIndex);
+                this.showSlide(this.currentImageIndex);
             }
         }, CONFIG.IMAGE_ROTATION_INTERVAL);
     }
@@ -869,6 +934,18 @@ class VideoPlayerManager {
             }
         });
         this.players.clear();
+    }
+
+    pauseAll() {
+        this.players.forEach((player) => {
+            try {
+                if (player && typeof player.pause === 'function') {
+                    player.pause();
+                }
+            } catch (e) {
+                // ignore
+            }
+        });
     }
 }
 
