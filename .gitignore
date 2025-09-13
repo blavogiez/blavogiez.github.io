@@ -13,6 +13,14 @@ yarn-error.log*
 *.tmp
 *.temp
 .cache/
+settings.cache/
+temp_*.txt
+TODO.txt
+
+# Debug/test images
+*debug*.png
+*test*.png
+*temp*.png
 
 # Build outputs
 dist/

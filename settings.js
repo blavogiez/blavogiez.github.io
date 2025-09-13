@@ -77,9 +77,9 @@ const SETTINGS_CONFIG = {
         // About section
         about_title_fr: "Qui suis-je ?",
         about_title_en: "About me",
-        about_description_fr: "Plus personnellement, je suis quelqu'un de simple qui essaie de voir de la positivité partout. Gratitude, positivité et respect sont mes valeurs.",
-        about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
-        about_years_value: "5+",
+        about_description_fr: "Étudiant passionné en BUT Informatique, je m'intéresse à la conception, l'optimisation, l'automatisation et le déploiement d'applications | de projets. La communication est également très importante pour moi ; j'aime donc (beaucoup) parler, que ce soit avec l'équipe avec laquelle je travaille ou avec le client final.\n\nPlus personnellement, je suis quelqu'un de simple et sociable qui essaie de voir de la positivité partout. J'apprécie notamment la géographie, la natation et le football. Gratitude, ponctualité et respect sont mes valeurs !\n\nApprenez ma vision de l'informatique à travers mes projets sur cette page : peut-être suis-je même en train d'en faire un actuellement !\n\nJe suis également à la recherche d'un stage pour avril 2026 (durée de 10 semaines). Contactez-moi si vous pensez que nous pouvons avancer ensemble !",
+about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
+about_years_value: "5+",
         about_years_label_fr: "expérience",
         about_years_label_en: "Years of study", 
         about_projects_value: "5+",
@@ -152,8 +152,6 @@ const SETTINGS_CONFIG = {
         contact_title_en: "Contact me",
         contact_intro_fr: "Disponible en région lilloise et alentours (véhiculé)",
         contact_intro_en: "Interested in collaboration? Feel free to contact me!",
-        contact_download_cv_fr: "Télécharger CV",
-        contact_download_cv_en: "Download CV",
         
         // Footer
         footer_rights_fr: "Baptiste Lavogiez. Tous droits réservés.",

@@ -1,3 +1,0 @@
-- bouton github plus petit
-- icone github linkedin en bas + télécharger cv + glisser lettre ?
-- fix les metrics
