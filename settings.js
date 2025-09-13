@@ -5,7 +5,7 @@
 
 const SETTINGS_CONFIG = {
     Personal: {
-        name: "Baptiste Lavogiez",
+        name: "En construction (dummy data)",
         title_fr: "Étudiant en 2ème année - Développeur passionné",
         title_en: "2nd Year Student - Passionate Developer",
         email: "baptiste.lavogiez@proton.me",
@@ -41,7 +41,7 @@ const SETTINGS_CONFIG = {
     UI: {
         // Page title
         title_fr: "Baptiste Lavogiez",
-        title_en: "Baptiste Lavogiez - Full-Stack Developer Portfolio",
+        title_en: "Baptiste Lavogiez",
         
         // Meta tags
         meta_description_fr: "Baptiste Lavogiez - Développeur Full-Stack passionné, étudiant en 2ème année. Portfolio moderne avec projets créatifs et solutions digitales innovantes.",
@@ -183,15 +183,15 @@ const SETTINGS_CONFIG = {
         name_en: "Task Management API",
         summary_fr: "Jeu réalisé en équipe de 6 personnes, de façon agile",
         summary_en: "REST API for project management with JWT authentication.",
-        description_fr: "Un projet réalisé à la rentrée de BUT2 ! Nous avions 20h (en 2 jours et demi) pour réaliser une application en Java avec pour objectif principal d'appliquer la méthodologie agile. Une communication importante, un radiateur d'information, une répartition adéquate des tâches ; c'est ce qui fait la force de notre projet, plus que du code pur.",
+        description_fr: "Un projet réalisé à la rentrée de BUT2 ! Nous avions 20h (en 2 jours et demi) pour réaliser une application en Java avec pour objectif principal d'appliquer la méthodologie agile. Un monopoly sur le thème de l'IUT en reprenant les références récurrentes jouable à plusieurs. Une communication importante, un radiateur d'information, une répartition adéquate des tâches ; c'est ce qui fait la force de notre projet, plus que du code pur.",
         description_en: "Complete API developed in Python/Flask with PostgreSQL database. Secure authentication system, full CRUD for tasks, unit tests and Swagger documentation.",
-        extended_description_fr: "Utilisation de Scrum avec sprints de 2h, stand-up meetings quotidiens et rétrospectives. Mise en place d'un board Kanban physique comme radiateur d'information. Architecture Java avec pattern MVC. Interface en terminal (Lanterna). Tests unitaires JUnit et intégration Maven pour la gestion des dépendances.",
+        extended_description_fr: "Utilisation de Scrum avec sprints de 2h, stand-up meetings quotidiens et rétrospectives. Mise en place d'un board Kanban physique comme radiateur d'information. Architecture Java avec pattern MVC. Interface en terminal (Lanterna). Tests unitaires JUnit et intégration Maven pour la gestion des dépendances. Démonstration à environ 40 BUT1 à la fin du projet + explication de notre méthode de travail. Notre projet permettait surtout à ceux qui viennent de jouer avec leurs amis. Nous avons par exemple observé des parties avec 5 joueurs durer 30 minutes (la meilleure récompense possible pour nous) !",
         extended_description_en: "Applied agile methodology details: Scrum implementation with 4h sprints, daily stand-up meetings and retrospectives. Physical Kanban board setup as information radiator. Java architecture with MVC pattern, JavaFX GUI and embedded H2 database. Event handling with Observer design pattern for player-board interactions. JUnit unit testing and Maven integration for dependency management. Technical documentation generated with Javadoc.",
         github: "https://github.com/blavogiez/infopoly-projet-agile-java-Semestre3",
         image_main: "assets/images/projects/project2/main.jpg",
         image_gallery1: "assets/images/projects/project2/MenuAccueil.gif",
         image_gallery2: "assets/images/projects/project2/DebutPartie.gif",
-        tags: "Python,Flask,PostgreSQL"
+        tags: "Java,Agile"
     },
     Project3: {
         name_fr: "Dashboard Analytique",
@@ -224,11 +224,11 @@ const SETTINGS_CONFIG = {
         tags: "Flutter,Dart,Firebase"
     },
     Project5: {
-        name_fr: "Système de Chat en Temps Réel",
+        name_fr: "Vayago",
         name_en: "Real-time Chat System",
-        summary_fr: "Plateforme de messagerie instantanée avec WebSockets et Redis.",
+        summary_fr: "Modélisation d'une base de données",
         summary_en: "Instant messaging platform with WebSockets and Redis.",
-        description_fr: "Système de chat moderne avec messages en temps réel, salles privées et publiques, partage de fichiers, émojis personnalisés et notifications desktop. Architecture scalable avec microservices.",
+        description_fr: "...",
         description_en: "Modern chat system with real-time messages, private and public rooms, file sharing, custom emojis and desktop notifications. Scalable architecture with microservices.",
         extended_description_fr: "Architecture microservices Node.js avec Express et Socket.io pour la communication temps réel. Base de données MongoDB pour les messages et Redis pour les sessions. Système d'authentification JWT avec refresh tokens. Upload de fichiers sécurisé avec validation de type et stockage cloud S3. API RESTful documentée avec Swagger et tests automatisés Mocha/Chai. Load balancing avec NGINX et déploiement Docker containerisé. Monitoring avec Prometheus et logs structurés.",
         extended_description_en: "Node.js microservices architecture with Express and Socket.io for real-time communication. MongoDB database for messages and Redis for sessions. JWT authentication system with refresh tokens. Secure file upload with type validation and S3 cloud storage. RESTful API documented with Swagger and automated Mocha/Chai testing. NGINX load balancing and containerized Docker deployment. Prometheus monitoring and structured logging.",
