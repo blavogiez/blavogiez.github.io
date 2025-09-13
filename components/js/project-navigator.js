@@ -140,11 +140,16 @@ class ProjectNavigator {
         if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
         this.updateControls();
 
-        // Update language
+        // Update language while preserving HTML content when present
         const currentLang = document.documentElement.lang;
         DOM.queryAll('[data-fr][data-en]', this.projectCard).forEach(el => {
             const text = el.getAttribute(`data-${currentLang}`);
-            if (text) el.textContent = text;
+            if (!text) return;
+            if (text.includes('<') && text.includes('>')) {
+                el.innerHTML = text;
+            } else {
+                el.textContent = text;
+            }
         });
     }
 
