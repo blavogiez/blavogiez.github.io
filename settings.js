@@ -152,6 +152,8 @@ const SETTINGS_CONFIG = {
         contact_title_en: "Contact me",
         contact_intro_fr: "Disponible en région lilloise et alentours (véhiculé)",
         contact_intro_en: "Interested in collaboration? Feel free to contact me!",
+        contact_download_cv_fr: "Télécharger CV",
+        contact_download_cv_en: "Download CV",
         
         // Footer
         footer_rights_fr: "Baptiste Lavogiez. Tous droits réservés.",

@@ -1540,6 +1540,42 @@ section {
     transition: var(--transition);
 }
 
+.social-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cv-download-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: 2px solid var(--accent);
+}
+
+.cv-download-btn:hover {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.cv-download-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 /* ===== LIGHTBOX ===== */
 .lightbox {
     position: fixed;
