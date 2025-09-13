@@ -144,6 +144,23 @@ body {
   filter: blur(40px);
 }
 
+/* Prevent hero-only horizontal overflow and make background mobile-safe */
+.hero {
+  /* Clip any decorative overflow to avoid horizontal scroll on mobile */
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero-background-element {
+    /* Center and bound within viewport width to avoid overflow */
+    left: 50%;
+    top: -280px;
+    width: 100vw;
+    height: 100vw;
+    transform: translateX(-50%);
+  }
+}
+
 /* Background elements for other sections */
 .section-background-element {
   position: absolute;

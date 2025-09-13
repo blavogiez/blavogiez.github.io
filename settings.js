@@ -5,7 +5,7 @@
 
 const SETTINGS_CONFIG = {
     Personal: {
-        name: "En construction (dummy data)",
+        name: "Baptiste Lavogiez",
         title_fr: "Étudiant en 2ème année - Développeur passionné",
         title_en: "2nd Year Student - Passionate Developer",
         email: "baptiste.lavogiez@proton.me",
@@ -77,7 +77,7 @@ const SETTINGS_CONFIG = {
         // About section
         about_title_fr: "Qui suis-je ?",
         about_title_en: "About me",
-        about_description_fr: "<p>Étudiant passionné en BUT Informatique, je m’intéresse particulièrement à la conception, l’optimisation, l’automatisation et le déploiement d’applications. J’accorde aussi une grande importance à la communication, qu’il s’agisse d’échanges avec mon équipe ou de collaboration avec le client final.</p><p>Sur un plan plus personnel, je suis une personne simple et sociable, toujours tournée vers le positif. J’aime notamment la géographie, la natation et le football. Mes valeurs essentielles : gratitude, ponctualité et respect.</p><p>Découvrez ma vision de l’informatique à travers mes projets présentés sur cette page — peut-être suis-je même en train d’en développer un nouveau !</p><p><strong>Je suis également à la recherche d'un stage pour avril 2026 (durée de 10 semaines). Contactez-moi si vous pensez que nous pouvons avancer ensemble !</strong></p>",
+        about_description_fr: "<p>Étudiant passionné en BUT Informatique, je m’intéresse particulièrement à la conception, l’optimisation, l’automatisation et le déploiement d’applications. Ayant commencé à développer très jeune, mon expérience me permet d'avoir du recul sur la gestion de projet informatique ; fiabilité, maintenabilité et conformité sont mes mots d'ordres. J’accorde aussi une grande importance à la communication, qu’il s’agisse d’échanges avec mon équipe ou de collaboration avec le client final.</p><p>Sur un plan plus personnel, je suis une personne simple et sociable, toujours tournée vers le positif. J’aime notamment la géographie, la natation et le football. Mes valeurs essentielles : gratitude, ponctualité et respect.</p><p>Découvrez ma vision de l’informatique à travers mes projets présentés sur cette page — peut-être suis-je même en train d’en développer un nouveau !</p><p><strong>Je suis également à la recherche d'un stage pour avril 2026 (durée de 10 semaines). Contactez-moi si vous pensez que nous pouvons avancer ensemble !</strong></p>",
 about_description_en: "Passionate computer science student, I develop creative and technical projects! Always seeking learning and innovation!",
 about_years_value: "5+",
         about_years_label_fr: "expérience",
