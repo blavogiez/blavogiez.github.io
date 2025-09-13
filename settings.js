@@ -175,6 +175,7 @@ const SETTINGS_CONFIG = {
         image_main: "assets/images/projects/project1/main.jpg",
         image_gallery1: "assets/images/projects/project1/gallery1.jpg",
         image_gallery2: "assets/images/projects/project1/gallery2.jpg",
+        video_url: "assets/images/projects/project1/demo.mp4",
         tags: "Python"
     },
     Project2: {

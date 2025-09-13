@@ -207,6 +207,7 @@ class ProjectNavigator {
         this.currentIndex = 0;
         this.currentImageIndex = 0;
         this.imageTimer = null;
+        this.videoManager = new VideoPlayerManager();
         this.init();
     }
 
@@ -277,14 +278,26 @@ class ProjectNavigator {
 
     showProject() {
         if (!this.projectCard || !this.projects[this.currentIndex]) return;
-        
+
         const project = this.projects[this.currentIndex];
+
+        // Destroy existing video players before creating new content
+        this.videoManager.destroyAllPlayers();
+
         this.projectCard.innerHTML = this.createProjectCard(project);
-        this.setupImageNavigation();
-        this.setupLazyLoading();
+
+        // Setup based on content type
+        const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
+        if (hasVideo) {
+            this.setupVideoPlayer(project);
+        } else {
+            this.setupImageNavigation();
+            this.setupLazyLoading();
+        }
+
         this.setupExpandableDescription();
         this.updateControls();
-        
+
         // Update language
         const currentLang = document.documentElement.lang;
         DOM.queryAll('[data-fr][data-en]', this.projectCard).forEach(el => {
@@ -293,51 +306,74 @@ class ProjectNavigator {
         });
     }
 
+    setupVideoPlayer(project) {
+        // Wait for DOM to be ready, then initialize video player
+        setTimeout(() => {
+            const videoElement = DOM.query('.plyr__video-embed, .plyr-video', this.projectCard);
+            if (videoElement) {
+                const videoId = videoElement.id;
+                this.videoManager.initializePlayer(videoId);
+            }
+        }, 100);
+    }
+
     createProjectCard(project) {
         const techIcons = TechIcons.generate(project.tags);
-        
+
+        // Check if project has video
+        const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
+
+        let galleryContent;
+        if (hasVideo) {
+            galleryContent = this.videoManager.createVideoElement(project);
+        } else {
+            galleryContent = `
+                <div class="project-gallery">
+                    <div class="image-wrapper">
+                        <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+                        <div class="zoom-icon" data-image="0">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="image-wrapper">
+                        <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                        <div class="zoom-icon" data-image="1">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="image-wrapper">
+                        <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                        <div class="zoom-icon" data-image="2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                                <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="gallery-nav">
+                        <span class="gallery-dot active" data-index="0"></span>
+                        <span class="gallery-dot" data-index="1"></span>
+                        <span class="gallery-dot" data-index="2"></span>
+                    </div>
+
+                    <div class="project-overlay">
+                        <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
+                        <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
+                    </div>
+                </div>
+            `;
+        }
+
         return `
-            <div class="project-gallery">
-                <div class="image-wrapper">
-                    <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
-                    <div class="zoom-icon" data-image="0">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="image-wrapper">
-                    <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-                    <div class="zoom-icon" data-image="1">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                        </svg>
-                    </div>
-                </div>
-                <div class="image-wrapper">
-                    <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-                    <div class="zoom-icon" data-image="2">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                            <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
-                        </svg>
-                    </div>
-                </div>
-                
-                <div class="gallery-nav">
-                    <span class="gallery-dot active" data-index="0"></span>
-                    <span class="gallery-dot" data-index="1"></span>
-                    <span class="gallery-dot" data-index="2"></span>
-                </div>
-                
-                <div class="project-overlay">
-                    <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
-                    <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
-                </div>
-            </div>
-            
+            ${galleryContent}
+
             <div class="project-info">
                 <div class="tech-icons">${techIcons}</div>
                 <div class="project-content">
@@ -398,7 +434,6 @@ class ProjectNavigator {
         });
         
         this.currentImageIndex = 0;
-        this.startImageRotation();
     }
     
     setupLazyLoading() {
@@ -702,6 +737,138 @@ class AnimationManager {
                 }
             });
         });
+    }
+}
+
+// ===== VIDEO PLAYER MANAGER =====
+class VideoPlayerManager {
+    constructor() {
+        this.players = new Map();
+    }
+
+    static isVideoUrl(url) {
+        if (!url) return false;
+
+        // Check for YouTube URLs
+        const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
+        if (youtubeRegex.test(url)) return true;
+
+        // Check for Vimeo URLs
+        const vimeoRegex = /(?:vimeo\.com\/)([0-9]+)/;
+        if (vimeoRegex.test(url)) return true;
+
+        // Check for direct video files
+        const videoExtensions = /\.(mp4|webm|ogg|avi|mov)(\?.*)?$/i;
+        if (videoExtensions.test(url)) return true;
+
+        return false;
+    }
+
+    createVideoElement(project) {
+        const videoId = `video-${Date.now()}`;
+        const videoUrl = project.video_url;
+
+        // Determine video type and create appropriate element
+        if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+            return `
+                <div class="project-video-wrapper">
+                    <div class="plyr__video-embed" id="${videoId}">
+                        <iframe
+                            src="https://www.youtube.com/embed/${this.extractYouTubeId(videoUrl)}?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1"
+                            allowfullscreen
+                            allowtransparency
+                            allow="autoplay">
+                        </iframe>
+                    </div>
+                    <div class="video-overlay">
+                        <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
+                        <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
+                    </div>
+                </div>
+            `;
+        } else if (videoUrl.includes('vimeo.com')) {
+            return `
+                <div class="project-video-wrapper">
+                    <div class="plyr__video-embed" id="${videoId}">
+                        <iframe
+                            src="https://player.vimeo.com/video/${this.extractVimeoId(videoUrl)}?loop=false&byline=false&portrait=false&title=false&speed=true&transparent=0&gesture=media"
+                            allowfullscreen
+                            allowtransparency
+                            allow="autoplay">
+                        </iframe>
+                    </div>
+                    <div class="video-overlay">
+                        <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
+                        <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
+                    </div>
+                </div>
+            `;
+        } else {
+            return `
+                <div class="project-video-wrapper">
+                    <video class="plyr-video" id="${videoId}" playsinline controls data-poster="">
+                        <source src="${videoUrl}" type="video/mp4" />
+                    </video>
+                    <div class="video-overlay">
+                        <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
+                        <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    extractYouTubeId(url) {
+        const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
+        return match ? match[1] : '';
+    }
+
+    extractVimeoId(url) {
+        const match = url.match(/(?:vimeo\.com\/)([0-9]+)/);
+        return match ? match[1] : '';
+    }
+
+    initializePlayer(videoId) {
+        if (typeof Plyr === 'undefined') {
+            console.warn('Plyr not loaded, video player initialization skipped');
+            return null;
+        }
+
+        try {
+            const element = DOM.query(`#${videoId}`);
+            if (!element) return null;
+
+            const player = new Plyr(element, {
+                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+                settings: ['quality', 'speed'],
+                quality: { default: 720, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] },
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] },
+                ratio: '16:9'
+            });
+
+            this.players.set(videoId, player);
+            return player;
+        } catch (error) {
+            console.error('Failed to initialize video player:', error);
+            return null;
+        }
+    }
+
+    destroyPlayer(videoId) {
+        const player = this.players.get(videoId);
+        if (player && typeof player.destroy === 'function') {
+            player.destroy();
+            this.players.delete(videoId);
+        }
+    }
+
+    destroyAllPlayers() {
+        this.players.forEach((player, videoId) => {
+            if (typeof player.destroy === 'function') {
+                player.destroy();
+            }
+        });
+        this.players.clear();
     }
 }
 

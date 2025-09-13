@@ -865,6 +865,64 @@ h2 {
     background: var(--bg-card);
 }
 
+/* ===== VIDEO PLAYER WRAPPER ===== */
+.project-video-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    background: var(--bg-dark);
+}
+
+.project-video-wrapper .plyr__video-embed,
+.project-video-wrapper .plyr-video {
+    width: 100%;
+    height: 100%;
+}
+
+.project-video-wrapper .plyr__video-embed iframe,
+.project-video-wrapper .plyr-video {
+    width: 100%;
+    height: 100%;
+    border: none;
+    object-fit: cover;
+}
+
+.project-video-wrapper .video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.project-video-wrapper .project-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.project-video-wrapper .project-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    line-height: 1.5;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+/* Plyr customization for dark theme */
+.plyr {
+    --plyr-color-main: var(--accent);
+}
+
+.plyr--video {
+    border-radius: 0;
+}
+
 .tech-icons {
     display: flex;
     gap: 0.8rem;
