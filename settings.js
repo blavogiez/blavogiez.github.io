@@ -196,6 +196,12 @@ about_years_value: "5+",
         image_main: "assets/images/projects/project1/main.jpg",
         image_gallery1: "assets/images/projects/project1/calling_ai.mp4",
         image_gallery2: "assets/images/projects/project1/gallery2.jpg",
+        // Multiple videos supported: order defines slide order after images
+        video_urls: [
+            "assets/images/projects/project1/demo.mp4",
+            "assets/images/projects/project1/calling_ai.mp4"
+        ],
+        // Legacy single video kept for backward compatibility (ignored if video_urls exists)
         video_url: "assets/images/projects/project1/demo.mp4",
         tags: "Python"
     },

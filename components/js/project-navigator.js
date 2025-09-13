@@ -130,9 +130,11 @@ class ProjectNavigator {
         this.setupImageNavigation();
         this.setupLazyLoading();
 
-        // Setup video player if present
-        const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
-        if (hasVideo) this.setupVideoPlayer(project);
+        // Setup video players if present (supports single or multiple URLs)
+        const videoUrls = Array.isArray(project.video_urls)
+            ? project.video_urls.filter(url => VideoPlayerManager.isVideoUrl(url))
+            : (VideoPlayerManager.isVideoUrl(project.video_url) ? [project.video_url] : []);
+        if (videoUrls.length > 0) this.setupVideoPlayer(project);
 
         this.setupExpandableDescription();
         if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
@@ -147,12 +149,13 @@ class ProjectNavigator {
     }
 
     setupVideoPlayer(project) {
-        // Wait for DOM to be ready, then initialize video player
+        // Wait for DOM to be ready, then initialize all video players
         setTimeout(() => {
-            const videoElement = DOM.query('.plyr__video-embed, .plyr-video', this.projectCard);
-            if (videoElement) {
-                const videoId = videoElement.id;
-                this.videoManager.initializePlayer(videoId);
+            const videoElements = DOM.queryAll('.plyr__video-embed, .plyr-video', this.projectCard);
+            if (videoElements && videoElements.length) {
+                videoElements.forEach(el => {
+                    if (el.id) this.videoManager.initializePlayer(el.id);
+                });
             }
         }, 100);
     }
@@ -160,8 +163,10 @@ class ProjectNavigator {
     createProjectCard(project) {
         const techIcons = TechIcons.generate(project.tags);
 
-        // Check if project has video
-        const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
+        // Check if project has video(s)
+        const videoUrls = Array.isArray(project.video_urls)
+            ? project.video_urls.filter(url => VideoPlayerManager.isVideoUrl(url))
+            : (VideoPlayerManager.isVideoUrl(project.video_url) ? [project.video_url] : []);
 
         // Build unified slides: images first, then optional video (do not show video first)
         const slides = [];
@@ -183,34 +188,36 @@ class ProjectNavigator {
             </div>
         `);
 
-        if (hasVideo) {
-            const videoId = `video-${Date.now()}`;
-            const url = project.video_url;
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                slides.push(`
-                    <div class="image-wrapper" data-type="video">
-                        <div class="plyr__video-embed" id="${videoId}">
-                            <iframe src="https://www.youtube.com/embed/${this.videoManager.extractYouTubeId(url)}?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
+        // Append any configured videos (after images)
+        if (videoUrls.length > 0) {
+            videoUrls.forEach((url, idx) => {
+                const videoId = `video-${Date.now()}-${idx}`;
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    slides.push(`
+                        <div class="image-wrapper" data-type="video">
+                            <div class="plyr__video-embed" id="${videoId}">
+                                <iframe src="https://www.youtube.com/embed/${this.videoManager.extractYouTubeId(url)}?origin=https://plyr.io&iv_load_policy=3&modestbranding=1&playsinline=1&showinfo=0&rel=0&enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
+                            </div>
                         </div>
-                    </div>
-                `);
-            } else if (url.includes('vimeo.com')) {
-                slides.push(`
-                    <div class="image-wrapper" data-type="video">
-                        <div class="plyr__video-embed" id="${videoId}">
-                            <iframe src="https://player.vimeo.com/video/${this.videoManager.extractVimeoId(url)}?loop=false&byline=false&portrait=false&title=false&speed=true&transparent=0&gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
+                    `);
+                } else if (url.includes('vimeo.com')) {
+                    slides.push(`
+                        <div class="image-wrapper" data-type="video">
+                            <div class="plyr__video-embed" id="${videoId}">
+                                <iframe src="https://player.vimeo.com/video/${this.videoManager.extractVimeoId(url)}?loop=false&byline=false&portrait=false&title=false&speed=true&transparent=0&gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
+                            </div>
                         </div>
-                    </div>
-                `);
-            } else {
-                slides.push(`
-                    <div class="image-wrapper" data-type="video">
-                        <video class="plyr-video" id="${videoId}" playsinline controls>
-                            <source src="${url}" type="video/mp4" />
-                        </video>
-                    </div>
-                `);
-            }
+                    `);
+                } else {
+                    slides.push(`
+                        <div class="image-wrapper" data-type="video">
+                            <video class="plyr-video" id="${videoId}" playsinline controls>
+                                <source src="${url}" type="video/mp4" />
+                            </video>
+                        </div>
+                    `);
+                }
+            });
         }
 
         const dots = Array.from({ length: slides.length }, (_, i) => `<span class=\"gallery-dot${i === 0 ? ' active' : ''}\" data-index=\"${i}\" aria-label=\"Slide ${i+1}\" role=\"button\" tabindex=\"0\"></span>`).join('');
