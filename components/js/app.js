@@ -19,9 +19,13 @@ class Portfolio {
 }
 
 // ===== STARTUP =====
-document.addEventListener('DOMContentLoaded', () => new Portfolio());
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new Portfolio());
+} else {
+    // DOM already parsed (scripts at end of body) → start immediately
+    new Portfolio();
+}
 
 // ===== ERROR HANDLING =====
 window.addEventListener('error', (e) => console.error('Error:', e.error));
 window.addEventListener('unhandledrejection', (e) => console.error('Promise rejection:', e.reason));
-

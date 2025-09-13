@@ -20,6 +20,46 @@ class ProjectNavigator {
         this.projectCard = DOM.query('#current-project');
         this.counterCurrent = DOM.query('.project-counter .current');
         this.counterTotal = DOM.query('.project-counter .total');
+
+        // Event delegation for actions inside the current project card
+        if (this.projectCard && !this._delegatedBound) {
+            this.projectCard.addEventListener('click', (e) => {
+                // Expand/collapse details
+                const toggleBtn = e.target.closest('.expand-toggle-btn');
+                if (toggleBtn) {
+                    e.preventDefault();
+                    const expandText = toggleBtn.querySelector('.expand-text');
+                    const details = this.projectCard.querySelector('.project-details');
+                    const icon = toggleBtn.querySelector('.expand-icon');
+                    const newState = toggleBtn.getAttribute('data-expanded') !== 'true';
+                    toggleBtn.setAttribute('data-expanded', String(newState));
+                    this.projectCard.classList.toggle('details-expanded', newState);
+                    if (details) details.classList.toggle('expanded', newState);
+                    if (icon) icon.classList.toggle('rotated', newState);
+
+                    const ui = window.PORTFOLIO_CONFIG?.UI || {};
+                    const moreInfoText = ui.projects_more_info_fr || "Plus d'infos";
+                    const lessInfoText = ui.projects_less_info_fr || "Moins d'infos";
+                    if (expandText) {
+                        expandText.textContent = newState ? lessInfoText : moreInfoText;
+                        expandText.setAttribute('data-fr', newState ? (ui.projects_less_info_fr || 'Moins d\'infos') : (ui.projects_more_info_fr || 'Plus d\'infos'));
+                        expandText.setAttribute('data-en', newState ? (ui.projects_less_info_en || 'Less info') : (ui.projects_more_info_en || 'More info'));
+                    }
+                    return;
+                }
+
+                // Click on gallery image opens lightbox
+                const imgEl = e.target.closest('.project-gallery .image-wrapper[data-type="image"] img');
+                if (imgEl) {
+                    e.preventDefault();
+                    const wrappers = Array.from(DOM.queryAll('.project-gallery .image-wrapper', this.projectCard));
+                    const index = wrappers.findIndex(w => w.contains(imgEl));
+                    const startIndex = Math.max(0, index);
+                    this.openLightbox(imgEl.src, imgEl.alt, startIndex);
+                }
+            });
+            this._delegatedBound = true;
+        }
     }
 
     setupNavigation() {
@@ -309,25 +349,8 @@ class ProjectNavigator {
     }
 
     setupExpandableDescription() {
-        const btn = DOM.query('.expand-toggle-btn', this.projectCard);
-        const expandText = btn?.querySelector('.expand-text');
-        const details = DOM.query('.project-details', this.projectCard);
-        const summary = DOM.query('.project-summary', this.projectCard);
-
-        if (!btn || !details || !summary || !expandText) return;
-
-        btn.addEventListener('click', () => {
-            const newState = btn.getAttribute('data-expanded') !== 'true';
-            btn.setAttribute('data-expanded', String(newState));
-            this.projectCard.classList.toggle('details-expanded', newState);
-
-            const moreInfoText = window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || "Plus d'infos";
-            const lessInfoText = window.PORTFOLIO_CONFIG?.UI?.projects_less_info_fr || "Moins d'infos";
-            
-            expandText.textContent = newState ? lessInfoText : moreInfoText;
-            expandText.setAttribute('data-fr', newState ? window.PORTFOLIO_CONFIG?.UI?.projects_less_info_fr || 'Moins d\'infos' : window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos');
-            expandText.setAttribute('data-en', newState ? window.PORTFOLIO_CONFIG?.UI?.projects_less_info_en || 'Less info' : window.PORTFOLIO_CONFIG?.UI?.projects_more_info_en || 'More info');
-        });
+        // Event delegation in bindElements() handles expand/collapse functionality
+        // This method is kept for future enhancements if needed
     }
 
     updateControls() {
@@ -446,4 +469,3 @@ class ProjectNavigator {
         setTimeout(() => lightbox.classList.add('active'), 10);
     }
 }
-
