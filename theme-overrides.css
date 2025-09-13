@@ -3,94 +3,216 @@
   /* Fonts */
   --font-hero: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
-  /* Palette: dark forest + tangerine */
-  --primary: #ffffff;
-  --secondary: #e9f1ec;
-  --accent: #8ECAE6;          /* baby blue */
-  --accent-hover: #6fb8de;    /* deeper baby blue */
+  /* Professional dark palette */
+  --primary: #f1f5f9;         /* light gray for primary text */
+  --secondary: #e2e8f0;       /* slightly darker for secondary text */
+  --accent: #60a5fa;          /* professional blue */
+  --accent-hover: #3b82f6;    /* darker blue for hover states */
 
-  --text-primary: #eaf3fb;
-  --text-secondary: #c7d8e6;
-  --text-muted: #96aaba;
-  --text-light: #7f95a8;
-  --text-inverse: #0a0f14;
+  --text-primary: #f1f5f9;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-light: #64748b;
+  --text-inverse: #0f172a;
 
-  /* Deep inky blue background family (no violet) */
-  --bg-primary: #0b1116;      /* inky midnight */
-  --bg-secondary: #0f1620;
-  --bg-tertiary: #141e29;
-  --bg-dark: #091017;
-  --bg-card: #0f1a24;
-  --bg-hover: #1a2a37;
+  /* Refined dark background family */
+  --bg-primary: #0f172a;      /* slate 900 - main background */
+  --bg-secondary: #1e293b;    /* slate 800 - section backgrounds */
+  --bg-tertiary: #334155;     /* slate 700 - card backgrounds */
+  --bg-dark: #020617;         /* nearly black - dark accents */
+  --bg-card: #1e293b;         /* slate 800 - cards */
+  --bg-hover: #334155;        /* slate 700 - hover states */
 
-  --border: #183040;
-  --border-light: #203a4c;
-  --border-dark: #0b151d;
+  --border: #334155;
+  --border-light: #475569;
+  --border-dark: #1e293b;
   --border-accent: var(--accent);
 
-  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.35);
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  --shadow-lg: 0 16px 42px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 24px rgba(142, 202, 230, 0.18);
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 15px rgba(96, 165, 250, 0.2);
 }
 
 /* Typography overrides */
-body { font-family: var(--font-sans); }
-.logo-text { font-family: var(--font-heading); letter-spacing: 0.005em; }
-.hero-title { font-family: var(--font-hero); font-weight: 700; letter-spacing: -0.02em; }
+body { 
+  font-family: var(--font-sans); 
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.logo-text { 
+  font-family: var(--font-heading); 
+  letter-spacing: -0.01em; 
+  font-weight: 600;
+}
+
+.hero-title { 
+  font-family: var(--font-hero); 
+  font-weight: 700; 
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
 /* Make hero name a touch larger but controlled */
-.hero-title { font-size: clamp(3.5rem, 7vw, 6rem); line-height: 1.05; }
-section h2, .philosophy-intro h3, .timeline-content h3, .skill-category h3 { font-family: var(--font-heading); letter-spacing: -0.005em; }
-.nav-links a { font-family: var(--font-sans); }
-.hero-greeting, .hero-subtitle { font-family: var(--font-sans); }
-.timeline-date { font-family: var(--font-mono); }
-.specialty-badge { font-family: var(--font-sans); }
-.grade-badge { color: var(--accent); }
-
-/* Header overrides to use theme variables */
-header {
-  background: var(--bg-secondary) !important;
-  backdrop-filter: blur(16px);
+.hero-title { 
+  font-size: clamp(3rem, 7vw, 5.5rem); 
 }
 
-header.section-active {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+section h2, 
+.philosophy-intro h3, 
+.timeline-content h3, 
+.skill-category h3 { 
+  font-family: var(--font-heading); 
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
-/* Remove any violet tint from highlight cards */
-.philosophy-card.highlight {
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(142, 202, 230, 0.10) 100%) !important;
+.nav-links a { 
+  font-family: var(--font-sans); 
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
-/* Ensure navigation hover/active is crisp with teal */
-.nav-links a:hover,
-.nav-links a.active { color: var(--accent) !important; }
+.hero-greeting, 
+.hero-subtitle { 
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
 
-/* Make section headings clearly adopt display font */
-h4, .philosophy-card h4 { font-family: var(--font-display); }
+.timeline-date { 
+  font-family: var(--font-mono); 
+  font-weight: 500;
+  font-size: 0.9rem;
+}
 
-/* Subtle background glow layers for depth */
+.specialty-badge { 
+  font-family: var(--font-sans); 
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.grade-badge { 
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.project-summary,
+.project-details,
+.about-text p,
+.contact-content p,
+.skills-intro p {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.skill-badge span {
+  font-family: var(--font-sans);
+  font-weight: 500;
+}
+
+/* Subtle background for depth without visual noise */
 body {
-  background:
-    radial-gradient(1200px 800px at 15% 10%, rgba(142, 202, 230, 0.08), transparent 60%),
-    radial-gradient(1000px 700px at 85% 30%, rgba(33, 158, 188, 0.07), transparent 60%),
-    radial-gradient(900px 600px at 20% 80%, rgba(173, 232, 209, 0.05), transparent 70%),
-    var(--bg-primary);
+  background: var(--bg-primary);
   background-attachment: fixed;
 }
 
-/* Hero name: tasteful animated blue gradient text */
+/* Hero name: clean accent color instead of animated gradient */
 .hero-title .name {
-  background: linear-gradient(90deg, #8ECAE6 0%, #6fb8de 35%, #48BFE3 70%, #8ECAE6 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
-  animation: name-sheen 6s ease-in-out infinite alternate;
-  text-shadow: 0 0 18px rgba(142, 202, 230, 0.08);
+  color: var(--accent) !important;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+  animation: none;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+}
+
+/* Subtle circular background element */
+.hero-background-element {
+  position: absolute;
+  top: -400px;
+  left: -100px;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, rgba(96, 165, 250, 0.15) 30%, rgba(96, 165, 250, 0.08) 50%, transparent 70%);
+  z-index: 0;
+  filter: blur(40px);
+}
+
+/* Background elements for other sections */
+.section-background-element {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(30px);
+  opacity: 0.2;
+}
+
+/* About section background element - purple tint */
+.about-bg-element {
+  top: -200px;
+  right: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(192, 132, 252, 0.3) 0%, rgba(192, 132, 252, 0.15) 40%, transparent 70%);
+}
+
+/* Journey section background element - green tint */
+.journey-bg-element {
+  top: -150px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(72, 187, 120, 0.3) 0%, rgba(72, 187, 120, 0.15) 40%, transparent 70%);
+}
+
+/* Projects section background element - orange tint */
+.projects-bg-element {
+  bottom: -200px;
+  right: -100px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%);
+}
+
+/* Philosophy section background element - pink tint */
+.philosophy-bg-element {
+  top: -100px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, rgba(244, 114, 182, 0.15) 40%, transparent 70%);
+}
+
+/* Skills section background element - teal tint */
+.skills-bg-element {
+  bottom: -150px;
+  right: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.3) 0%, rgba(20, 184, 166, 0.15) 40%, transparent 70%);
+}
+
+/* Contact section background element - red tint */
+.contact-bg-element {
+  top: -100px;
+  left: -200px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0.15) 40%, transparent 70%);
+}
+
+/* Ensure section content stays on top */
+.container,
+.projects-container,
+.skills-container {
+  position: relative;
+  z-index: 10;
 }
 
 @keyframes name-sheen {
@@ -101,3 +223,31 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .hero-title .name { animation: none; }
 }
+
+/* Header overrides to use theme variables */
+header {
+  background: var(--bg-secondary) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+header.section-active {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Remove any violet tint from highlight cards */
+.philosophy-card.highlight {
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(96, 165, 250, 0.08) 100%) !important;
+  border: 1px solid var(--border-accent);
+}
+
+/* Ensure navigation hover/active is crisp with blue */
+.nav-links a:hover,
+.nav-links a.active { 
+  color: var(--accent) !important; 
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+/* Make section headings clearly adopt display font */
+h4, .philosophy-card h4 { font-family: var(--font-heading); }
