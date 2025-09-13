@@ -695,6 +695,14 @@ class ProjectNavigator {
             img.src = images[currentImageIndex].src;
             img.alt = images[currentImageIndex].alt;
             currentSpan.textContent = currentImageIndex + 1;
+            // Always fit inside viewport: simple de-zoom if too big
+            Object.assign(img.style, {
+                maxWidth: '90vw',
+                maxHeight: '90vh',
+                width: 'auto',
+                height: 'auto',
+                objectFit: 'contain'
+            });
             
             prevBtn.style.opacity = currentImageIndex === 0 ? '0.5' : '1';
             nextBtn.style.opacity = currentImageIndex === images.length - 1 ? '0.5' : '1';
