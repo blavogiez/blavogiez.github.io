@@ -410,31 +410,49 @@ class ProjectNavigator {
         const dots = Array.from({ length: slides.length }, (_, i) => `<span class=\"gallery-dot${i === 0 ? ' active' : ''}\" data-index=\"${i}\" aria-label=\"Slide ${i+1}\" role=\"button\" tabindex=\"0\"></span>`).join('');
 
         const galleryContent = `
-            <div class=\"project-gallery\">\n                ${slides.join('\\n')}\n                <div class=\"project-overlay\">\n                    <h3 class=\"project-title\" data-fr=\"${project.name_fr}\" data-en=\"${project.name_en}\">${project.name_fr}</h3>\n                    <p class=\"project-subtitle\" data-fr=\"${project.summary_fr}\" data-en=\"${project.summary_en}\">${project.summary_fr}</p>\n                </div>\n            </div>\n            <div class=\"gallery-controls\">\n                <div class=\"gallery-dots\">${dots}</div>\n                <button class=\"gallery-zoom\" aria-label=\"Open image in lightbox\" title=\"Agrandir\">\n                    <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\">\n                        <path d=\"M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n                        <path d=\"m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z\"/>\n                    </svg>\n                </button>\n            </div>
+            <div class="project-gallery">
+                ${slides.join('')}
+                <div class="project-overlay">
+                    <h3 class="project-title" data-fr="${project.name_fr}" data-en="${project.name_en}">${project.name_fr}</h3>
+                    <p class="project-subtitle" data-fr="${project.summary_fr}" data-en="${project.summary_en}">${project.summary_fr}</p>
+                </div>
+            </div>
+            <div class="gallery-controls">
+                <div class="gallery-dots">${dots}</div>
+                <button class="gallery-zoom" aria-label="Open image in lightbox" title="Agrandir">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        <path d="m12 10h-2v-2h-1v2H7v1h2v2h1v-2h2z"/>
+                    </svg>
+                </button>
+            </div>
         `;
 
         return `
-            ${galleryContent}
-
-            <div class="project-info">
-                <div class="tech-icons">${techIcons}</div>
-                <div class="project-content">
-                    <div class="project-summary" data-fr="${project.description_fr}" data-en="${project.description_en}">${project.description_fr}</div>
-                    <div class="project-details" data-fr="${project.extended_description_fr || project.description_fr}" data-en="${project.extended_description_en || project.description_en}">${project.extended_description_fr || project.description_fr}</div>
-                </div>
-                <div class="project-actions">
-                    <button class="expand-toggle-btn" data-expanded="false">
-                        <span class="expand-text" data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_en || 'More info'}">${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}</span>
-                        <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M7 10l5 5 5-5z"/>
-                        </svg>
-                    </button>
-                    <a href="${project.github}" class="github-link" target="_blank" rel="noopener">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                        </svg>
-                        <span data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_en || 'View code'}">${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}</span>
-                    </a>
+            <div class="project-media">
+                ${galleryContent}
+            </div>
+            <div class="project-content-zone">
+                <div class="project-info">
+                    <div class="tech-icons">${techIcons}</div>
+                    <div class="project-content">
+                        <div class="project-summary" data-fr="${project.description_fr}" data-en="${project.description_en}">${project.description_fr}</div>
+                        <div class="project-details" data-fr="${project.extended_description_fr || project.description_fr}" data-en="${project.extended_description_en || project.description_en}">${project.extended_description_fr || project.description_fr}</div>
+                    </div>
+                    <div class="project-actions">
+                        <button class="expand-toggle-btn" data-expanded="false">
+                            <span class="expand-text" data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_en || 'More info'}">${window.PORTFOLIO_CONFIG?.UI?.projects_more_info_fr || 'Plus d\'infos'}</span>
+                            <svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 10l5 5 5-5z"/>
+                            </svg>
+                        </button>
+                        <a href="${project.github}" class="github-link" target="_blank" rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                            </svg>
+                            <span data-fr="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}" data-en="${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_en || 'View code'}">${window.PORTFOLIO_CONFIG?.UI?.projects_view_code_fr || 'Voir le code'}</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         `;
