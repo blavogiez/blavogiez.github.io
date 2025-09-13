@@ -440,6 +440,42 @@ class ProjectNavigator {
         `;
     }
 
+    // Ensure slide changes work and UI syncs (including with videos)
+    showSlide(index) {
+        const wrappers = DOM.queryAll('.project-gallery .image-wrapper', this.projectCard);
+        const images = DOM.queryAll('.gallery-image', this.projectCard);
+        const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+
+        // Pause any playing video when changing slides
+        this.videoManager.pauseAll();
+
+        wrappers.forEach((wrapper, i) => {
+            wrapper.style.display = i === index ? 'block' : 'none';
+        });
+        images.forEach((img) => img.classList.remove('active'));
+        const currentWrapper = wrappers[index];
+        const currentImg = currentWrapper ? currentWrapper.querySelector('.gallery-image') : null;
+        if (currentImg) currentImg.classList.add('active');
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+        this.currentImageIndex = index;
+        this.updateGalleryUI();
+    }
+
+    updateGalleryUI() {
+        const dots = DOM.queryAll('.gallery-dot', this.projectCard);
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === this.currentImageIndex));
+
+        const zoomBtn = DOM.query('.gallery-zoom', this.projectCard);
+        if (zoomBtn) {
+            const wrappers = DOM.queryAll('.project-gallery .image-wrapper', this.projectCard);
+            const current = wrappers[this.currentImageIndex];
+            const isImage = current && current.getAttribute('data-type') === 'image';
+            zoomBtn.disabled = !isImage;
+            zoomBtn.setAttribute('aria-disabled', String(!isImage));
+        }
+    }
+
     setupImageNavigation() {
         const images = DOM.queryAll('.gallery-image', this.projectCard);
         const dots = DOM.queryAll('.gallery-dot', this.projectCard);
@@ -448,6 +484,13 @@ class ProjectNavigator {
         
         dots.forEach((dot, index) => {
             dot.addEventListener('click', () => this.showSlide(index));
+            // Basic keyboard support for accessibility
+            dot.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.showSlide(index);
+                }
+            });
         });
         
         if (zoomBtn) {
@@ -497,8 +540,8 @@ class ProjectNavigator {
             img.style.cursor = 'pointer';
         });
         
-        this.currentImageIndex = 0;
-        if (typeof this.updateGalleryUI === 'function') this.updateGalleryUI();
+        // Initialize first slide state explicitly
+        this.showSlide(0);
     }
     
     setupLazyLoading() {
