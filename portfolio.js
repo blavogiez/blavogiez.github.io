@@ -318,6 +318,8 @@ class ProjectNavigator {
 
         // Destroy existing video players before creating new content
         this.videoManager.destroyAllPlayers();
+        // Reset expanded state on project change
+        this.projectCard.classList.remove('details-expanded');
 
         this.projectCard.innerHTML = this.createProjectCard(project);
 
@@ -358,8 +360,25 @@ class ProjectNavigator {
         // Check if project has video
         const hasVideo = VideoPlayerManager.isVideoUrl(project.video_url);
 
-        // Build unified slides: video (if any) + images
+        // Build unified slides: images first, then optional video (do not show video first)
         const slides = [];
+
+        
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+            </div>
+        `);
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+            </div>
+        `);
+        slides.push(`
+            <div class="image-wrapper" data-type="image">
+                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+            </div>
+        `);
 
         if (hasVideo) {
             const videoId = `video-${Date.now()}`;
@@ -390,22 +409,6 @@ class ProjectNavigator {
                 `);
             }
         }
-
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
-            </div>
-        `);
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-            </div>
-        `);
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-            </div>
-        `);
 
         const dots = Array.from({ length: slides.length }, (_, i) => `<span class=\"gallery-dot${i === 0 ? ' active' : ''}\" data-index=\"${i}\" aria-label=\"Slide ${i+1}\" role=\"button\" tabindex=\"0\"></span>`).join('');
 
@@ -520,14 +523,12 @@ class ProjectNavigator {
                 const isImage = current.getAttribute('data-type') === 'image';
                 if (!isImage) return;
 
-                const images = DOM.queryAll('.gallery-image', this.projectCard);
-                const hasVideo = VideoPlayerManager.isVideoUrl(this.projects[this.currentIndex]?.video_url);
-                const imageIndex = hasVideo ? this.currentImageIndex - 1 : this.currentImageIndex;
-                const img = images[imageIndex];
+                const img = current.querySelector('.gallery-image');
                 if (!img) return;
                 const imageSrc = img.src || img.dataset.src;
                 if (imageSrc && imageSrc !== '') {
-                    this.openLightbox(imageSrc, img.alt, Math.max(0, imageIndex));
+                    const imageStartIndex = this.currentImageIndex; // images are first slides
+                    this.openLightbox(imageSrc, img.alt, Math.max(0, imageStartIndex));
                 }
             });
         }
@@ -622,14 +623,16 @@ class ProjectNavigator {
         const expandIcon = DOM.query('.expand-icon', this.projectCard);
         
         if (!expandBtn || !projectDetails || !expandText || !expandIcon) return;
-        
+
         expandBtn.addEventListener('click', () => {
             const isExpanded = expandBtn.getAttribute('data-expanded') === 'true';
             const newState = !isExpanded;
-            
+
             expandBtn.setAttribute('data-expanded', newState);
             projectDetails.classList.toggle('expanded', newState);
             expandIcon.classList.toggle('rotated', newState);
+            // Shift overlay title downward without expanding media
+            this.projectCard.classList.toggle('details-expanded', newState);
             
             // Update button text based on current language and state
             const currentLang = document.documentElement.lang;

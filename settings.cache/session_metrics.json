@@ -1,0 +1,14 @@
+{
+  "sessions": [
+    {
+      "session_id": "2025-09-13T12:25:27.313979",
+      "start_time": 1757759127.3139796,
+      "duration_seconds": 5999.289128780365,
+      "words_typed": 121,
+      "initial_word_count": 2616,
+      "final_word_count": 2737,
+      "date": "2025-09-13",
+      "productivity_score": 1.2101433760162736
+    }
+  ]
+}
