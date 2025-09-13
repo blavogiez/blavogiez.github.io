@@ -34,7 +34,14 @@ class LanguageManager {
         // Update content
         DOM.queryAll('[data-fr][data-en]').forEach(element => {
             const text = element.getAttribute(`data-${lang}`);
-            if (text) element.textContent = text;
+            if (text) {
+                // Use innerHTML for elements that contain HTML tags
+                if (text.includes('<') && text.includes('>')) {
+                    element.innerHTML = text;
+                } else {
+                    element.textContent = text;
+                }
+            }
         });
 
         // Update title

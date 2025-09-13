@@ -154,9 +154,16 @@ class ConfigLoader {
                     elements.forEach(el => {
                         el.setAttribute('data-fr', ui[key]);
                         el.setAttribute('data-en', ui[enKey]);
-                        
+
                         const currentLang = document.documentElement.lang || 'fr';
-                        el.textContent = currentLang === 'en' ? ui[enKey] : ui[key];
+                        const content = currentLang === 'en' ? ui[enKey] : ui[key];
+
+                        // Use innerHTML for elements that contain HTML tags
+                        if (content.includes('<') && content.includes('>')) {
+                            el.innerHTML = content;
+                        } else {
+                            el.textContent = content;
+                        }
                     });
                 }
             }
