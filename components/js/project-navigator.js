@@ -168,25 +168,31 @@ class ProjectNavigator {
             ? project.video_urls.filter(url => VideoPlayerManager.isVideoUrl(url))
             : (VideoPlayerManager.isVideoUrl(project.video_url) ? [project.video_url] : []);
 
-        // Build unified slides: images first, then optional video (do not show video first)
+        // Build unified slides: images first, then optional video(s)
         const slides = [];
 
-        
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
-            </div>
-        `);
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img data-src="${project.image_gallery1}" alt="${project.name_fr} - Image 2" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-            </div>
-        `);
-        slides.push(`
-            <div class="image-wrapper" data-type="image">
-                <img data-src="${project.image_gallery2}" alt="${project.name_fr} - Image 3" class="gallery-image lazy-load" loading="lazy" decoding="async" />
-            </div>
-        `);
+        // Main image first
+        if (project.image_main) {
+            slides.push(`
+                <div class="image-wrapper" data-type="image">
+                    <img src="${project.image_main}" alt="${project.name_fr} - Image 1" class="gallery-image active" loading="lazy" decoding="async" />
+                </div>
+            `);
+        }
+
+        // Additional gallery images from array (fallback to image_gallery1/2)
+        const galleryImages = Array.isArray(project.image_gallery)
+            ? project.image_gallery
+            : [project.image_gallery1, project.image_gallery2].filter(Boolean);
+
+        galleryImages.forEach((imgUrl, idx) => {
+            const n = 2 + idx; // numbering starts after main image
+            slides.push(`
+                <div class="image-wrapper" data-type="image">
+                    <img data-src="${imgUrl}" alt="${project.name_fr} - Image ${n}" class="gallery-image lazy-load" loading="lazy" decoding="async" />
+                </div>
+            `);
+        });
 
         // Append any configured videos (after images)
         if (videoUrls.length > 0) {
@@ -375,11 +381,16 @@ class ProjectNavigator {
 
     openLightbox(imageSrc, imageAlt, startIndex = 0) {
         const currentProject = this.projects[this.currentIndex];
-        const images = [
-            { src: currentProject.image_main, alt: `${currentProject.name_fr} - Image 1` },
-            { src: currentProject.image_gallery1, alt: `${currentProject.name_fr} - Image 2` },
-            { src: currentProject.image_gallery2, alt: `${currentProject.name_fr} - Image 3` }
-        ];
+        const images = [];
+        if (currentProject.image_main) {
+            images.push({ src: currentProject.image_main, alt: `${currentProject.name_fr} - Image 1` });
+        }
+        const galleryImages = Array.isArray(currentProject.image_gallery)
+            ? currentProject.image_gallery
+            : [currentProject.image_gallery1, currentProject.image_gallery2].filter(Boolean);
+        galleryImages.forEach((src, idx) => {
+            images.push({ src, alt: `${currentProject.name_fr} - Image ${2 + idx}` });
+        });
         
         let currentImageIndex = startIndex;
 

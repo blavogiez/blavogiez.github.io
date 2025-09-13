@@ -194,12 +194,17 @@ about_years_value: "5+",
         extended_description_en: "Advanced technical architecture: The project uses tkinter for native GUI, with a modular plugin system allowing functionality extension. Gemini API integration uses asynchronous requests to maintain interface fluidity. PDF preview system uses real-time LaTeX compilation with intelligent error handling. SQLite database for project and user preference storage. Customizable template system and configurable keyboard shortcuts to optimize productivity.",
         github: "https://github.com/blavogiez/Noctern",
         image_main: "assets/images/projects/project1/main.jpg",
-        image_gallery1: "assets/images/projects/project1/calling_ai.mp4",
-        image_gallery2: "assets/images/projects/project1/gallery2.jpg",
+        // New: list of gallery images (after main)
+        image_gallery: [
+            "assets/images/projects/project1/proofreading.jpg",
+            "assets/images/projects/project1/models.jpg",
+            "assets/images/projects/project1/metrics.jpg",
+            "assets/images/projects/project1/indication.jpg"
+        ],
         // Multiple videos supported: order defines slide order after images
         video_urls: [
-            "assets/images/projects/project1/demo.mp4",
-            "assets/images/projects/project1/calling_ai.mp4"
+            "assets/images/projects/project1/calling_ai.mp4",
+            "assets/images/projects/project1/demo.mp4"
         ],
         // Legacy single video kept for backward compatibility (ignored if video_urls exists)
         video_url: "assets/images/projects/project1/demo.mp4",
