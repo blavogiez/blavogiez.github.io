@@ -70,6 +70,26 @@ class ProjectNavigator {
             if (e.key === 'ArrowLeft') this.navigate(-1);
             if (e.key === 'ArrowRight') this.navigate(1);
         });
+        
+        // Basic swipe to change project (mobile)
+        let startX = 0, startY = 0, tracking = false;
+        const threshold = 40;
+        const card = this.projectCard;
+        if (card) {
+            card.addEventListener('touchstart', (e) => {
+                const t = e.changedTouches[0];
+                startX = t.clientX; startY = t.clientY; tracking = true;
+            }, { passive: true });
+            card.addEventListener('touchend', (e) => {
+                if (!tracking) return;
+                const t = e.changedTouches[0];
+                const dx = t.clientX - startX; const dy = t.clientY - startY;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    if (dx < 0) this.navigate(1); else this.navigate(-1);
+                }
+                tracking = false;
+            }, { passive: true });
+        }
     }
 
     navigate(direction) {
@@ -337,6 +357,27 @@ class ProjectNavigator {
                 const img = currentWrapper.querySelector('img');
                 if (img) this.openLightbox(img.src, img.alt, this.currentImageIndex);
             });
+        }
+
+        // Swipe inside gallery (mobile)
+        const gallery = DOM.query('.project-gallery', this.projectCard);
+        if (gallery) {
+            let startX = 0, startY = 0, tracking = false;
+            const threshold = 40;
+            gallery.addEventListener('touchstart', (e) => {
+                const t = e.changedTouches[0];
+                startX = t.clientX; startY = t.clientY; tracking = true;
+            }, { passive: true });
+            gallery.addEventListener('touchend', (e) => {
+                if (!tracking) return;
+                const t = e.changedTouches[0];
+                const dx = t.clientX - startX; const dy = t.clientY - startY;
+                if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+                    const nextIndex = this.currentImageIndex + (dx < 0 ? 1 : -1);
+                    if (nextIndex >= 0 && nextIndex < wrappers.length) this.showSlide(nextIndex);
+                }
+                tracking = false;
+            }, { passive: true });
         }
     }
 

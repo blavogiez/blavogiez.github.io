@@ -52,7 +52,12 @@
             <div class="logo">
                 <span class="logo-text" data-ui="logo_text"></span>
             </div>
-            <div class="nav-links">
+            <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="nav-links" id="mobile-menu">
                 <a href="#about" data-ui="nav_about"></a>
                 <a href="#journey" data-ui="nav_journey"></a>
                 <a href="#projects" data-ui="nav_projects"></a>
@@ -309,6 +314,7 @@
     <script src="components/js/animation-manager.js"></script>
     <script src="components/js/particle-system.js"></script>
     <script src="components/js/config-loader.js"></script>
+    <script src="components/js/mobile-enhancements.js"></script>
     <script src="components/js/app.js"></script>
 </body>
 </html>
