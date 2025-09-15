@@ -39,7 +39,7 @@
       next.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m10 6-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z"/></svg>';
     }
 
-    // Lightbox: ensure clean buttons and add touch swipe
+    // Lightbox: ensure clean buttons (no swipe)
     const observer = new MutationObserver((mutations) => {
       for (const m of mutations) {
         m.addedNodes.forEach((n) => {
@@ -54,26 +54,10 @@
           if (prevBtn) prevBtn.innerHTML = '&#8249;';
           if (nextBtn) nextBtn.innerHTML = '&#8250;';
 
-          // Swipe in lightbox
-          const content = lb.querySelector('.lightbox-content');
-          if (content) {
-            let sx = 0, sy = 0, trk = false;
-            content.addEventListener('touchstart', (e) => {
-              const t = e.changedTouches[0]; sx = t.clientX; sy = t.clientY; trk = true;
-            }, { passive: true });
-            content.addEventListener('touchend', (e) => {
-              if (!trk) return; const t = e.changedTouches[0];
-              const dx = t.clientX - sx; const dy = t.clientY - sy;
-              if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-                if (dx < 0) nextBtn?.click(); else prevBtn?.click();
-              }
-              trk = false;
-            }, { passive: true });
-          }
+          // Keep controls clean; no extra gestures
         });
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
   });
 })();
-
