@@ -253,6 +253,24 @@ const SETTINGS_CONFIG = {
         tags: "Flutter,Dart,Firebase"
     },
     Project5: {
+        name_fr: "Analyse sur les JO",
+        name_en: "Real-time Chat System",
+        summary_fr: "Nettoyage de base de données SQL",
+        summary_en: "Instant messaging platform with WebSockets and Redis.",
+        description_fr: "273 000 lignes, 16 colonnes ; c'est le fichier contenant tous les athlètes ayant concouru aux JO, avec leur épreuve, leur édition... C'est bien, mais c'est désorganisé : en fin de BUT1, il nous a été demandé de nettoyer cette base, afin de construire un système plus fiable éliminant les redondances, afin de pouvoir plus tard les analyser avec des outils statistiques. Pour ce projet, je suis allé plus loin en automatisant les analyses de fichier CSV produits par les requêtes SQL avec un script python générant un graphique (régression linéaire, évolution annuelle déduite...)",
+        description_en: "",
+        extended_description_fr: "Ma volonté a été d'aller plus loin que le sujet en proposant des visualisations sous un autre angle, permettant l'analyse de données ne sautant pas à l'oeil tout de suite. La réflexion pour bâtir un système efficace, robuste et maintenable, couplée à la mise en situation d'analyses pertinentes a donné lieu à une réalisation dont je peux aujourd'hui être fier !",
+        extended_description_en: "Node.js microservices architecture with Express and Socket.io for real-time communication. MongoDB database for messages and Redis for sessions. JWT authentication system with refresh tokens. Secure file upload with type validation and S3 cloud storage. RESTful API documented with Swagger and automated Mocha/Chai testing. NGINX load balancing and containerized Docker deployment. Prometheus monitoring and structured logging.",
+        github: "https://github.com/blavogiez/stats-sql-Semestre2",
+        image_main: "assets/images/projects/project5/main.jpg",
+        image_gallery: [
+            "assets/images/projects/project5/gallery1.jpg",
+            "assets/images/projects/project5/gallery2.jpg",
+            "assets/images/projects/project5/gallery3.jpg"
+        ],
+        tags: "SQL,Python"
+    },
+    Project6: {
         name_fr: "Vayago",
         name_en: "Real-time Chat System",
         summary_fr: "Modélisation d'une base de données pour une agence de voyages",
@@ -262,25 +280,10 @@ const SETTINGS_CONFIG = {
         extended_description_fr: "Ma volonté a été d'aller plus loin que le sujet en proposant des visualisations sous un autre angle, permettant l'analyse de données ne sautant pas à l'oeil tout de suite. La réflexion d'un système efficace, robuste et maintenable, couplée à la mise en situation d'analyses pertinentes a donné lieu à une réalisation dont je peux aujourd'hui être fier !",
         extended_description_en: "Node.js microservices architecture with Express and Socket.io for real-time communication. MongoDB database for messages and Redis for sessions. JWT authentication system with refresh tokens. Secure file upload with type validation and S3 cloud storage. RESTful API documented with Swagger and automated Mocha/Chai testing. NGINX load balancing and containerized Docker deployment. Prometheus monitoring and structured logging.",
         github: "https://github.com/blavogiez/creation-base-de-donnees-access-Semestre1",
-        image_main: "assets/images/projects/project5/main.jpg",
-        image_gallery1: "assets/images/projects/project5/gallery1.jpg",
-        image_gallery2: "assets/images/projects/project5/gallery2.jpg",
-        tags: "Node.js,WebSocket,Redis"
-    },
-    Project6: {
-        name_fr: "Analyse sur les JO",
-        name_en: "Real-time Chat System",
-        summary_fr: "Nettoyage de base de données SQL",
-        summary_en: "Instant messaging platform with WebSockets and Redis.",
-        description_fr: "273 000 lignes, 16 colonnes ; c'est le fichier contenant tous les athlètes ayant concouru aux JO, avec leur épreuve, leur édition... C'est bien, mais c'est désorganisé : en fin de BUT1, il nous a été demandé de nettoyer cette base, afin de construire un système plus fiable éliminant les redondances, afin de pouvoir plus tard les analyser avec des outils statistiques. Pour ce projet, je suis allé plus loin en automatisant les analyses de fichier CSV produits par les requêtes SQL avec un script python générant un graphique (régression linéaire, évolution annuelle déduite...)",
-        description_en: "",
-        extended_description_fr: "Ma volonté a été d'aller plus loin que le sujet en proposant des visualisations sous un autre angle, permettant l'analyse de données ne sautant pas à l'oeil tout de suite. La réflexion pour bâtir un système efficace, robuste et maintenable, couplée à la mise en situation d'analyses pertinentes a donné lieu à une réalisation dont je peux aujourd'hui être fier !",
-        extended_description_en: "Node.js microservices architecture with Express and Socket.io for real-time communication. MongoDB database for messages and Redis for sessions. JWT authentication system with refresh tokens. Secure file upload with type validation and S3 cloud storage. RESTful API documented with Swagger and automated Mocha/Chai testing. NGINX load balancing and containerized Docker deployment. Prometheus monitoring and structured logging.",
-        github: "https://github.com/blavogiez/creation-base-de-donnees-access-Semestre1",
-        image_main: "assets/images/projects/project5/main.jpg",
-        image_gallery1: "assets/images/projects/project5/gallery1.jpg",
-        image_gallery2: "assets/images/projects/project5/gallery2.jpg",
-        tags: "Node.js,WebSocket,Redis"
+        image_main: "assets/images/projects/project6/main.jpg",
+        image_gallery1: "assets/images/projects/project6/gallery1.jpg",
+        image_gallery2: "assets/images/projects/project6/gallery2.jpg",
+        tags: "SQL"
     },
 };
 

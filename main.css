@@ -1802,9 +1802,21 @@ footer p {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 1.5rem !important;
+    }
+
+    .hero-text {
+        order: 2;
+    }
+
+    .hero-visual {
+        order: 1;
+        transform: none !important;
+        width: 100%;
+        justify-content: center;
     }
 
     .nav-links {
@@ -1873,10 +1885,10 @@ footer p {
         justify-content: center;
     }
 
-    .hero-visual { transform: none; }
     .profile-photo {
-        width: 210px;
-        height: 210px;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
     }
 
     .floating-card {
@@ -1986,10 +1998,10 @@ footer p {
     }
 
     .gallery-dot {
-        width: 12px;
-        height: 12px;
-        border: 2px solid rgba(255,255,255,0.75);
-        background: rgba(255,255,255,0.35);
+        width: 16px;
+        height: 16px;
+        border: 3px solid rgba(255,255,255,0.8);
+        background: rgba(255,255,255,0.4);
     }
 
     .gallery-zoom {
@@ -1999,9 +2011,10 @@ footer p {
     }
 
     .nav-arrow {
-        width: 72px;
-        height: 72px;
+        width: 64px;
+        height: 64px;
         border-radius: 12px;
+        font-size: 1.8rem;
     }
 
     .project-actions {
