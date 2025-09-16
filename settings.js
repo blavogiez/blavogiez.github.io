@@ -234,8 +234,8 @@ const SETTINGS_CONFIG = {
         description_en: "Complete React application with Redux for state management, external API integration, interactive charts with Chart.js, and real-time notification system via WebSockets.",
         extended_description_fr: "Architecture web moderne en JavaScript vanilla avec système modulaire avancé : 10 composants spécialisés (LanguageManager pour le multilinguisme FR/EN, AnimationManager pour les transitions fluides, ParticleSystem pour les effets visuels WebGL, ProjectNavigator pour la navigation par flèches). Système de chargement instantané avec InstantLoad et préchargement des ressources critiques. Interface responsive avec variables CSS personnalisées et breakpoints optimisés mobile/desktop. Lecteur vidéo intégré Plyr.js avec support multi-formats. Configuration centralisée dans settings.js pour faciliter la maintenance. Analyse des métriques avec Plausible Analytics (comment le site est visité). Temps de chargement minimal et expérience utilisateur fluide.",
         extended_description_en: "Modern React architecture with custom hooks for business logic, Context API for global data and Redux Toolkit for complex state management. REST API integration with Axios and centralized error handling. Dynamic Chart.js charts with custom animations and PDF/PNG export. WebSockets for real-time updates with automatic reconnection. Testing with React Testing Library and Jest. Optimized build with Webpack and CI/CD deployment.",
-        github: "https://github.com/baptiste-lavogiez/analytics-dashboard",
-        tags: "JavaScript,Redux,Chart.js"
+        github: "https://github.com/blavogiez/blavogiez.github.io",
+        tags: "JavaScript,HTML,CSS"
     },
     Project4: {
         name_fr: "BuTeX",
@@ -250,7 +250,7 @@ const SETTINGS_CONFIG = {
         image_main: "assets/images/projects/project4/main.jpg",
         image_gallery1: "assets/images/projects/project4/gallery1.jpg",
         image_gallery2: "assets/images/projects/project4/gallery2.jpg",
-        tags: "Flutter,Dart,Firebase"
+        tags: "LaTeX"
     },
     Project5: {
         name_fr: "Analyse sur les JO",
