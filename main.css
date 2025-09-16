@@ -1833,9 +1833,29 @@ footer p {
     nav { flex-wrap: wrap; }
     .menu-toggle { display: inline-flex; }
 
-    /* Mobile dropdown nav (no overlay) */
-    .nav-links { display: none; flex-direction: column; border-top: 1px solid var(--border); padding: 0.5rem 0; gap: 0.25rem; width: 100%; }
-    #nav-toggle:checked ~ .nav-links { display: flex; }
+    /* Mobile dropdown nav with smooth expand */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-top: 1px solid var(--border);
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: max-height 0.2s ease, opacity 0.18s ease, transform 0.2s ease, padding 0.2s ease;
+        padding: 0;
+        gap: 0.25rem;
+        pointer-events: none;
+    }
+    #nav-toggle:checked ~ .menu-toggle { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
+    #nav-toggle:checked ~ .nav-links {
+        max-height: 300px;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 0.5rem 0 1rem;
+        pointer-events: auto;
+    }
     .nav-links a { padding: 0.9rem 0.5rem; font-size: 1.05rem; }
 
     .stats {

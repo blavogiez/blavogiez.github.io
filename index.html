@@ -67,6 +67,13 @@
             </div>
         </nav>
     </header>
+    <script>
+      // Fermer le menu mobile au clic sur un lien
+      document.addEventListener('click',function(e){
+        var link=e.target.closest && e.target.closest('.nav-links a');
+        if(link){ var t=document.getElementById('nav-toggle'); if(t) t.checked=false; }
+      });
+    </script>
 
     <!-- Main Content -->
     <main>

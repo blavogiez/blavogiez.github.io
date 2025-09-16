@@ -145,7 +145,7 @@ const SETTINGS_CONFIG = {
         philosophy_title_en: "my development philosophy",
         philosophy_opt_title_fr: "Optimisation continue",
         philosophy_opt_title_en: "continuous optimization",
-        philosophy_opt_desc_fr: "J'optimise constamment ma façon de développer et je m'ouvre à de nouvelles technologies ! Aujourd'hui, j'intègre notamment les agents LLM terminaux à mon cycle de développement afin d'être plus productif !; j'utilise Claude Code et Codex (GPT-5) en complémentarité l'un de l'autre.",
+        philosophy_opt_desc_fr: "J’optimise en continu ma façon de développer et intègre désormais les agents LLM dans mon cycle de travail pour gagner en productivité. J’utilise Claude Code et Codex (GPT-5) de façon complémentaire, tout en restant vigilant sur les données et la validation des résultats. Ces outils constituent des technologies prometteuses à adopter avec rigueur.",
         philosophy_opt_desc_en: "i continuously optimize my development process and embrace new technologies! today, i integrate terminal llm agents (claude code, gemini/qwen cli...) into my development cycle to be more productive!",
         philosophy_arch_title_fr: "Architecture solide",
         philosophy_arch_title_en: "solid architecture",
@@ -155,7 +155,7 @@ const SETTINGS_CONFIG = {
         philosophy_user_title_en: "user vision",
         philosophy_user_quote_fr: "Un développeur ne doit pas se limiter à lui-même ; il doit incarner tous les utilisateurs à la fois",
         philosophy_user_quote_en: "a developer should not limit themselves; they must embody all users at once",
-        philosophy_user_desc_fr: "cette phrase résume comment je vois la réalisation de projets informatiques ",
+        philosophy_user_desc_fr: "Cette conviction reflète ma manière d’aborder la conception et la réalisation de projets informatiques !",
         philosophy_user_desc_en: "this phrase summarizes how i view software project development",
         
         // Skills section
