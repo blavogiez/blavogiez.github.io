@@ -211,29 +211,33 @@ nav {
 }
 
 /* Mobile menu toggle */
+
 .menu-toggle {
     display: none;
-    width: 44px;
-    height: 44px;
+    padding: 0 12px;
     min-width: 44px;
     min-height: 44px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--bg-tertiary);
     color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
     align-items: center;
     justify-content: center;
-    gap: 4px;
     cursor: pointer;
     touch-action: manipulation;
 }
 
-.menu-toggle .bar {
-    display: block;
-    width: 18px;
-    height: 2px;
-    background: currentColor;
+.menu-toggle[aria-expanded="true"] {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--bg-hover);
 }
+
+/* Legacy hamburger bars no longer used */
+.menu-toggle .bar { display: none; }
 
 .logo {
     display: flex;
