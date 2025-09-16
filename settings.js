@@ -149,7 +149,7 @@ const SETTINGS_CONFIG = {
         philosophy_opt_desc_en: "i continuously optimize my development process and embrace new technologies! today, i integrate terminal llm agents (claude code, gemini/qwen cli...) into my development cycle to be more productive!",
         philosophy_arch_title_fr: "Architecture solide",
         philosophy_arch_title_en: "solid architecture",
-        philosophy_arch_desc_fr: "Je module beaucoup mes projets en réutilisant les principes solid et agile notamment. des projets bien organisés et compréhensibles de tous !",
+        philosophy_arch_desc_fr: "Je conçois mes projets en m’appuyant largement sur les principes SOLID et les méthodes agiles. Cette approche permet de créer des solutions modulaires, bien structurées, plus maintenables et compréhensibles par l’ensemble de l’équipe.",
         philosophy_arch_desc_en: "i modularize my projects extensively using solid and agile principles. well-organized projects that everyone can understand!",
         philosophy_user_title_fr: "Vision utilisateur",
         philosophy_user_title_en: "user vision",

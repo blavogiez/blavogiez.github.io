@@ -248,6 +248,62 @@ header {
   border-bottom: 1px solid var(--border);
 }
 
+/* ===== Mobile Overflow Guard (<=768px) ===== */
+@media (max-width: 768px) {
+  /* Verrouille la largeur et supprime tout scroll horizontal */
+  html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    position: relative;
+  }
+
+  /* Coupe tout débordement décoratif (éléments absolus, backgrounds) */
+  main, header, footer, nav, section {
+    overflow-x: clip;
+  }
+
+  /* Conteneurs principaux: largeur 100%, pas de débordement */
+  .container, .projects-container, .skills-container {
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+
+  /* Médias responsives: ne dépassent jamais la largeur */
+  img, video, svg, canvas, iframe {
+    max-width: 100% !important;
+    height: auto;
+  }
+
+  /* Texte/mots très longs: wrap systématique */
+  p, li, a, span, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Éléments flex/grid: autoriser la réduction en largeur */
+  div, section, article, aside, main, header, footer, nav,
+  .flex, .grid, [class*="grid"], [class*="flex"] {
+    min-width: 0;
+  }
+
+  /* Code, pre, tables: scroll interne horizontal si nécessaire */
+  pre, code, kbd, samp {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+  }
+  pre, code, table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  table { table-layout: fixed; border-collapse: collapse; }
+
+  /* Sécurité pour les menus/headers */
+  header { max-width: 100vw; }
+  nav { max-width: 100vw; box-sizing: border-box; }
+}
+
 header.section-active {
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%) !important;
   border-bottom: 1px solid var(--accent);
