@@ -103,6 +103,7 @@ body {
     background: var(--bg-primary);
     font-weight: 400;
     overflow-x: hidden;
+    max-width: 100vw;
     letter-spacing: 0;
     font-feature-settings: 'kern' 1, 'liga' 1;
     text-rendering: optimizeLegibility;
@@ -173,11 +174,14 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
     background: rgba(30, 30, 46, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
     transition: all var(--transition);
+    overflow-x: hidden;
 }
 
 header.section-active {
@@ -212,6 +216,8 @@ nav {
     display: none;
     width: 44px;
     height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--bg-tertiary);
@@ -220,6 +226,7 @@ nav {
     justify-content: center;
     gap: 4px;
     cursor: pointer;
+    touch-action: manipulation;
 }
 
 .menu-toggle .bar {
@@ -303,9 +310,11 @@ nav {
     font-size: 1.2rem;
     transition: var(--transition);
     min-width: 44px;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    touch-action: manipulation;
 }
 
 .lang-btn.active,
@@ -478,6 +487,8 @@ main {
 /* ===== SECTIONS ===== */
 section {
     padding: var(--space-3xl) 0;
+    overflow-x: hidden;
+    position: relative;
 }
 
 h2 {
@@ -1199,6 +1210,8 @@ h2 {
     cursor: pointer;
     transition: var(--transition);
     font-family: inherit;
+    min-height: 44px;
+    touch-action: manipulation;
 }
 
 .expand-toggle-btn:hover {
@@ -1862,10 +1875,16 @@ footer p {
 
     nav {
         padding: 1rem;
+        max-width: 100vw;
+        box-sizing: border-box;
     }
 
-    .container {
+    .container,
+    .projects-container,
+    .skills-container {
         padding: 0 1rem;
+        max-width: 100vw;
+        box-sizing: border-box;
     }
 
     .projects-navigation {
@@ -1934,6 +1953,8 @@ footer p {
 
     .project-card {
         margin: 0 1rem;
+        max-width: calc(100vw - 2rem);
+        box-sizing: border-box;
     }
 
     .project-actions {
@@ -1964,8 +1985,9 @@ footer p {
     /* Maintain vertical layout for mobile phones */
     .project-card {
         flex-direction: column;
-        max-width: none;
+        max-width: calc(100vw - 1rem);
         margin: 0 0.5rem;
+        box-sizing: border-box;
     }
 
     .project-media {
@@ -1998,16 +2020,42 @@ footer p {
     }
 
     .gallery-dot {
-        width: 16px;
-        height: 16px;
+        width: 24px;
+        height: 24px;
         border: 3px solid rgba(255,255,255,0.8);
         background: rgba(255,255,255,0.4);
+        min-width: 44px;
+        min-height: 44px;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .gallery-dot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.4);
+        border: 3px solid rgba(255,255,255,0.8);
+        transition: var(--transition);
+    }
+
+    .gallery-dot.active::before {
+        background: white;
+        transform: translate(-50%, -50%) scale(1.2);
     }
 
     .gallery-zoom {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .nav-arrow {
@@ -2015,6 +2063,8 @@ footer p {
         height: 64px;
         border-radius: 12px;
         font-size: 1.8rem;
+        min-width: 44px;
+        min-height: 44px;
     }
 
     .project-actions {
