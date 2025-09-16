@@ -214,15 +214,15 @@ nav {
 
 .menu-toggle {
     display: none;
-    padding: 0 12px;
+    padding: 0 8px;
     min-width: 44px;
     min-height: 44px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    background: var(--bg-tertiary);
+    background: transparent;
     color: var(--text-primary);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1;
     align-items: center;
     justify-content: center;
@@ -230,11 +230,7 @@ nav {
     touch-action: manipulation;
 }
 
-.menu-toggle[aria-expanded="true"] {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--bg-hover);
-}
+.menu-toggle[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); background: var(--bg-hover); }
 
 /* Legacy hamburger bars no longer used */
 .menu-toggle .bar { display: none; }

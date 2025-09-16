@@ -8,10 +8,11 @@
   };
 
   onReady(() => {
-    // Mobile menu toggle
+    // Mobile menu toggle (idempotent)
     const menuBtn = document.querySelector('.menu-toggle');
     const navLinks = document.getElementById('mobile-menu');
-    if (menuBtn && navLinks) {
+    if (menuBtn && navLinks && !menuBtn.dataset.wired) {
+      menuBtn.dataset.wired = '1';
       const closeMenu = () => {
         document.body.classList.remove('nav-open');
         menuBtn.setAttribute('aria-expanded', 'false');

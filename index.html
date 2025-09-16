@@ -66,6 +66,17 @@
             </div>
         </nav>
     </header>
+    <script>
+      (function(){
+        var btn=document.querySelector('.menu-toggle');
+        var menu=document.getElementById('mobile-menu');
+        if(!btn||!menu||btn.dataset.wired) return; btn.dataset.wired='1';
+        function close(){ document.body.classList.remove('nav-open'); btn.setAttribute('aria-expanded','false'); }
+        btn.addEventListener('click',function(){ var open=!document.body.classList.contains('nav-open'); document.body.classList.toggle('nav-open',open); btn.setAttribute('aria-expanded', String(open)); });
+        menu.addEventListener('click',function(e){ if(e.target.tagName==='A') close(); });
+        document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+      })();
+    </script>
 
     <!-- Main Content -->
     <main>
