@@ -8,27 +8,7 @@
   };
 
   onReady(() => {
-    // Mobile menu toggle (idempotent)
-    const menuBtn = document.querySelector('.menu-toggle');
-    const navLinks = document.getElementById('mobile-menu');
-    if (menuBtn && navLinks && !menuBtn.dataset.wired) {
-      menuBtn.dataset.wired = '1';
-      const closeMenu = () => {
-        document.body.classList.remove('nav-open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      };
-      menuBtn.addEventListener('click', () => {
-        const open = !document.body.classList.contains('nav-open');
-        document.body.classList.toggle('nav-open', open);
-        menuBtn.setAttribute('aria-expanded', String(open));
-      });
-      navLinks.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') closeMenu();
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeMenu();
-      });
-    }
+    // Menu handled by CSS checkbox toggle; keep rest below
 
     // Normalize navigation arrows with inline SVGs
     const prev = document.getElementById('prev-project');
