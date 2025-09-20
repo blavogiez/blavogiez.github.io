@@ -1,40 +1,41 @@
 /* ===== THEME OVERRIDES (Palette + Typos) ===== */
 :root {
   /* Fonts */
-  --font-hero: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-hero: 'Fraunces', 'Times New Roman', serif;
+  --font-heading: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
 
-  /* Professional dark palette */
-  --primary: #f1f5f9;         /* light gray for primary text */
-  --secondary: #e2e8f0;       /* slightly darker for secondary text */
-  --accent: #60a5fa;          /* professional blue */
-  --accent-hover: #3b82f6;    /* darker blue for hover states */
+  /* Tailored deep palette */
+  --primary: #f6f0e4;         /* soft sand for primary text */
+  --secondary: #e4d8c7;       /* muted parchment for secondary text */
+  --primary-light: #f2cfa4;   /* warm highlight for lifted surfaces */
+  --accent: #f09b60;          /* burnished apricot accent */
+  --accent-hover: #db7f3e;    /* deeper ember for hover states */
 
-  --text-primary: #f1f5f9;
-  --text-secondary: #e2e8f0;
-  --text-muted: #94a3b8;
-  --text-light: #64748b;
-  --text-inverse: #0f172a;
+  --text-primary: #f6f0e4;
+  --text-secondary: #e0d6c8;
+  --text-muted: #b9afa2;
+  --text-light: #92877a;
+  --text-inverse: #141a17;
 
   /* Refined dark background family */
-  --bg-primary: #0f172a;      /* slate 900 - main background */
-  --bg-secondary: #1e293b;    /* slate 800 - section backgrounds */
-  --bg-tertiary: #334155;     /* slate 700 - card backgrounds */
-  --bg-dark: #020617;         /* nearly black - dark accents */
-  --bg-card: #1e293b;         /* slate 800 - cards */
-  --bg-hover: #334155;        /* slate 700 - hover states */
+  --bg-primary: #0f1918;      /* inky pine - main background */
+  --bg-secondary: #172422;    /* dusk pine - section backgrounds */
+  --bg-tertiary: #1f302e;     /* deep teal - card backgrounds */
+  --bg-dark: #0a1311;         /* near-black juniper */
+  --bg-card: #182826;         /* textured card base */
+  --bg-hover: #223732;        /* lifted hover state */
 
-  --border: #334155;
-  --border-light: #475569;
-  --border-dark: #1e293b;
+  --border: #28413b;
+  --border-light: #375851;
+  --border-dark: #121f1d;
   --border-accent: var(--accent);
 
   --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
   --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 15px rgba(96, 165, 250, 0.2);
+  --shadow-glow: 0 0 20px rgba(240, 155, 96, 0.18);
 }
 
 /* Typography overrides */
@@ -124,7 +125,7 @@ body {
 /* Hero name: clean accent color instead of animated gradient */
 .hero-title .name {
   color: var(--accent) !important;
-  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+  text-shadow: 0 0 18px rgba(240, 155, 96, 0.35);
   animation: none;
   background: none;
   -webkit-background-clip: initial;
@@ -139,7 +140,7 @@ body {
   width: 1000px;
   height: 1000px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.25) 0%, rgba(96, 165, 250, 0.15) 30%, rgba(96, 165, 250, 0.08) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(240, 155, 96, 0.28) 0%, rgba(240, 155, 96, 0.16) 45%, rgba(240, 155, 96, 0.05) 70%, transparent 90%);
   z-index: 0;
   filter: blur(40px);
 }
@@ -170,58 +171,58 @@ body {
   opacity: 0.2;
 }
 
-/* About section background element - purple tint */
+/* About section background element - warm clay */
 .about-bg-element {
   top: -200px;
   right: -200px;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(192, 132, 252, 0.3) 0%, rgba(192, 132, 252, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 140, 106, 0.32) 0%, rgba(212, 140, 106, 0.18) 48%, rgba(212, 140, 106, 0.06) 72%, transparent 88%);
 }
 
-/* Journey section background element - green tint */
+/* Journey section background element - soft sage */
 .journey-bg-element {
   top: -150px;
   left: -150px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(72, 187, 120, 0.3) 0%, rgba(72, 187, 120, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(109, 169, 150, 0.32) 0%, rgba(109, 169, 150, 0.18) 48%, rgba(109, 169, 150, 0.06) 72%, transparent 88%);
 }
 
-/* Projects section background element - orange tint */
+/* Projects section background element - brass glow */
 .projects-bg-element {
   bottom: -200px;
   right: -100px;
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.3) 0%, rgba(251, 191, 36, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(189, 158, 99, 0.32) 0%, rgba(189, 158, 99, 0.18) 46%, rgba(189, 158, 99, 0.07) 70%, transparent 88%);
 }
 
-/* Philosophy section background element - pink tint */
+/* Philosophy section background element - terracotta haze */
 .philosophy-bg-element {
   top: -100px;
   left: -100px;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, rgba(244, 114, 182, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(191, 118, 104, 0.3) 0%, rgba(191, 118, 104, 0.18) 50%, rgba(191, 118, 104, 0.07) 78%, transparent 92%);
 }
 
-/* Skills section background element - teal tint */
+/* Skills section background element - cool fern */
 .skills-bg-element {
   bottom: -150px;
   right: -150px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.3) 0%, rgba(20, 184, 166, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(121, 170, 142, 0.32) 0%, rgba(121, 170, 142, 0.18) 46%, rgba(121, 170, 142, 0.08) 72%, transparent 90%);
 }
 
-/* Contact section background element - red tint */
+/* Contact section background element - ember wash */
 .contact-bg-element {
   top: -100px;
   left: -200px;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, rgba(239, 68, 68, 0.15) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(240, 155, 96, 0.32) 0%, rgba(240, 155, 96, 0.18) 48%, rgba(240, 155, 96, 0.08) 72%, transparent 90%);
 }
 
 /* Ensure section content stays on top */
@@ -309,17 +310,17 @@ header.section-active {
   border-bottom: 1px solid var(--accent);
 }
 
-/* Remove any violet tint from highlight cards */
+/* Highlight cards receive a subtle ember glaze */
 .philosophy-card.highlight {
-  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(96, 165, 250, 0.08) 100%) !important;
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(240, 155, 96, 0.12) 100%) !important;
   border: 1px solid var(--border-accent);
 }
 
-/* Ensure navigation hover/active is crisp with blue */
+/* Navigation hover/active leans into the ember accent */
 .nav-links a:hover,
 .nav-links a.active { 
   color: var(--accent) !important; 
-  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+  text-shadow: 0 0 10px rgba(240, 155, 96, 0.45);
 }
 
 /* Make section headings clearly adopt display font */

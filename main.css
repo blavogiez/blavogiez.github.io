@@ -3,38 +3,45 @@
 
 /* ===== MINIMALIST PROFESSIONAL VARIABLES ===== */
 :root {
-    /* Professional modern palette */
-    --primary: #ffffff;
-    --secondary: #e2e8f0;
-    --accent: #dc2626;
-    --accent-hover: #b91c1c;
+    /* Custom typography */
+    --font-hero: 'Fraunces', 'Times New Roman', serif;
+    --font-heading: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+    /* Tailored core palette */
+    --primary: #f6f0e4;
+    --secondary: #e4d8c7;
+    --primary-light: #f2cfa4;
+    --accent: #f09b60;
+    --accent-hover: #db7f3e;
     
     /* Text colors - enhanced contrast */
-    --text-primary: #ffffff;
-    --text-secondary: #cbd5e1;
-    --text-muted: #94a3b8;
-    --text-light: #64748b;
-    --text-inverse: #1e293b;
+    --text-primary: #f6f0e4;
+    --text-secondary: #e0d6c8;
+    --text-muted: #b9afa2;
+    --text-light: #92877a;
+    --text-inverse: #141a17;
     
     /* Modern professional backgrounds */
-    --bg-primary: #1e1e2e;
-    --bg-secondary: #2a2d3a;
-    --bg-tertiary: #353547;
-    --bg-dark: #16161f;
-    --bg-card: #353547;
-    --bg-hover: #464658;
+    --bg-primary: #0f1918;
+    --bg-secondary: #172422;
+    --bg-tertiary: #1f302e;
+    --bg-dark: #0a1311;
+    --bg-card: #182826;
+    --bg-hover: #223732;
     
     /* Professional borders */
-    --border: #464658;
-    --border-light: #525266;
-    --border-dark: #2a2d3a;
-    --border-accent: #dc2626;
+    --border: #28413b;
+    --border-light: #375851;
+    --border-dark: #121f1d;
+    --border-accent: var(--accent);
     
     /* Enhanced shadows for depth */
     --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.25);
-    --shadow-glow: 0 0 20px rgba(220, 38, 38, 0.15);
+    --shadow-glow: 0 0 20px rgba(240, 155, 96, 0.18);
     
     /* Gradients pour le thème sombre */
     --gradient-accent: linear-gradient(135deg, var(--accent), var(--accent-hover));
@@ -97,7 +104,7 @@ html {
 }
 
 body {
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans);
     line-height: 1.5;
     color: var(--text-primary);
     background: var(--bg-primary);
@@ -245,7 +252,7 @@ nav {
     font-size: 1.1rem;
     color: var(--text-primary);
     font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     letter-spacing: 0.01em;
 }
 
@@ -261,7 +268,7 @@ nav {
     transition: var(--transition);
     position: relative;
     padding: 0.5rem 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-sans);
     font-size: 1rem;
     letter-spacing: 0;
 }
@@ -357,12 +364,12 @@ main {
     color: var(--text-muted);
     display: block;
     margin-bottom: 0.5rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-sans);
     letter-spacing: 0;
 }
 
 .hero-title {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-hero);
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 600;
     line-height: 1.1;
@@ -490,7 +497,7 @@ section {
 }
 
 h2 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 50;
     text-align: center;
@@ -601,7 +608,7 @@ h2 {
 .timeline-marker.active {
     background: var(--accent);
     border-color: var(--accent);
-    box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 0 12px rgba(240, 155, 96, 0.35);
 }
 
 .timeline-marker.future {
@@ -617,7 +624,7 @@ h2 {
 }
 
 .timeline-section-divider h3 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 300;
     color: var(--text-primary);
@@ -630,7 +637,7 @@ h2 {
 .timeline-section-divider h3::before {
     content: '> ';
     color: var(--accent);
-    font-family: 'Source Code Pro', monospace;
+    font-family: var(--font-mono);
 }
 
 .timeline-content {
@@ -649,7 +656,7 @@ h2 {
 }
 
 .timeline-date {
-    font-family: 'Source Code Pro', monospace;
+    font-family: var(--font-mono);
     font-size: 0.9rem;
     color: var(--accent);
     font-weight: 600;
@@ -679,7 +686,7 @@ h2 {
     border-radius: var(--radius);
     font-size: 0.8rem;
     font-weight: 500;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-sans);
     letter-spacing: 0.5px;
 }
 
@@ -689,7 +696,7 @@ h2 {
 
 .grade-badge {
     background: var(--primary);
-    color: rgb(173, 72, 47);
+    color: var(--accent);
     padding: 0.4rem 1rem;
     border-radius: var(--radius);
     font-size: 0.85rem;
@@ -727,7 +734,7 @@ h2 {
     font-weight: 500;
     border: 1px solid var(--border);
     transition: var(--transition);
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-sans);
 }
 
 .skill-tag:hover {
@@ -965,7 +972,7 @@ h2 {
 .nav-arrow:focus-visible,
 .gallery-zoom:focus-visible,
 .gallery-dot:focus-visible {
-    outline: 3px solid rgba(220,38,38,0.6);
+    outline: 3px solid rgba(240,155,96,0.55);
     outline-offset: 2px;
 }
 
@@ -1270,7 +1277,7 @@ h2 {
 }
 
 .philosophy-intro h3 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 300;
     color: var(--text-primary);
@@ -1282,7 +1289,7 @@ h2 {
 .philosophy-intro h3::before {
     content: '> ';
     color: var(--accent);
-    font-family: 'Source Code Pro', monospace;
+    font-family: var(--font-mono);
 }
 
 .philosophy-grid {
@@ -1320,7 +1327,7 @@ h2 {
 
 .philosophy-card.highlight {
     border-color: var(--primary);
-    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(99, 102, 241, 0.05) 100%);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(240, 155, 96, 0.12) 100%);
 }
 
 .philosophy-card.highlight::before {
@@ -1332,7 +1339,7 @@ h2 {
 }
 
 .philosophy-card h4 {
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     font-size: 1.3rem;
     font-weight: 600;
     color: var(--text-primary);
@@ -1366,7 +1373,7 @@ h2 {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-sans);
     opacity: 0.3;
 }
 
@@ -1432,7 +1439,7 @@ h2 {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-heading);
     letter-spacing: 0;
     font-size: 1.1rem;
 }
