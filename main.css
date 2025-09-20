@@ -4,7 +4,7 @@
 /* ===== MINIMALIST PROFESSIONAL VARIABLES ===== */
 :root {
     /* Custom typography */
-    --font-hero: 'Fraunces', 'Times New Roman', serif;
+    --font-hero: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
     --font-heading: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
     --font-sans: 'Plus Jakarta Sans', 'Inter', 'Segoe UI', sans-serif;
     --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
@@ -369,13 +369,14 @@ main {
 }
 
 .hero-title {
-    font-family: var(--font-hero);
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 600;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif !important;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
     line-height: 1.1;
     margin-bottom: var(--space-sm);
-    letter-spacing: -0.04em;
+    letter-spacing: -0.01em;
     color: var(--text-primary);
+    white-space: nowrap;
 }
 
 .name {
