@@ -1,0 +1,8 @@
+*
+!.gitignore
+!decrypt-repo.sh
+!README.md
+!archive.tar.gz.enc.part-*
+!.github/
+!.github/workflows/
+!.github/workflows/deploy.yml
