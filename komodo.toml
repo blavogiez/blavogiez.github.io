@@ -1,0 +1,21 @@
+[[stack]]
+name = "blavogiez-github-io"
+deploy = true
+
+[stack.config]
+server = "Local"
+git_provider = "github.com"
+repo = "blavogiez/blavogiez.github.io"
+branch = "master"
+clone_path = "/etc/komodo/stacks/blavogiez-github-io"
+run_directory = "/etc/komodo/stacks/blavogiez-github-io"
+file_paths = ["docker-compose.yml"]
+environment = """
+ARCHIVE_KEY="[[BLAVOGIEZ_GITHUB_IO_ARCHIVE_KEY]]"
+"""
+env_file_path = ".env"
+
+[stack.config.pre_deploy]
+command = """
+set -a && . ./.env && set +a && ./decrypt-repo.sh
+"""

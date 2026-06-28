@@ -1,0 +1,8 @@
+node_modules
+.github
+.git 
+dist
+Dockerfile
+docker-compose.yml 
+komodo.toml
+*.enc*

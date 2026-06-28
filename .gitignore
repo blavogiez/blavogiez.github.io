@@ -1,4 +1,8 @@
 *
+!docker-compose.yml
+!.dockerignore
+!komodo.toml
+!Dockerfile
 !.gitignore
 !decrypt-repo.sh
 !README.md
