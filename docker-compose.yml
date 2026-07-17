@@ -14,14 +14,14 @@ services:
       - "traefik.http.services.kanboard.loadbalancer.server.port=80"
     networks:
       - default
-      - proxy
+        #  - proxy
       # si cest pour test en dehors de komodo, on desactive ce reseau
       # - proxy
     # test uniquement, a desac pour komodo
-    #ports:
-    #  - 9090:80
+    ports:
+      - 9090:80
 
 networks:
   default:
-  proxy:
-    external: true
+    #proxy:
+    #external: true
