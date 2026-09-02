@@ -39,7 +39,6 @@ jobs:
 
       - run: npm run build
 
-      - run: bash ./fix-routes.sh
 
       - uses: actions/upload-pages-artifact@v3
         with:

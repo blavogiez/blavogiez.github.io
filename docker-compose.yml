@@ -11,7 +11,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.kanboard.rule=Host(`apercu-site.blavogiez.fr`)"
       - "traefik.http.routers.kanboard.entrypoints=web"
-      - "traefik.http.services.kanboard.loadbalancer.server.port=80"
+      - "traefik.http.services.kanboard.loadbalancer.server.port=8080"
     networks:
       - default
         #  - proxy
@@ -19,7 +19,7 @@ services:
       # - proxy
     # test uniquement, a desac pour komodo
     ports:
-      - 9090:80
+      - 9090:8080
 
 networks:
   default:
